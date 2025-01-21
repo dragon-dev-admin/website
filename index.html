@@ -24,13 +24,17 @@
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
+
+    /* 
+      Updated container
+      Left column remains 25%, middle is auto and right column is now fixed
+      to an aspect-based width relative to the viewport height.
+    */
     .container {
       display: grid;
-      /* Left column stays 25%, middle column fills the remaining space, 
-         right column uses fixed width based on viewport height divided by 2.3 */
       grid-template-columns: 25% auto calc(100vh / 2.3);
       width: 100%;
-      height: 100%;
+      height: 100vh;
       position: relative;
     }
 
@@ -111,16 +115,16 @@
       display: block;
       opacity: 0;          
       visibility: hidden;  
-      transition: opacity 1s ease, visibility 1s ease, color 0.3s ease; /* Added color transition */
+      transition: opacity 1s ease, visibility 1s ease, color 0.3s ease;
       text-align: left;    
-      font-weight: bold; /* Make text bold */
+      font-weight: bold;
     }
     .read-more-button.show {
       opacity: 1;          
       visibility: visible; 
     }
     .read-more-button:hover {
-      color: rgb(132, 132, 132); /* Change text color to blue on hover */
+      color: rgb(132, 132, 132); 
     }
 
     /*--------------------------------
@@ -171,15 +175,12 @@
       display: flex;
       gap: 30px;
     }
-
     .button-container {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-
-    /* The link (icon) itself */
     .button-container a {
       display: flex;
       align-items: center;
@@ -200,11 +201,9 @@
       height: 100%;
       object-fit: cover;
     }
-
-    /* Hover text that appears below the button */
     .hover-text {
       position: absolute;
-      top: 70px; /* Adjust if needed to space below the icon */
+      top: 70px;
       background-color: #fff;
       color: #000;
       font-size: 14px;
@@ -215,7 +214,7 @@
       pointer-events: none;
       transition: opacity 0.2s ease;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-      z-index: 9999; /* Ensures it stays above everything */
+      z-index: 9999;
       font-weight: normal;
       transform: translateX(-50%);
       left: 50%;
@@ -241,19 +240,15 @@
       overflow-wrap: break-word;
       word-break: break-word;
       white-space: normal;
-      right: -280px; /* Fully hide the info panel */
+      right: -280px;
       transition: right 0.5s ease;
       z-index: 999;
       top: 0;
       transform: translateY(0);
-    
-      /* Reduced shadow for a subtler 3D effect */
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10); /* Opacity reduced from 0.3 to 0.15 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10);
     }
-    
-    
     .info-panel.show {
-      right: 20px; /* slide into view */
+      right: 20px;
     }
     .info-panel strong {
       display: block;
@@ -270,7 +265,7 @@
       animation: float 2s infinite;
     }
     .hover-image img {
-      width: 100px; /* Adjust size as needed */
+      width: 100px;
       height: auto;
     }
     @keyframes float {
@@ -299,7 +294,6 @@
       width: 0;
       background: transparent;
     }
-    
     .extension-section {
       width: 90%;
       position: relative;
@@ -319,9 +313,8 @@
       border-radius: 12px;
       display: block;
     }
-
     .highlight-overlay {
-      display: none; /* Hide all text descriptions overlay if not needed */
+      display: none;
     }
 
     /* Responsive Adjustments */
@@ -332,13 +325,12 @@
       }
       .info-panel {
         width: 220px;
-        right: -220px; /* Hide fully on smaller screens */
+        right: -220px;
       }
       .hover-image img {
-        width: 150px; /* Adjust smaller for narrower screens */
+        width: 150px;
       }
     }
-
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
@@ -348,7 +340,7 @@
         display: none;
       }
       .middle-column {
-        padding-right: 50px; /* Adjust padding for smaller screens */
+        padding-right: 50px;
       }
       .image-container {
         width: 100%;
@@ -359,7 +351,7 @@
         right: -200px;
       }
       .hover-image {
-        display: none; /* or reposition as desired on mobile */
+        display: none;
       }
     }
   </style>
@@ -368,43 +360,35 @@
   <div class="container">
     <!-- LEFT COLUMN: 3 sections -->
     <div class="left-column">
-      <!-- Top 26% -->
+      <!-- Top 21% -->
       <div class="top-section">
         <!-- Could be used for a logo or just empty white space -->
       </div>
       
-      <!-- Middle 60%: contains auto-scrolling text and "Read More" text -->
+      <!-- Middle 65%: contains auto-scrolling text and "Read More" text -->
       <div class="middle-section">
         <div class="scroll-wrapper">
           <div class="scroll-text">
             <p>
               Unseen snipes, bundles, fresh wallets, wash trades, clusters, and other deceptions are threatening the collective bags. Go on Reddit and see how many new traders are posting about getting “scammed” and you realize that new money is getting scared off. Some traders understand how to spot bots and bundles, and that not all developer techniques are rugs, but most new traders are blind. And a lot of new traders are coming into the casino now with cash. Let’s tighten up our trading techniques and pump the total growth potential.
             </p>
-            <br>
-            <br>
+            <br><br>
             <p>
               <strong>Dragon</strong> is a trading companion that visualizes the real landscape of a token’s holders by getting real-time data from a node and producing pretty diagrams to illustrate. This gives new traders the confidence to trade alongside crypto-natives and gives everyone the vision to see if a token’s holdership is too unbalanced. At the end of the day, every token crashes on its holders, but we don’t have to out-bot each other forever in a race to the bottom. Let’s build an ecosystem where transparency drives participation and everyone stays in their bets a little bit longer.
             </p>
-            <br>
-            <br>
+            <br><br>
             <p><strong>Product:</strong></p>
-            
-
             <p>
               A Chrome extension that opens a side panel inside the browser window. Copy and paste any token’s contract address and it produces data visualizations for major deceptions on that token’s holdership: Bundles, Snipes, Security, and Wallets. Each of these can be assessed one at a time using different tools, but this is the first to aggregate into a single smart-assistant and greatly increasing the focus, speed, and accuracy of DYOR.
             </p>
-            <br>
-            <br>
+            <br><br>
             <p><strong>Competition:</strong></p>
-
-            
             <p>
               SarumAI, Soul Scanner, Syrax. There are other tools too, but they don't seem to be resourced well enough. We are in conversation with a competitor actually about working together on developing the data visualizations, in a strategic partnership. We are also in conversation with two separate ex-scammers for the blockchain developer role.
             </p>
           </div>
         </div>
-
-        <!-- "Read More" text (no button style) below the scrollable text div -->
+        <!-- "Read More" text -->
         <a href="your-read-more-link.html" class="read-more-button">Read More</a>
       </div>
 
@@ -436,33 +420,23 @@
           </a>
           <div class="hover-text">GitHub</div>
         </div>
-
         <!-- Chrome Extension -->
         <div class="button-container">
           <a href="https://yourwebsite.com" target="_blank" aria-label="Chrome Extension">
             <img src="extension3.png" alt="Chrome Extension">
           </a>
-          <div class="hover-text"> Download Extension!
-            <!-- <span style="color: #000000;">E</span>
-            <span style="color: #4285F4;">x</span>
-            <span style="color: #F4B400;">t</span>
-            <span style="color: #0F9D58;">e</span>
-            <span style="color: #4285F4;">n</span>
-            <span style="color: #0F9D58;">s</s></span>
-            <span style="color: #F4B400;">i</span>
-            <span style="color: #DB4437;">o</span> 
-            <span style="color: #DB4437;">n</span>  -->
-
+          <div class="hover-text">
+            Download Extension!
           </div>
         </div>
       </div>
 
-      <!-- Hover image: placed inside the middle column, to the left of info panel -->
+      <!-- Hover image -->
       <div class="hover-image" id="hoverImage">
         <img src="hover.png" alt="Hover Image">
       </div>
 
-      <!-- Info panel (slides in/out on hover from right column items) -->
+      <!-- Info panel -->
       <div class="info-panel" id="infoPanel">
         <!-- Content set via JavaScript -->
       </div>
@@ -517,20 +491,16 @@
   <!-- JavaScript to handle hover events, dynamic positioning, and "Read More" text fade-in -->
   <script>
     window.onload = function() {
-      // Select elements
       const extensionSections = document.querySelectorAll('.extension-section');
       const infoPanel = document.getElementById('infoPanel');
       const middleCol = document.querySelector('.middle-column');
       const hoverImage = document.getElementById('hoverImage');
       const readMoreButton = document.querySelector('.read-more-button');
 
-      // Flag to detect if we've already hovered once
       let hasHovered = false;
 
-      // Update the info panel content and position
       function updateInfoPanel(section) {
         if (!section) return;
-
         const title = section.getAttribute('data-info');
         const description = section.getAttribute('data-description');
         infoPanel.innerHTML = `<strong>${title}</strong><p>${description}</p>`;
@@ -538,50 +508,36 @@
         const sectionRect = section.getBoundingClientRect();
         const middleColRect = middleCol.getBoundingClientRect();
 
-        // Calculate vertical center relative to .middle-column
         const centerPosition =
           (sectionRect.top - middleColRect.top) +
           (sectionRect.height / 2) -
           (infoPanel.offsetHeight / 2);
-
-        // Ensure the panel stays within .middle-column's vertical range
         const maxTop = middleCol.offsetHeight - infoPanel.offsetHeight;
         const adjustedTop = Math.min(Math.max(centerPosition, 10), maxTop - 30);
-
         infoPanel.style.top = `${adjustedTop}px`;
       }
 
-      // Hover events for the extension sections
       extensionSections.forEach(section => {
         section.addEventListener('mouseenter', () => {
-          // Show info panel
           updateInfoPanel(section);
           infoPanel.classList.add('show');
-
-          // Hide hover.png permanently on first hover
           if (!hasHovered) {
             hoverImage.style.opacity = '0';
             hasHovered = true;
           }
         });
-
         section.addEventListener('mouseleave', () => {
-          // Hide info panel
           infoPanel.classList.remove('show');
         });
       });
 
-      // Initialize info panel with "Basic Information" section on page load
       const basicInfoSection = document.getElementById('basicInfoSection');
       if (basicInfoSection) {
         setTimeout(() => {
           updateInfoPanel(basicInfoSection);
-          // If you want it to show immediately, uncomment:
-          // infoPanel.classList.add('show');
         }, 100);
       }
 
-      // Re-position info panel on window resize (if panel is visible)
       window.addEventListener('resize', () => {
         if (infoPanel.classList.contains('show')) {
           const activeTitle = infoPanel.querySelector('strong').innerText;
@@ -593,7 +549,6 @@
         }
       });
 
-      // "Read More" text: show after 8 seconds
       setTimeout(() => {
         if (readMoreButton) {
           readMoreButton.classList.add('show');
