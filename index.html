@@ -331,6 +331,22 @@
         width: 150px;
       }
     }
+
+      /* Responsive Adjustments */
+      @media (max-width: 1600px) {
+        .image-container {
+          width: 600px;
+          height: 384px;
+        }
+        .info-panel {
+          width: 220px;
+          right: -220px;
+        }
+        .hover-image img {
+          width: 150px;
+        }
+      }
+
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
@@ -340,18 +356,18 @@
         display: none;
       }
       .middle-column {
-        padding-right: 50px;
+        padding-right: 0px;
       }
       .image-container {
-        width: 100%;
-        height: auto;
+        width: 600px;
+        height: 384px;
       }
       .info-panel {
         width: 200px;
         right: -200px;
       }
-      .hover-image {
-        display: none;
+      .hover-image img {
+        width: 100px;
       }
     }
   </style>
