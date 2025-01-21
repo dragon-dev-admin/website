@@ -12,7 +12,7 @@
     referrerpolicy="no-referrer"
   />
   <style>
-    /* Global resets and basic styling */
+    /* Global Resets and Basic Styling */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -25,11 +25,7 @@
       overflow: hidden;
     }
 
-    /* 
-      Updated container
-      Left column remains 25%, middle is auto and right column is now fixed
-      to an aspect-based width relative to the viewport height.
-    */
+    /* Container Setup */
     .container {
       display: grid;
       grid-template-columns: 25% auto calc(100vh / 2.3);
@@ -38,36 +34,35 @@
       position: relative;
     }
 
-    /*--------------------------------
-      LEFT COLUMN (Split into 3 parts)
-    --------------------------------*/
+    /* Left Column: Split into 3 Sections */
     .left-column {
       display: flex;
       flex-direction: column;
       width: 100%;
       height: 100%;
+      background-color: #fff; /* Ensure consistent background */
     }
     .top-section {
       flex: 0 0 21%;
-      background-color: #fff; /* White background */
+      background-color: #fff;
     }
     .middle-section {
-      flex: 0 0 65%;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      background-color: #fff; /* White background */
-      overflow: hidden; /* Container for the scrolling text */
-      padding: 20px; /* Added some padding for general spacing */
+      background-color: #fff;
+      overflow: hidden;
+      padding: 20px;
       position: relative;
     }
     .bottom-section {
       flex: 0 0 14%;
-      background-color: #fff; /* White background */
+      background-color: #fff;
     }
 
-    /* Auto-scrolling text inside the middle section */
+    /* Auto-Scrolling Text */
     .scroll-wrapper {
-      flex: 1; /* Take up available space */
+      flex: 1;
       overflow: hidden;
       position: relative;
     }
@@ -78,14 +73,14 @@
       font-size: 18px;
       line-height: 1.2em;
       color: #333;
-      padding: 0px;
-      transition: animation-play-state 0.3s ease; /* smooth pause on hover */
+      padding: 0;
+      transition: animation-play-state 0.3s ease;
     }
     .scroll-text:hover {
       animation-play-state: paused;
     }
 
-    /* Gradient overlay for bottom 10% grey effect */
+    /* Gradient Overlay */
     .scroll-wrapper::after {
       content: "";
       position: absolute;
@@ -106,70 +101,67 @@
       }
     }
 
-    /* "Read More" - updated to be bold and change color on hover */
+    /* "Read More" Button */
     .read-more-button {
-      color: rgb(0, 0, 0);
+      color: #000;
       text-decoration: none;
       font-size: 18px;
       margin-top: 10px;
       display: block;
-      opacity: 0;          
-      visibility: hidden;  
+      opacity: 0;
+      visibility: hidden;
       transition: opacity 1s ease, visibility 1s ease, color 0.3s ease;
-      text-align: left;    
+      text-align: left;
       font-weight: bold;
     }
     .read-more-button.show {
-      opacity: 1;          
-      visibility: visible; 
+      opacity: 1;
+      visibility: visible;
     }
     .read-more-button:hover {
-      color: rgb(132, 132, 132); 
+      color: #848484;
     }
 
-    /*--------------------------------
-      MIDDLE COLUMN
-    --------------------------------*/
+    /* Middle Column */
     .middle-column {
       position: relative;
       border-right: 3px solid rgba(0, 0, 0, 0.7);
       box-shadow: inset -7px 0 10px -3px rgba(0, 0, 0, 0.8);
-      overflow: hidden; /* to hide the animated info panel */
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;  /* center horizontally */
+      align-items: center;
       justify-content: center;
-      padding-right: 280px; /* extra right padding to shift the block left */
+      padding-right: 280px;
+      background-color: #fff; /* Ensure consistent background */
     }
 
-    /* Container for the dragon image */
+    /* Image Container */
     .image-container {
       margin-top: 20px;
-      width: 700px;   
-      height: 450px;  
+      width: 700px;
+      height: 450px;
       background: url("main_image.png") center center no-repeat;
       background-size: contain;
     }
 
-    /* The text below the image */
+    /* Dragon Title Text */
     .dragon-title {
       margin-top: 20px;
       text-align: center;
     }
     .dragon-title h1 {
-      font-size: 42px; 
+      font-size: 42px;
       font-weight: normal;
       margin-bottom: 5px;
     }
     .dragon-title p {
-      font-size: 18px; 
+      font-size: 18px;
       line-height: 1.4em;
       color: #959595;
     }
 
-    /*--------------------------------
-      BOTTOM LINKS (GitHub, Chrome Extension)
-    --------------------------------*/
+    /* Bottom Links */
     .bottom-links {
       margin-top: 25px;
       display: flex;
@@ -224,9 +216,7 @@
       pointer-events: auto;
     }
 
-    /*--------------------------------
-      INFO PANEL (slides from the right)
-    --------------------------------*/
+    /* Info Panel */
     .info-panel {
       position: absolute;
       background-color: rgba(255, 255, 255, 0.9);
@@ -244,7 +234,6 @@
       transition: right 0.5s ease;
       z-index: 999;
       top: 0;
-      transform: translateY(0);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10);
     }
     .info-panel.show {
@@ -255,7 +244,7 @@
       margin-bottom: 5px;
     }
 
-    /* Hover image (to and fro) */
+    /* Hover Image */
     .hover-image {
       position: absolute;
       right: 20px;
@@ -274,9 +263,7 @@
       100% { transform: translateX(0); }
     }
 
-    /*--------------------------------
-      RIGHT COLUMN
-    --------------------------------*/
+    /* Right Column */
     .right-column {
       background-color: #1A2240;
       padding: 20px;
@@ -318,10 +305,10 @@
     }
 
     /* Responsive Adjustments */
-    @media (max-width: 1200px) {
+    @media (max-width: 1600px) and (min-width: 1201px) {
       .image-container {
-        width: 500px;
-        height: 320px;
+        width: 800px;
+        height: 514px;
       }
       .info-panel {
         width: 220px;
@@ -330,34 +317,12 @@
       .hover-image img {
         width: 150px;
       }
+      .middle-column {
+        padding-right: 220px;
+      }
     }
 
-      /* Responsive Adjustments */
-      @media (max-width: 1600px) {
-        .image-container {
-          width: 600px;
-          height: 384px;
-        }
-        .info-panel {
-          width: 220px;
-          right: -220px;
-        }
-        .hover-image img {
-          width: 150px;
-        }
-      }
-
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr auto 1fr;
-      }
-      .left-column, .right-column {
-        display: none;
-      }
-      .middle-column {
-        padding-right: 0px;
-      }
+    @media (max-width: 1200px) and (min-width: 769px) {
       .image-container {
         width: 600px;
         height: 384px;
@@ -367,21 +332,67 @@
         right: -200px;
       }
       .hover-image img {
+        width: 120px;
+      }
+      .middle-column {
+        padding-right: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .left-column, .right-column {
+        display: none;
+      }
+      .middle-column {
+        padding-right: 0;
+      }
+      .image-container {
+        width: 100%;
+        height: auto;
+        max-width: 600px;
+      }
+      .info-panel {
+        width: 200px;
+        right: -200px;
+      }
+      .hover-image img {
         width: 100px;
+      }
+    }
+
+    /* Enhanced Styles for Screens Larger Than 1600px */
+    @media (min-width: 1601px) {
+      .image-container {
+        width: 900px;
+        height: 576px;
+      }
+      .middle-column {
+        padding-right: 320px;
+      }
+      .info-panel {
+        width: 300px;
+        right: -300px;
+      }
+      .hover-image img {
+        width: 180px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- LEFT COLUMN: 3 sections -->
+    <!-- LEFT COLUMN: 3 Sections -->
     <div class="left-column">
-      <!-- Top 21% -->
+      <!-- Top Section -->
       <div class="top-section">
-        <!-- Could be used for a logo or just empty white space -->
+        <!-- Placeholder for Logo or Empty Space -->
       </div>
       
-      <!-- Middle 65%: contains auto-scrolling text and "Read More" text -->
+      <!-- Middle Section: Auto-Scrolling Text and "Read More" -->
       <div class="middle-section">
         <div class="scroll-wrapper">
           <div class="scroll-text">
@@ -404,22 +415,22 @@
             </p>
           </div>
         </div>
-        <!-- "Read More" text -->
+        <!-- "Read More" Button -->
         <a href="your-read-more-link.html" class="read-more-button">Read More</a>
       </div>
 
-      <!-- Bottom 14% -->
+      <!-- Bottom Section -->
       <div class="bottom-section">
-        <!-- Could be used for any additional info or empty white space -->
+        <!-- Placeholder for Additional Info or Empty Space -->
       </div>
     </div>
 
-    <!-- MIDDLE COLUMN: Dragon image, title/text, links, hover image, info panel -->
+    <!-- MIDDLE COLUMN: Dragon Image, Title/Text, Links, Hover Image, Info Panel -->
     <div class="middle-column">
-      <!-- Dragon image container -->
+      <!-- Dragon Image Container -->
       <div class="image-container"></div>
 
-      <!-- Text under the dragon image -->
+      <!-- Text Under the Dragon Image -->
       <div class="dragon-title">
         <p>
           An AI assistant that accelerates the speed and accuracy of<br>
@@ -427,16 +438,16 @@
         </p>
       </div>
 
-      <!-- Bottom links to GitHub and Chrome Extension (with hover text) -->
+      <!-- Bottom Links: GitHub and Chrome Extension -->
       <div class="bottom-links">
-        <!-- GitHub -->
+        <!-- GitHub Link -->
         <div class="button-container">
           <a href="https://github.com/yourHandle" target="_blank" aria-label="GitHub">
             <img src="github2.png" alt="GitHub">
           </a>
           <div class="hover-text">GitHub</div>
         </div>
-        <!-- Chrome Extension -->
+        <!-- Chrome Extension Link -->
         <div class="button-container">
           <a href="https://yourwebsite.com" target="_blank" aria-label="Chrome Extension">
             <img src="extension3.png" alt="Chrome Extension">
@@ -447,21 +458,21 @@
         </div>
       </div>
 
-      <!-- Hover image -->
+      <!-- Hover Image -->
       <div class="hover-image" id="hoverImage">
         <img src="hover.png" alt="Hover Image">
       </div>
 
-      <!-- Info panel -->
+      <!-- Info Panel -->
       <div class="info-panel" id="infoPanel">
-        <!-- Content set via JavaScript -->
+        <!-- Content Set via JavaScript -->
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: extension sections with images -->
+    <!-- RIGHT COLUMN: Extension Sections with Images -->
     <div class="right-column">
       <div class="extension-section"
-           data-info="enter any SPL contract address here"
+           data-info="Enter any SPL contract address here"
            data-description="">
         <img src="i1.png" alt="Image 1" class="extension-image" />
         <div class="highlight-overlay">
@@ -470,7 +481,7 @@
       </div>
       <div class="extension-section"
            id="basicInfoSection"
-           data-info="basic token information and security checks like revoked mint and freeze authority, burned lp tokens, and paid dex. links to sites and socials"
+           data-info="Basic token information and security checks like revoked mint and freeze authority, burned LP tokens, and paid DEX. Links to sites and socials."
            data-description="">
         <img src="i2.png" alt="Image 2" class="extension-image" />
         <div class="highlight-overlay">
@@ -478,7 +489,7 @@
         </div>
       </div>
       <div class="extension-section"
-           data-info="a visualizer that displays the active bundles and returns the number of active wallets and percentage of the token held"
+           data-info="A visualizer that displays the active bundles and returns the number of active wallets and percentage of the token held."
            data-description="">
         <img src="i3.png" alt="Image 3" class="extension-image" />
         <div class="highlight-overlay">
@@ -486,7 +497,7 @@
         </div>
       </div>
       <div class="extension-section"
-           data-info="a sniper chart that shows each buy within 15s of the launch, and then each buy within 15s of Raydium graduation"
+           data-info="A sniper chart that shows each buy within 15s of the launch, and then each buy within 15s of Raydium graduation."
            data-description="">
         <img src="i4.png" alt="Image 4" class="extension-image" />
         <div class="highlight-overlay">
@@ -494,7 +505,7 @@
         </div>
       </div>
       <div class="extension-section"
-           data-info="an analysis of the powerful holders, including clusters and the top 10. more charts coming to include fresh wallets and other wallet analyses"
+           data-info="An analysis of the powerful holders, including clusters and the top 10. More charts coming to include fresh wallets and other wallet analyses."
            data-description="">
         <img src="i5.png" alt="Image 5" class="extension-image" />
         <div class="highlight-overlay">
@@ -504,7 +515,7 @@
     </div>
   </div>
 
-  <!-- JavaScript to handle hover events, dynamic positioning, and "Read More" text fade-in -->
+  <!-- JavaScript for Interactive Features -->
   <script>
     window.onload = function() {
       const extensionSections = document.querySelectorAll('.extension-section');
@@ -515,12 +526,17 @@
 
       let hasHovered = false;
 
+      /**
+       * Updates the Info Panel with data from the hovered extension section.
+       * @param {Element} section - The extension section being hovered.
+       */
       function updateInfoPanel(section) {
         if (!section) return;
         const title = section.getAttribute('data-info');
-        const description = section.getAttribute('data-description');
+        const description = section.getAttribute('data-description') || '';
         infoPanel.innerHTML = `<strong>${title}</strong><p>${description}</p>`;
 
+        // Position the Info Panel vertically centered relative to the section
         const sectionRect = section.getBoundingClientRect();
         const middleColRect = middleCol.getBoundingClientRect();
 
@@ -533,6 +549,7 @@
         infoPanel.style.top = `${adjustedTop}px`;
       }
 
+      // Add event listeners to each extension section
       extensionSections.forEach(section => {
         section.addEventListener('mouseenter', () => {
           updateInfoPanel(section);
@@ -547,6 +564,7 @@
         });
       });
 
+      // Initialize Info Panel with Basic Info Section
       const basicInfoSection = document.getElementById('basicInfoSection');
       if (basicInfoSection) {
         setTimeout(() => {
@@ -554,6 +572,7 @@
         }, 100);
       }
 
+      // Handle Window Resize
       window.addEventListener('resize', () => {
         if (infoPanel.classList.contains('show')) {
           const activeTitle = infoPanel.querySelector('strong').innerText;
@@ -565,6 +584,7 @@
         }
       });
 
+      // Show "Read More" Button After 23 Seconds
       setTimeout(() => {
         if (readMoreButton) {
           readMoreButton.classList.add('show');
