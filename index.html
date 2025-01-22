@@ -319,17 +319,38 @@
       display: none; /* Hide all text descriptions overlay if not needed */
     }
 
-    @media (max-width: 767px) {
-      /* Hide everything including body, html, and content */
+
+    @media (max-width: 1060px) {
       html, body {
-        display: none !important;
         height: 100%;
         margin: 0;
         padding: 0;
+        background-color: white; /* Set background to white */
+      }
+    
+      /* Hide all content */
+      * {
+        display: none !important; /* This hides all elements */
+      }
+    
+      /* Display a full-screen white page */
+      body {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    
+      /* Optionally: If you want a logo or any background, you can display here */
+      .container {
+        display: none;
       }
     }
 
-    
+
+
+
     /* Tablet Devices */
     @media (max-width: 1550px) and (min-width: 768px) {
       /* Hide the left column */
