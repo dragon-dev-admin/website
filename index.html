@@ -23,6 +23,7 @@
       height: 100%;
       font-family: Arial, sans-serif;
       overflow: hidden;
+      scroll-behavior: smooth; /* Enable smooth scrolling */
     }
     .container {
       display: grid;
@@ -185,6 +186,7 @@
       overflow: hidden;
       background-color: transparent;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none; /* Remove underline from links */
     }
     .button-container a:hover {
       transform: scale(1.1);
@@ -318,118 +320,150 @@
     .highlight-overlay {
       display: none; /* Hide all text descriptions overlay if not needed */
     }
-/* Mobile Devices */
-@media (max-width: 1000px) {
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: white; /* Set background to white */
-    overflow-x: hidden; /* Prevent horizontal scroll */ 
-  }
+  /* Mobile Devices */
+  @media (max-width: 1000px) {
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: white; /* Set background to white */
+      overflow-x: hidden; /* Prevent horizontal scroll */ 
+    }
 
-  /* Neutralize the container's grid layout */
-  .container {
-    display: flex; /* Change from block to flex */
-    width: 100%;
-    height: 100%;
-    align-items: center; /* Vertically center the content */
-    justify-content: center; /* Horizontally center the content */
-  }
+    /* Neutralize the container's grid layout */
+    .container {
+      display: flex; /* Change from grid to flex */
+      flex-direction: column;
+      width: 100%;
+      height: 90%;
+      align-items: center; /* Vertically center the content */
+      justify-content: center; /* Horizontally center the content */
+    }
 
-  /* Hide specific elements */
-  .right-column,
-  .info-panel,
-  .hover-image {
-    display: none !important;
-  }
+    /* Hide specific elements */
+    .right-column,
+    .info-panel,
+    .hover-image {
+      display: none !important;
+    }
 
-  /* Hide left column if not needed */
-  .left-column {
-    display: none;
-  }
+    /* Hide left column if not needed */
+    .left-column {
+      display: none;
+    }
 
-  /* Adjust middle column to take full width and center it vertically */
-  .middle-column {
-    padding-right: 0;
-    border-right: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    width: 100%;
-    max-height: 100%; /* Ensure it doesn't overflow */
-  }
+    /* Adjust middle column to take full width and center it vertically */
+    .middle-column {
+      padding-right: 0;
+      border-right: none;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      width: 100%;
+      max-height: 100%; /* Ensure it doesn't overflow */
+    }
 
-  /* Adjust image-container for smaller screens */
-  .image-container {
-    height: 100%;
-    width: 100%;
-    height: 500px; 
-    background: url("main_image.png") center center no-repeat;
-    background-size: contain;
-    margin: 0 auto;
-  }
+    /* Adjust image-container for smaller screens */
+    .image-container {
+      height: 100%;
+      width: 100%;
+      height: 500px; 
+      background: url("main_image.png") center center no-repeat;
+      background-size: contain;
+      margin: 0 auto;
+    }
 
-  /* Adjust dragon-title */
-  .dragon-title p {
-    font-size: 20px; /* Reduced font size for better readability */
-    line-height: 1.4em;
-    color: #959595;
-    text-align: center;
-  }
+    /* Adjust dragon-title */
+    .dragon-title p {
+      font-size: 20px; /* Reduced font size for better readability */
+      line-height: 1.4em;
+      color: #959595;
+      text-align: center;
+    }
 
-  /* Adjust bottom-links to display side by side */
-  .bottom-links {
-    margin-top: 20px;
-    display: flex;
-    gap: 20px;
-    flex-direction: row; /* Change from column to row */
-    justify-content: center; /* Center the buttons horizontally */
-    align-items: center;
-    width: 100%; /* Ensure it takes full width */
-  }
+    /* Adjust bottom-links to display side by side */
+    .bottom-links {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      flex-direction: row; /* Change from column to row */
+      justify-content: center; /* Center the buttons horizontally */
+      align-items: center;
+      width: 100%; /* Ensure it takes full width */
+    }
 
-  /* Adjust button-container for better spacing */
-  .button-container {
-    /* Remove flex-direction column if present */
-    flex-direction: column;
-  }
+    /* Adjust button-container for better spacing */
+    .button-container {
+      /* Remove flex-direction column if present */
+      flex-direction: column;
+    }
 
-  /* Adjust buttons size for mobile */
-  .button-container a {
-    width: 50px; /* Reduced size for mobile */
-    height: 50px;
-  }
+    /* Adjust buttons size for mobile */
+    .button-container a {
+      width: 50px; /* Reduced size for mobile */
+      height: 50px;
+    }
 
-  .hover-text {
-    top: 60px; /* Adjusted position for mobile */
-    font-size: 12px; /* Smaller font size */
-  }
+    .hover-text {
+      top: 60px; /* Adjusted position for mobile */
+      font-size: 12px; /* Smaller font size */
+    }
 
-  /* Adjust scroll-wrapper and scroll-text */
-  .middle-section {
-    max-height: 300px; /* Limit height for better scrolling */
-    overflow-y: auto;
-    width: 100%;
-  }
+    /* Adjust scroll-wrapper and scroll-text */
+    .middle-section {
+      max-height: 300px; /* Limit height for better scrolling */
+      overflow-y: auto;
+      width: 100%;
+    }
 
-  .scroll-text {
-    font-size: 14px; /* Slightly smaller font */
-  }
+    .scroll-text {
+      font-size: 14px; /* Slightly smaller font */
+    }
 
-  /* Show "Read More" button immediately */
-  .read-more-button {
-    font-size: 16px;
-    text-align: center;
-    margin-top: 10px;
-    display: block;
-    opacity: 1;          
-    visibility: visible; 
+    /* Show "Read More" button immediately */
+    .read-more-button {
+      font-size: 16px;
+      text-align: center;
+      margin-top: 10px;
+      display: block;
+      opacity: 1;          
+      visibility: visible; 
+    }
+
+    /* Arrow Landing for Mobile */
+    .arrowlanding {
+      position: fixed;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      z-index: 1000;
+      animation: bounce 2s infinite;
+      text-decoration: none; /* Remove underline */
+      outline: none; /* Remove focus outline */
+    }
+
+    .arrowlanding p {
+      font-size: 80px;
+      color: #000000;
+      margin: 0;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
   }
-}
 
     /* Tablet Devices */
     @media (max-width: 1550px) and (min-width: 1000px) {
@@ -466,8 +500,8 @@
         background-size: contain;
       }
 
-    
-    
+
+
       /* Adjust the info panel size and position */
       .info-panel {
         width: 250px;
@@ -598,7 +632,7 @@
         <!-- GitHub -->
         <div class="button-container">
           <a href="https://github.com/yourHandle" target="_blank" aria-label="GitHub">
-            <img src="gitbook.png">
+            <img src="gitbook.png" alt="GitHub">
           </a>
           <div class="hover-text">Read More</div>
         </div>
@@ -669,7 +703,17 @@
     </div>
   </div>
 
-  <!-- JavaScript to handle hover events, dynamic positioning, and "Read More" text fade-in -->
+  <!-- Arrow Landing for Mobile -->
+  <a href="#new-section" class="arrowlanding" aria-label="Scroll Down">
+    <p style="font-size: 80px; color: #000000">&#xfe40;</p>
+  </a>
+
+  <!-- New Section to Scroll To -->
+  <div id="new-section" style="height: 100vh; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+    <h2>Welcome to the New Section!</h2>
+  </div>
+
+  <!-- JavaScript to handle hover events, dynamic positioning, "Read More" text fade-in, and arrow behavior -->
   <script>
     window.onload = function() {
       // Select elements
@@ -754,6 +798,19 @@
           readMoreButton.classList.add('show');
         }
       }, 23000);
+
+      // Smooth scroll for Arrow Landing and hide arrow after click
+      const arrowLanding = document.querySelector('.arrowlanding');
+      arrowLanding.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        // Hide the arrow after clicking
+        this.style.display = 'none';
+      });
     };
   </script>
 </body>
