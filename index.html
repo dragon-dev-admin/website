@@ -518,7 +518,7 @@
     /* Adjust #new-section and .scrollable-extensions to fit without gaps */
     #new-section {
       height: 100vh;
-      background-color: #f0f0f0;
+      background-color: #282c4c;
       overflow-y: auto;
       padding: 0; /* Remove padding to eliminate gaps */
       display: flex;
@@ -529,6 +529,8 @@
     }
 
     .scrollable-extensions {
+      background: #282c4c; 
+
       margin-top: 200px; /* Added padding space above scrollable extensions */
       width: 100%; /* Ensure full width */
       max-height: 100vh; /* Utilize full height */
@@ -544,15 +546,15 @@
       width: 8px;
     }
     .scrollable-extensions::-webkit-scrollbar-track {
-      background: #f1f1f1; 
+      background: #282c4c; 
       border-radius: 4px;
     }
     .scrollable-extensions::-webkit-scrollbar-thumb {
-      background: #888; 
+      background: #282c4c; 
       border-radius: 4px;
     }
     .scrollable-extensions::-webkit-scrollbar-thumb:hover {
-      background: #555; 
+      background: #282c4c; 
     }
     .extension-image-scroll {
       width: 100%;
@@ -692,7 +694,7 @@
       padding: 0; /* Removed padding to eliminate gaps */
       display: flex;
       justify-content: center; /* Center horizontally */
-      align-items: stretch;     /* Stretch to fill vertically */
+      align-items: center;     /* Center vertically */
       width: 100%; /* Ensure full width */
       flex-direction: column; /* Ensure column direction */
     }
@@ -745,6 +747,27 @@
       transform: scale(1.02);
     }
 
+    /*--------------------------------
+      SECTION TITLE STYLING
+    --------------------------------*/
+    .section-title {
+  
+      font-size: 38px;
+      color: #ffffff; /* Grey color */
+      text-align: center;
+      margin-bottom:100px;
+      margin-bottom: 40px; /* Space below the title */
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    /* Adjustments for smaller screens */
+    @media (max-width: 1000px) {
+      .section-title {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -780,6 +803,7 @@
             <br>
             <p><strong>Competition:</strong></p>
     
+
           
             
             <p>
@@ -889,13 +913,25 @@
 
   <!-- Arrow Landing for Mobile -->
   <a href="#new-section" class="arrowlanding" aria-label="Scroll Down">
-    <p style="font-size: 80px; color: #000000">&#xfe40;</p>
+    <p style="font-size: 80px; color: #cecece">&#xfe40;</p>
   </a>
 
   <!-- New Section to Scroll To -->
   <div id="new-section">
     <!-- Scrollable Extensions Images -->
     <div class="scrollable-extensions">
+      <div class="section-title">
+        
+      </div>
+      <div class="section-title">
+        
+      </div>
+      <div class="section-title">
+        Extension
+      </div>
+      <div class="section-title">
+        
+      </div>
       <div class="extension-image-scroll">
         <img src="i1.png" alt="Extension 1">
       </div>
