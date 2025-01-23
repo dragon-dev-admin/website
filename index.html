@@ -318,38 +318,118 @@
     .highlight-overlay {
       display: none; /* Hide all text descriptions overlay if not needed */
     }
+/* Mobile Devices */
+@media (max-width: 1060px) {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* Set background to white */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
 
+  /* Neutralize the container's grid layout */
+  .container {
+    display: flex; /* Change from block to flex */
+    width: 100%;
+    height: 100%;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+  }
 
-    @media (max-width: 1060px) {
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: white; /* Set background to white */
-      }
-    
-      /* Hide all content */
-      * {
-        display: none !important; /* This hides all elements */
-      }
-    
-      /* Display a full-screen white page */
-      body {
-        background-color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-    
-      /* Optionally: If you want a logo or any background, you can display here */
-      .container {
-        display: none;
-      }
-    }
+  /* Hide specific elements */
+  .right-column,
+  .info-panel,
+  .hover-image {
+    display: none !important;
+  }
 
+  /* Hide left column if not needed */
+  .left-column {
+    display: none;
+  }
 
+  /* Adjust middle column to take full width and center it vertically */
+  .middle-column {
+    padding-right: 0;
+    border-right: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-height: 100%; /* Ensure it doesn't overflow */
+  }
 
+  /* Adjust image-container for smaller screens */
+  .image-container {
+    height: 100%;
+    max-width: 1000px;
+    height: auto;
+    background: url("main_image.png") center center no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+  }
+
+  /* Adjust dragon-title */
+  .dragon-title p {
+    font-size: 24px; /* Reduced font size for better readability */
+    line-height: 1.4em;
+    color: #959595;
+    text-align: center;
+  }
+
+  /* Adjust bottom-links to display side by side */
+  .bottom-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row; /* Change from column to row */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center;
+    width: 100%; /* Ensure it takes full width */
+  }
+
+  /* Adjust button-container for better spacing */
+  .button-container {
+    /* Remove flex-direction column if present */
+    flex-direction: column;
+  }
+
+  /* Adjust buttons size for mobile */
+  .button-container a {
+    width: 50px; /* Reduced size for mobile */
+    height: 50px;
+  }
+
+  .hover-text {
+    top: 60px; /* Adjusted position for mobile */
+    font-size: 12px; /* Smaller font size */
+  }
+
+  /* Adjust scroll-wrapper and scroll-text */
+  .middle-section {
+    max-height: 200px; /* Limit height for better scrolling */
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .scroll-text {
+    font-size: 14px; /* Slightly smaller font */
+  }
+
+  /* Show "Read More" button immediately */
+  .read-more-button {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+    opacity: 1;          
+    visibility: visible; 
+  }
+}
 
     /* Tablet Devices */
     @media (max-width: 1550px) and (min-width: 768px) {
