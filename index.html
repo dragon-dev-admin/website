@@ -73,12 +73,17 @@
     .scroll-text {
       position: absolute;
       width: 100%;
-      animation: scroll-up 80s linear infinite;
       font-size: 18px;
       line-height: 1.2em;
       color: #333;
       padding: 0px;
-      transition: animation-play-state 0.3s ease; /* smooth pause on hover */
+      transition: animation-play-state 0.3s ease, opacity 1s ease;
+      opacity: 0; /* Initially hidden */
+      /* Remove animation and animation-delay */
+    }
+    .scroll-text.start-scroll {
+      opacity: 1;
+      animation: scroll-up 80s linear infinite;
     }
     .scroll-text:hover {
       animation-play-state: paused;
@@ -621,7 +626,6 @@
         padding-right: 0; /* Removed padding to eliminate gaps */
         padding-top: 50px; /* Added padding for better spacing */
         padding-bottom: 40px; /* Added padding for better spacing */
-
         scrollbar-width: thin; /* For Firefox */
       }
 
@@ -832,11 +836,10 @@
       display: flex;
       flex-direction: column;
       gap: 10px; /* Reduced gap if necessary */
-      padding-top: 40; /* Removed padding to eliminate gaps */
-      padding-bottom: 220px; /* Removed padding to eliminate gaps */
-
-      padding-right: 80; /* Removed padding to eliminate gaps */
-      padding-left: 80; /* Removed padding to eliminate gaps */
+      padding-top: 40px; /* Added padding for better spacing */
+      padding-bottom: 220px; /* Added padding for better spacing */
+      padding-right: 80px; /* Removed padding to eliminate gaps */
+      padding-left: 80px; /* Removed padding to eliminate gaps */
 
 
       scrollbar-width: thin; /* For Firefox */
@@ -997,7 +1000,7 @@
       <div class="bottom-links">
         <!-- GitHub -->
         <div class="button-container">
-          <a href="https://github.com/yourHandle" target="_blank" aria-label="GitHub">
+          <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank" aria-label="GitHub">
             <img src="gitbook.png" alt="GitHub">
           </a>
           <div class="hover-text">Read More</div>
@@ -1005,7 +1008,7 @@
 
         <!-- Chrome Extension -->
         <div class="button-container">
-          <a href="https://yourwebsite.com" target="_blank" aria-label="Chrome Extension">
+          <a href="https://chromewebstore.google.com/" target="_blank" aria-label="Chrome Extension">
             <img src="extension3.png" alt="Chrome Extension">
           </a>
           <div class="hover-text">Download Extension!</div>
@@ -1120,6 +1123,9 @@
       const arrowLanding = document.querySelector('.arrowlanding');
       const returnArrow = document.querySelector('.return-arrow');
 
+      // Select the scroll-text element
+      const scrollText = document.querySelector('.scroll-text');
+
       // Flag to detect if we've already hovered once
       let hasHovered = false;
 
@@ -1223,6 +1229,13 @@
         // Show the arrowlanding
         arrowLanding.style.display = 'flex';
       });
+
+      // **New Addition: Start scroll-text animation after 15 seconds**
+      setTimeout(() => {
+        if (scrollText) {
+          scrollText.classList.add('start-scroll');
+        }
+      }, 12000); // 15000ms = 15 seconds
     };
   </script>
 </body>
