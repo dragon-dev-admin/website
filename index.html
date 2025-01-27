@@ -302,13 +302,12 @@
     .info-panel {
       position: absolute;
       background-color: rgba(255, 255, 255, 0.9);
-      border: 2px solid #ff6b6b;
+      border: 2px solid #a1a1a1;
       padding: 15px 20px;
       border-radius: 8px;
       width: 280px;
-      color: red;
+      color: rgb(0, 0, 0);
       font-size: 16px;
-      font-weight: bold;
       overflow-wrap: break-word;
       word-break: break-word;
       white-space: normal;
@@ -322,6 +321,11 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10);
     }
     
+
+    /* Remove boldness from all text within the info panel */
+.info-panel * {
+  font-weight: normal;
+}
     .info-panel.show {
       right: 20px; /* slide into view */
     }
