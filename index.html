@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Dragon | v0.3</title>
-  <!-- Font Awesome (optional, used in other sections) -->
   <link rel="icon" href="./icon-128.png" type="image/png" />
 
+  <!-- Optional: Font Awesome (used in other sections for icons) -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -13,6 +13,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
   <style>
     /* Global resets and basic styling */
     * {
@@ -209,12 +210,13 @@
     }
 
     /*--------------------------------
-      BOTTOM LINKS (GitBook, Chrome Extension)
+      BOTTOM LINKS (GitBook, Chrome Extension, etc.)
     --------------------------------*/
     .bottom-links {
       margin-top: 25px;
       display: flex;
       gap: 30px;
+      margin-bottom: 25px;
     }
 
     .button-container {
@@ -316,16 +318,11 @@
       z-index: 999;
       top: 0;
       transform: translateY(0);
-
-      /* Reduced shadow for a subtler 3D effect */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10);
     }
-    
-
-    /* Remove boldness from all text within the info panel */
-.info-panel * {
-  font-weight: normal;
-}
+    .info-panel * {
+      font-weight: normal;
+    }
     .info-panel.show {
       right: 20px; /* slide into view */
     }
@@ -434,7 +431,6 @@
       font-weight: bold;
     }
     
-    /* Remove outline and shadow on focus and active states */
     .return-arrow:focus,
     .return-arrow:active,
     .return-arrow:focus-visible {
@@ -442,7 +438,6 @@
       box-shadow: none;
     }
     
-    /* Reuse the bounce animation */
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% {
         transform: translateX(-50%) translateY(0);
@@ -524,7 +519,6 @@
       .bottom-links {
         margin-top: 20px;
         margin-bottom: 50px;
-
         display: flex;
         gap: 20px;
         flex-direction: row; /* Change from column to row */
@@ -913,9 +907,6 @@
       transform: scale(1.02);
     }
     
-    /*--------------------------------
-      SECTION TITLE STYLING
-    --------------------------------*/
     .section-title {
       font-size: 38px;
       color: #ffffff; 
@@ -932,7 +923,7 @@
     }
 
     /*--------------------------------
-      RETURN ARROW STYLING
+      RETURN ARROW STYLING (again)
     --------------------------------*/
     .return-arrow {
       position: fixed;
@@ -1008,7 +999,6 @@
           <div class="scroll-text">
             <p>
               Heavy handed snipes, bundles, wash trades, and other deceptions on a token’s ownership are threatening web3 adoption. If you check Reddit (say like r/Solana) you’ll see all the recent stories about getting scammed or about the fear of buying a token because of rug pulls. Experienced traders can spot a token’s bundled supply or its wash trades with their naked eye, but new traders are blind. Let’s bring light to these techniques in a collective effort to pump the growth of the ecosystem.
-
             </p>
             <br><br>
             <p>
@@ -1041,7 +1031,7 @@
       <div class="bottom-links">
         <!-- GitBook -->
         <div class="button-container">
-          <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank" aria-label="GitHub">
+          <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank" aria-label="GitBook">
             <img src="gitbook.png" alt="GitBook">
           </a>
           <div class="hover-text">Read More</div>
@@ -1054,6 +1044,31 @@
           </a>
           <div class="hover-text">Download the Extension!</div>
         </div>
+
+      </div>
+
+      <!-- Contribute button (now directly links to contribute.html without overlay/animation) -->
+      <div class="button-container" style="align-items: center; text-align: center; display: flex; flex-direction: column;">
+        <!-- "Want to build?" text -->
+        <div style="margin: 4px 0; color: #000; font-size: 16px;">Want to build?</div>
+        <!-- Direct link to contribute.html -->
+        <a class="contribute-button" href="contribute.html" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 44px;
+            border: none;
+            border-radius: 8px;
+            background-color: #e5ecf0;
+            font-size: 16px;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        ">
+          contribute
+        </a>
       </div>
 
       <!-- Hover image: placed inside the middle column, to the left of info panel -->
@@ -1286,14 +1301,12 @@
         arrowLanding.style.display = 'flex';
       });
 
-      // Start scroll-text animation after 15 seconds
+      // Start scroll-text animation after 11 seconds (adjust as needed)
       setTimeout(() => {
         if (scrollText) {
           scrollText.classList.add('start-scroll');
         }
-      }, 11000); // 15000ms = 15 seconds
-
-      
+      }, 11000);
     };
   </script>
 </body>
