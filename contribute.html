@@ -49,7 +49,10 @@
       background-color: #fff;
       border-right: 1px solid #ccc;
       overflow-y: auto;
-      padding: 40px 50px;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      padding-left: 160px;
+      padding-right: 120px;
     }
 
     /* "Go back" link */
@@ -69,6 +72,8 @@
 
     /* Big heading */
     h1.main-title {
+      padding-top: 10px;
+      padding-bottom: 10px;
       font-size: 48px;
       margin: 20px 0;
       color: #000;
@@ -89,6 +94,8 @@
     h2.section-title {
       font-size: 32px;
       margin-top: 40px;
+      padding-top: 15px;
+      padding-bottom: 15px;
       margin-bottom: 25px;
       color: #000;
     }
@@ -100,11 +107,10 @@
       align-items: center;
       margin-bottom: 45px;
       gap: 30px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease;
     }
     .bounty-row:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 0px 0px rgba(255, 255, 255, 0.15);
     }
 
     /* Larger images in bounty rows */
@@ -221,24 +227,28 @@
       width: 0;
       background: transparent;
     }
+
+    /* Extension section – remove pointer cursor by using default */
     .extension-section {
       width: 95%;
       position: relative;
       display: flex;
       justify-content: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
+      cursor: default;
     }
-    .extension-section:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 14px rgba(255, 255, 255, 0.8);
-    }
+
     .extension-image {
       width: 100%;
       height: auto;
       object-fit: contain;
       border-radius: 12px;
       display: block;
+    }
+
+    /* Highlight class to visually indicate the "hovered" extension-section from bounty row's hover */
+    .extension-section.highlight {
+      box-shadow: 0 0 10px 2px rgba(74, 138, 255, 0.7), 0 0 20px rgba(74, 138, 255, 0.4);
+      transform: scale(1.05);
     }
 
     /*--------------------------
@@ -361,7 +371,7 @@
           and top 10 holders. Soon Dragon will produce analyses on many other deception techniques, crowd-sourced by 
           the builders and traders in the trenches.
         </p>
-        <br>
+        <br />
         <p>
           <strong>First Task:</strong> We build the data-pipelines to Dragon’s first four mods. The front-end for each 
           mod is already built for proof-of-concept, and gathers data by web-scraping various online tools. The 
@@ -407,7 +417,7 @@
           <p>
             <a href="#">See job</a>
             <a href="#">Go to repo</a>
-                    </p>
+          </p>
         </div>
       </div>
 
@@ -425,7 +435,8 @@
           </p>
           <p>
             <a href="#">See job</a>
-            <a href="#">Go to repo</a>          </p>
+            <a href="#">Go to repo</a>
+          </p>
         </div>
       </div>
 
@@ -491,41 +502,34 @@
 
     <!-- RIGHT COLUMN: extension sections -->
     <div class="right-column">
+      <!-- index 0 in JavaScript will refer to this (extImages[0]) -->
       <div class="extension-section">
-        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
           <img src="image1.png" alt="Image 1" class="extension-image" />
-        </a>
       </div>
-      <!-- The next four images will change on hover -->
+      <!-- index 1 in JavaScript => i2_default.png, index 2 => i3_default.png, etc. -->
       <div class="extension-section">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
           <img src="./images-contribute/i2_default.png" alt="Image 2" class="extension-image" />
-        </a>
       </div>
       <div class="extension-section">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
           <img src="./images-contribute/i3_default.png" alt="Image 3" class="extension-image" />
-        </a>
       </div>
       <div class="extension-section">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
           <img src="./images-contribute/i4_default.png" alt="Image 4" class="extension-image" />
-        </a>
       </div>
       <div class="extension-section">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
           <img src="./images-contribute/i5_default.png" alt="Image 5" class="extension-image" />
-        </a>
       </div>
     </div>
   </div>
   
-  <!-- JavaScript to swap right-column images on bounty row hover -->
+  <!-- JavaScript to swap right-column images AND highlight the corresponding extension-section on bounty row hover -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Grab all bounty rows and right-column extension images
       const bountyRows = document.querySelectorAll('.bounty-row');
       const extImages = document.querySelectorAll('.right-column .extension-section img');
+      // Also get the extension-section containers so we can add a highlight class
+      const extensionSections = document.querySelectorAll('.right-column .extension-section');
       
       // Save the default source for each extension image
       const defaultSrc = Array.from(extImages).map(img => img.getAttribute('src'));
@@ -533,31 +537,43 @@
       // Define the new hover sources for the first four bounty rows:
       // (Mapping: bounty row 0 → extImages[1], row 1 → extImages[2], etc.)
       const hoverSrc = [
-        "./images-contribute/image2.png", // For Ticker $DOGEAI (bounty row 0)
-        "./images-contribute/image3.png", // For Bundle Analysis (bounty row 1)
-        "./images-contribute/image4.png", // For Sniper Analysis (bounty row 2)
-        "./images-contribute/image5.png"  // For Cluster Analysis (bounty row 3)
+        "./images-contribute/image2.png", // For Ticker $DOGEAI (bounty row 0 => extImages[1])
+        "./images-contribute/image3.png", // For Bundle Analysis (bounty row 1 => extImages[2])
+        "./images-contribute/image4.png", // For Sniper Analysis (bounty row 2 => extImages[3])
+        "./images-contribute/image5.png"  // For Cluster Analysis (bounty row 3 => extImages[4])
       ];
       
       // Variable to keep track of the currently active bounty row
       let activeIndex = null;
       
-      // Function to update the extension images
+      // Function to update the extension images and highlight
       function updateExtensionImages() {
+        // Revert all first 4 images to default and remove highlight
         for (let i = 0; i < hoverSrc.length; i++) {
-          if (activeIndex === i) {
-            extImages[i + 1].setAttribute('src', hoverSrc[i]);
-          } else {
-            extImages[i + 1].setAttribute('src', defaultSrc[i + 1]);
-          }
+          extensionSections[i + 1].classList.remove('highlight');
+          extImages[i + 1].setAttribute('src', defaultSrc[i + 1]);
+        }
+
+        // If there's an active index, set the new src for the corresponding extension image
+        // and add highlight to its container
+        if (activeIndex !== null) {
+          extImages[activeIndex + 1].setAttribute('src', hoverSrc[activeIndex]);
+          extensionSections[activeIndex + 1].classList.add('highlight');
         }
       }
       
-      // Attach a mouseenter event to each bounty row (only the first four)
+      // Attach mouseenter and mouseleave events to each bounty row (only the first four)
       bountyRows.forEach((row, index) => {
         if (index < hoverSrc.length) {
+          // When we hover over the row...
           row.addEventListener('mouseenter', function() {
             activeIndex = index;
+            updateExtensionImages();
+          });
+
+          // When we leave the row, remove highlight and revert
+          row.addEventListener('mouseleave', function() {
+            activeIndex = null;
             updateExtensionImages();
           });
         }

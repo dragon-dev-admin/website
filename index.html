@@ -450,7 +450,9 @@
       }
     }
 
-    /* Small Mobile Devices */
+    /*--------------------------------
+      MOBILE DEVICES (max-width: 1000px)
+    --------------------------------*/
     @media (max-width: 1000px) {
       html, body {
         height: 100%;
@@ -691,7 +693,9 @@
       
     }
 
-    /* Tablet Devices */
+    /*--------------------------------
+      TABLET DEVICES (max-width: 1400px, min-width: 1001px)
+    --------------------------------*/
     @media (max-width: 1400px) and (min-width: 1001px) {
       /* Hide the left column */
       .left-column {
@@ -782,7 +786,9 @@
       }
     }
 
-    /* Large Desktop Devices */
+    /*--------------------------------
+      LARGE DESKTOP DEVICES (min-width: 2000px)
+    --------------------------------*/
     @media (min-width: 2000px) {
       .top-section {
         flex: 0 0 21%;
@@ -972,6 +978,25 @@
         transform: translateX(-50%) translateY(-5px);
       }
     }
+/*--------------------------------
+  BOUNCE ANIMATION FOR CONTRIBUTE BUTTON AND "Want to build?" text
+--------------------------------*/
+@keyframes bounceContribute {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+.contribute-button,
+.want-to-build-text {
+  animation: bounceContribute 2s infinite;
+}
+
   </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -1046,30 +1071,30 @@
         </div>
 
       </div>
+<!-- Contribute button (now with a jump animation) -->
+<div class="button-container" style="align-items: center; text-align: center; display: flex; flex-direction: column;">
+  <!-- "Want to build?" text with bounce -->
+  <div class="want-to-build-text" style="margin: 4px 0; color: #000; font-size: 16px;">Want to build?</div>
 
-      <!-- Contribute button (now directly links to contribute.html without overlay/animation) -->
-      <div class="button-container" style="align-items: center; text-align: center; display: flex; flex-direction: column;">
-        <!-- "Want to build?" text -->
-        <div style="margin: 4px 0; color: #000; font-size: 16px;">Want to build?</div>
-        <!-- Direct link to contribute.html -->
-        <a class="contribute-button" href="contribute.html" style="
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 150px;
-            height: 44px;
-            border: none;
-            border-radius: 8px;
-            background-color: #e5ecf0;
-            font-size: 16px;
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        ">
-          contribute
-        </a>
-      </div>
+  <!-- Direct link to contribute.html -->
+  <a class="contribute-button" href="contribute.html" style="
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 44px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e5ecf0;
+      font-size: 16px;
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  ">
+    contribute
+  </a>
+</div>
 
       <!-- Hover image: placed inside the middle column, to the left of info panel -->
       <div class="hover-image" id="hoverImage">
@@ -1099,7 +1124,7 @@
            id="basicInfoSection"
            data-info="This shows the project’s basic token information, supply security measures, and project-related web links."
            data-description="">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
+        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
           <img src="image2.png" alt="Image 2" class="extension-image" />
         </a>
         <div class="highlight-overlay">
@@ -1110,7 +1135,7 @@
       <div class="extension-section"
            data-info="This is a visualizer on all the bundled supply that is still actively holding the token."
            data-description="">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
+        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
           <img src="image3.png" alt="Image 3" class="extension-image" />
         </a>
         <div class="highlight-overlay">
@@ -1121,7 +1146,7 @@
       <div class="extension-section"
            data-info="This is a chart of all bots that bought token supply within 15s of launch."
            data-description="">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
+        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
           <img src="image4.png" alt="Image 4" class="extension-image" />
         </a>
         <div class="highlight-overlay">
@@ -1133,7 +1158,7 @@
            data-info="This is a panel for different analyses on the token’s powerful holders.
             More charts coming!"
            data-description="">
-        <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank">
+        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
           <img src="image5.png" alt="Image 5" class="extension-image" />
         </a>
         <div class="highlight-overlay">
