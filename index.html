@@ -359,7 +359,6 @@
       padding-bottom: 5px;
       padding-left: 5px;
       padding-right: 5px;
-
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -575,55 +574,7 @@
         visibility: visible; 
       }
 
-      /* Arrow Landing for Mobile */
-      .arrowlanding {
-        position: fixed;
-        bottom: 0px;
-        left: 50%;
-        transform: translateX(-50%);
-        cursor: pointer;
-        z-index: 1000;
-        animation: bounce 2s infinite;
-        text-decoration: none; /* Remove underline */
-        outline: none; /* Remove focus outline */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 20px; /* Optional: Add padding inside the arrow if needed */
-      }
-
-      .arrowlanding p {
-        font-size: 50px;
-        color: #000000;
-        margin: 0;
-      }
-
-      .arrowlanding span {
-        font-size: 16px;
-        color: #000000;
-        margin-top: 2px; 
-        font-weight: bold;
-      }
-
-      /* Remove outline and shadow on focus and active states */
-      .arrowlanding:focus,
-      .arrowlanding:active,
-      .arrowlanding:focus-visible {
-        outline: none;
-        box-shadow: none;
-      }
-
-      @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-          transform: translateX(-50%) translateY(0);
-        }
-        40% {
-          transform: translateX(-50%) translateY(-10px);
-        }
-        60% {
-          transform: translateX(-50%) translateY(-5px);
-        }
-      }
+      /* Removed arrowlanding code entirely */
 
       /* Adjust #new-section and .scrollable-extensions to fit without gaps */
       #new-section {
@@ -978,27 +929,29 @@
         transform: translateX(-50%) translateY(-5px);
       }
     }
-/*--------------------------------
-  BOUNCE ANIMATION FOR CONTRIBUTE BUTTON AND "Want to build?" text
---------------------------------*/
-@keyframes bounceContribute {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-.contribute-button,
-.want-to-build-text {
-  animation: bounceContribute 2s infinite;
-}
+
+    /*--------------------------------
+      BOUNCE ANIMATION FOR CONTRIBUTE BUTTON AND "Want to build?" text
+    --------------------------------*/
+    @keyframes bounceContribute {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+    .contribute-button,
+    .want-to-build-text {
+      animation: bounceContribute 2s infinite;
+    }
 
   </style>
 </head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-C5RWNSLV53"></script>
 <script>
@@ -1008,6 +961,7 @@
 
   gtag('config', 'G-C5RWNSLV53');
 </script>
+
 <body>
   <!-- Main Container with ID for Return Arrow -->
   <div class="container" id="main-container">
@@ -1069,32 +1023,32 @@
           </a>
           <div class="hover-text">Download the Extension!</div>
         </div>
-
       </div>
-<!-- Contribute button (now with a jump animation) -->
-<div class="button-container" style="align-items: center; text-align: center; display: flex; flex-direction: column;">
-  <!-- "Want to build?" text with bounce -->
-  <div class="want-to-build-text" style="margin: 4px 0; color: #000; font-size: 16px;">Want to build?</div>
 
-  <!-- Direct link to contribute.html -->
-  <a class="contribute-button" href="contribute.html" style="
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 150px;
-      height: 44px;
-      border: none;
-      border-radius: 8px;
-      background-color: #e5ecf0;
-      font-size: 16px;
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-  ">
-    contribute
-  </a>
-</div>
+      <!-- Contribute button (with bounce animation) -->
+      <div class="button-container" style="align-items: center; text-align: center; display: flex; flex-direction: column;">
+        <!-- "Want to build?" text with bounce -->
+        <div class="want-to-build-text" style="margin: 4px 0; color: #000; font-size: 16px;">Want to build?</div>
+
+        <!-- Direct link to contribute.html -->
+        <a class="contribute-button" href="contribute.html" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 44px;
+            border: none;
+            border-radius: 8px;
+            background-color: #e5ecf0;
+            font-size: 16px;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        ">
+          contribute
+        </a>
+      </div>
 
       <!-- Hover image: placed inside the middle column, to the left of info panel -->
       <div class="hover-image" id="hoverImage">
@@ -1168,11 +1122,7 @@
     </div>
   </div>
 
-  <!-- Arrow Landing for Mobile -->
-  <a href="#new-section" class="arrowlanding" aria-label="Scroll Down">
-    <span style="font-size: 24px; color: grey;">TAP</span>
-    <p>&#xfe40;</p> 
-  </a>
+  <!-- (Removed the mobile "TAP" arrow entirely) -->
 
   <!-- Return Arrow (Initially Hidden) -->
   <a href="#main-container" class="return-arrow" aria-label="Return to Top">
@@ -1216,7 +1166,7 @@
       const hoverImage = document.getElementById('hoverImage');
       const readMoreButton = document.querySelector('.read-more-button');
 
-      const arrowLanding = document.querySelector('.arrowlanding');
+      // Return arrow
       const returnArrow = document.querySelector('.return-arrow');
 
       // Select the scroll-text element
@@ -1274,7 +1224,7 @@
       if (basicInfoSection) {
         setTimeout(() => {
           updateInfoPanel(basicInfoSection);
-          // If you want it to show immediately, uncomment:
+          // If you want it to show immediately, you could uncomment:
           // infoPanel.classList.add('show');
         }, 100);
       }
@@ -1298,21 +1248,7 @@
         }
       }, 23000);
 
-      // Smooth scroll for Arrow Landing and hide arrow after click
-      arrowLanding.addEventListener('click', function(event) {
-        event.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-        // Hide the arrow after clicking
-        this.style.display = 'none';
-        // Show the return arrow
-        returnArrow.style.display = 'flex';
-      });
-
-      // Smooth scroll for Return Arrow and hide return arrow after click
+      // Smooth scroll for Return Arrow
       returnArrow.addEventListener('click', function(event) {
         event.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
@@ -1322,8 +1258,6 @@
         }
         // Hide the return arrow after clicking
         this.style.display = 'none';
-        // Show the arrowlanding
-        arrowLanding.style.display = 'flex';
       });
 
       // Start scroll-text animation after 11 seconds (adjust as needed)
