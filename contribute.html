@@ -58,6 +58,18 @@
       justify-content: center;
       padding-left: 30%;
     }
+    @keyframes bounceGoBackLR {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+      }
+      40% {
+        transform: translateX(-10px);
+      }
+      60% {
+        transform: translateX(10px);
+      }
+    }
+    
     .go-back {
       text-decoration: none;
       color: #9f9f9f;
@@ -65,17 +77,18 @@
       font-weight: bold;
       line-height: 1.2;
       text-align: center;
-      padding-top: 80%;
+      padding-top: 70%;
+      display: inline-block;
+      animation: bounceGoBackLR 2s infinite; /* Apply the animation */
     }
+    
     .go-back:hover {
       color: #000;
     }
+    
     /* Optional: prepend "< " before text. 
        Or you can hard-code it in the link text as "< go back". */
-    .go-back::before {
-      content: "< ";
-      font-size: 22px;
-    }
+
 
     /* MIDDLE COLUMN */
     .middle-column {
@@ -396,8 +409,9 @@
     
     <!-- LEFT COLUMN: "Go back" -->
     <div class="left-column">
-      <!-- If you want a line break, use "go <br>back" -->
-      <a href="./index.html" class="go-back">go <br>back</a>
+      <a href="./index.html" class="go-back">
+        <img src="./go_back.png" alt="Go Back" style="width: 100px; height: auto;">
+      </a>
     </div>
 
     <!-- MIDDLE COLUMN -->
