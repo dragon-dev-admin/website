@@ -36,38 +36,55 @@
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
+
+    /* Main container:
+       1) Left column for "Go back"
+       2) Middle column for main content
+       3) Right column for extension images
+    */
     .container {
       display: grid;
-      grid-template-columns: auto calc(100vh / 2.3); /* Middle + Right columns */
+      grid-template-columns: 180px auto calc(100vh / 2.3);
       width: 100%;
       height: 100%;
-      position: relative;
+    }
+
+    /* LEFT COLUMN (Go back) */
+    .left-column {
+      background-color: #ffffff;
+      border-right: 1px solid #ffffff; /* Gray line separating left column & middle column */
+      display: flex;
+      align-items: top;
+      justify-content: center;
+      padding-left: 30%;
+    }
+    .go-back {
+      text-decoration: none;
+      color: #555;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.2;
+      text-align: center;
+      padding-top: 80%;
+    }
+    .go-back:hover {
+      color: #000;
+    }
+    /* Optional: prepend "< " before text. 
+       Or you can hard-code it in the link text as "< go back". */
+    .go-back::before {
+      content: "< ";
+      font-size: 22px;
     }
 
     /* MIDDLE COLUMN */
     .middle-column {
       background-color: #fff;
-      border-right: 1px solid #ccc;
       overflow-y: auto;
-      padding-top: 60px;
-      padding-bottom: 60px;
-      padding-left: 160px;
-      padding-right: 120px;
-    }
-
-    /* "Go back" link */
-    .go-back {
-      text-align: right;
-      margin-bottom: 25px;
-    }
-    .go-back a {
-      text-decoration: none;
-      color: #555;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .go-back a:hover {
-      color: #000;
+      padding-top: 5%;
+      padding-bottom: 5%;
+      padding-left: 0%;
+      padding-right: 12%;
     }
 
     /* Big heading */
@@ -130,9 +147,8 @@
     .bounty-row .bounty-details {
       flex: 1;
       min-width: 280px;
-      padding-left: 60px;     /* For later changing padding */
-      padding-right: 80px;
-
+      padding-left: 3%;
+      padding-right: 6%;
     }
     .bounty-row .bounty-details p {
       font-size: 18px;
@@ -239,7 +255,6 @@
       justify-content: center;
       cursor: default;
     }
-
     .extension-image {
       width: 100%;
       height: auto;
@@ -248,21 +263,19 @@
       display: block;
     }
 
-    /* Highlight class to visually indicate the "hovered" extension-section from bounty row's hover */
+    /* Highlight class for the extension section when hovered in bounty-row */
     .extension-section.highlight {
       box-shadow: 0 0 10px 2px rgba(74, 138, 255, 0.7), 0 0 20px rgba(74, 138, 255, 0.4);
       transform: scale(1.05);
     }
 
-    /*--------------------------
-      BOTTOM LINKS
-    --------------------------*/
+    /* Bottom links (GitBook & Chrome Extension) */
     .bottom-links {
       margin-top: 25px;
       display: flex;
       gap: 30px;
       margin-bottom: 25px;
-      justify-content: center; /* Center the links horizontally */
+      justify-content: center;
     }
     .button-container {
       position: relative;
@@ -336,11 +349,17 @@
 
     /* RESPONSIVE */
     @media (max-width: 1000px) {
+      /* In smaller view, collapse to 1 column for left + middle,
+         hide the right column. */
       .container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100px 1fr;
       }
       .right-column {
         display: none;
+      }
+      .middle-column {
+        padding-left: 0%;
+        padding-right: 8%;
       }
       .future-bounties-container {
         flex-direction: column;
@@ -351,34 +370,53 @@
         height: auto;
         margin-bottom: 20px;
       }
+
+      .left-column {
+        background-color: #ffffff;
+        border-right: 1px solid #ffffff; /* Gray line separating left column & middle column */
+        display: flex;
+        align-items: top;
+        justify-content: center;
+        padding-left: 5%;
+      }
+          .go-back {
+      text-decoration: none;
+      color: #555;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.2;
+      text-align: center;
+      padding-top: 90%;
+    }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    
+    <!-- LEFT COLUMN: "Go back" -->
+    <div class="left-column">
+      <!-- If you want a line break, use "go <br>back" -->
+      <a href="./index.html" class="go-back">go <br>back</a>
+    </div>
+
     <!-- MIDDLE COLUMN -->
     <div class="middle-column">
-      <!-- "Go back" link -->
-      <div class="go-back">
-        <a href="./index.html">Go back</a>
-      </div>
-
-      <!-- Main Title -->
       <h1 class="main-title">Build Mods, Collect Bounties</h1>
 
       <!-- Intro Text -->
       <div class="intro-text">
         <p>
-          Dragon is a trading companion divided into data-modules that visualize the deceptions and power 
-          concentrations on a Solana memecoin. Currently these modules produce analyses on bundles, snipes, clusters, 
-          and top 10 holders. Soon Dragon will produce analyses on many other deception techniques, crowd-sourced by 
+          Dragon is a trading companion divided into data-modules that visualize the deceptions and power
+          concentrations on a Solana memecoin. Currently these modules produce analyses on bundles, snipes, clusters,
+          and top 10 holders. Soon Dragon will produce analyses on many other deception techniques, crowd-sourced by
           the builders and traders in the trenches.
         </p>
         <br />
         <p>
-          <strong>First Task:</strong> We build the data-pipelines to Dragon’s first four mods. The front-end for each 
-          mod is already built for proof-of-concept, and gathers data by web-scraping various online tools. The 
-          successful integration of a Solana node RPC pipeline into one of these mods will reward the developer 
+          <strong>First Task:</strong> We build the data-pipelines to Dragon’s first four mods. The front-end for each
+          mod is already built for proof-of-concept, and gathers data by web-scraping various online tools. The
+          successful integration of a Solana node RPC pipeline into one of these mods will reward the developer
           with the bounty specified.
         </p>
       </div>
@@ -395,7 +433,7 @@
           <p><strong>Build:</strong> Token Info</p>
           <p><strong>Bounty:</strong> 0.25% of $DRAGON supply</p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline 
+            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
             to RPC using our Helius node.
           </p>
           <p>
@@ -414,7 +452,7 @@
           <p><strong>Build:</strong> Bundle Analysis</p>
           <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply</p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline 
+            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
             to RPC using our Helius node.
           </p>
           <p>
@@ -433,7 +471,7 @@
           <p><strong>Build:</strong> Sniper Analysis</p>
           <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply</p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline 
+            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
             to RPC using our Helius node.
           </p>
           <p>
@@ -452,7 +490,7 @@
           <p><strong>Build:</strong> Cluster Analysis</p>
           <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply</p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline 
+            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
             to RPC using our Helius node.
           </p>
           <p>
@@ -495,7 +533,11 @@
 
         <!-- Chrome Extension [Highlighted in Purple] -->
         <div class="button-container purple-highlight">
-          <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank" aria-label="Chrome Extension">
+          <a
+            href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe"
+            target="_blank"
+            aria-label="Chrome Extension"
+          >
             <img src="extension3.png" alt="Chrome Extension">
           </a>
           <div class="hover-text">Download the Extension!</div>
@@ -505,26 +547,24 @@
 
     <!-- RIGHT COLUMN: extension sections -->
     <div class="right-column">
-      <!-- index 0 in JavaScript will refer to this (extImages[0]) -->
       <div class="extension-section">
-          <img src="image1.png" alt="Image 1" class="extension-image" />
-      </div>
-      <!-- index 1 in JavaScript => i2_default.png, index 2 => i3_default.png, etc. -->
-      <div class="extension-section">
-          <img src="./images-contribute/i2_default.png" alt="Image 2" class="extension-image" />
+        <img src="image1.png" alt="Image 1" class="extension-image" />
       </div>
       <div class="extension-section">
-          <img src="./images-contribute/i3_default.png" alt="Image 3" class="extension-image" />
+        <img src="./images-contribute/i2_default.png" alt="Image 2" class="extension-image" />
       </div>
       <div class="extension-section">
-          <img src="./images-contribute/i4_default.png" alt="Image 4" class="extension-image" />
+        <img src="./images-contribute/i3_default.png" alt="Image 3" class="extension-image" />
       </div>
       <div class="extension-section">
-          <img src="./images-contribute/i5_default.png" alt="Image 5" class="extension-image" />
+        <img src="./images-contribute/i4_default.png" alt="Image 4" class="extension-image" />
+      </div>
+      <div class="extension-section">
+        <img src="./images-contribute/i5_default.png" alt="Image 5" class="extension-image" />
       </div>
     </div>
   </div>
-  
+
   <!-- JavaScript to swap right-column images AND highlight the corresponding extension-section on bounty row hover -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -537,44 +577,39 @@
       // Save the default source for each extension image
       const defaultSrc = Array.from(extImages).map(img => img.getAttribute('src'));
       
-      // Define the new hover sources for the first four bounty rows:
-      // (Mapping: bounty row 0 → extImages[1], row 1 → extImages[2], etc.)
+      // Define the new hover sources for the first four bounty rows
       const hoverSrc = [
-        "./images-contribute/image2.png", // For Ticker $DOGEAI (bounty row 0 => extImages[1])
-        "./images-contribute/image3.png", // For Bundle Analysis (bounty row 1 => extImages[2])
-        "./images-contribute/image4.png", // For Sniper Analysis (bounty row 2 => extImages[3])
-        "./images-contribute/image5.png"  // For Cluster Analysis (bounty row 3 => extImages[4])
+        "./images-contribute/image2.png", // Ticker $DOGEAI
+        "./images-contribute/image3.png", // Bundle Analysis
+        "./images-contribute/image4.png", // Sniper Analysis
+        "./images-contribute/image5.png"  // Cluster Analysis
       ];
       
-      // Variable to keep track of the currently active bounty row
+      // Track the currently active bounty row
       let activeIndex = null;
       
       // Function to update the extension images and highlight
       function updateExtensionImages() {
-        // Revert all first 4 images to default and remove highlight
+        // Revert the first 4 extension images to default and remove highlight
         for (let i = 0; i < hoverSrc.length; i++) {
           extensionSections[i + 1].classList.remove('highlight');
           extImages[i + 1].setAttribute('src', defaultSrc[i + 1]);
         }
 
-        // If there's an active index, set the new src for the corresponding extension image
-        // and add highlight to its container
+        // If there's an active index, set the new src and highlight that container
         if (activeIndex !== null) {
           extImages[activeIndex + 1].setAttribute('src', hoverSrc[activeIndex]);
           extensionSections[activeIndex + 1].classList.add('highlight');
         }
       }
       
-      // Attach mouseenter and mouseleave events to each bounty row (only the first four)
+      // Attach mouseenter/mouseleave to each bounty row (the first four)
       bountyRows.forEach((row, index) => {
         if (index < hoverSrc.length) {
-          // When we hover over the row...
           row.addEventListener('mouseenter', function() {
             activeIndex = index;
             updateExtensionImages();
           });
-
-          // When we leave the row, remove highlight and revert
           row.addEventListener('mouseleave', function() {
             activeIndex = null;
             updateExtensionImages();
