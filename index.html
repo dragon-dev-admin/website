@@ -448,201 +448,214 @@
         transform: translateX(-50%) translateY(-5px);
       }
     }
-
-    /*--------------------------------
+/*--------------------------------
       MOBILE DEVICES (max-width: 1000px)
-    --------------------------------*/
-    @media (max-width: 1000px) {
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: white; /* Set background to white */
-        overflow-x: hidden; /* Prevent horizontal scroll */ 
-      }
+--------------------------------*/
+@media (max-width: 1000px) {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* Set background to white */
+    overflow-x: hidden; /* Prevent horizontal scroll */ 
+  }
 
-      /* Neutralize the container's grid layout */
-      .container {
-        display: flex; /* Change from grid to flex */
-        flex-direction: column;
-        width: 100%;
-        height: 95%;
-        align-items: center; /* Vertically center the content */
-        justify-content: center; /* Horizontally center the content */
-        padding: 0; /* Remove padding to eliminate gaps */
-        padding-bottom: 100px; /* Added extra space to accommodate the arrow */
-      }
+  /* Neutralize the container's grid layout */
+  .container {
+    display: flex; /* Change from grid to flex */
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+    padding: 0; /* Remove padding to eliminate gaps */
+    padding-bottom: 100px; /* Added extra space to accommodate the arrow */
+  }
 
-      /* Hide specific elements */
-      .right-column,
-      .info-panel,
-      .hover-image {
-        display: none !important;
-      }
+  /* Hide specific elements */
+  .right-column,
+  .info-panel,
+  .hover-image {
+    display: none !important;
+  }
 
-      /* Hide left column if not needed */
-      .left-column {
-        display: none;
-      }
+  /* Hide left column if not needed */
+  .left-column {
+    display: none;
+  }
 
-      /* Adjust middle column to take full width and center it vertically */
-      .middle-column {
-        padding-right: 0;
-        border-right: none;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0; /* Remove padding to eliminate gaps */
-        width: 100%;
-        max-height: 100%; /* Ensure it doesn't overflow */
-      }
+  /* Adjust middle column to take full width and center it vertically */
+  .middle-column {
+    padding-right: 0;
+    border-right: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Remove padding to eliminate gaps */
+    width: 100%;
+    max-height: 100%; /* Ensure it doesn't overflow */
+  }
 
-      /* Adjust image-container for smaller screens */
-      .image-container {
-        height: 650px; 
-        width: 100%;
-        background: url("main_image.png") center center no-repeat;
-        background-size: contain;
-        margin: 0; /* Remove margins to eliminate gaps */
-      }
+  /* Adjust image-container for smaller screens */
+  .image-container {
+    height: 650px; 
+    width: 100%;
+    background: url("main_image.png") center center no-repeat;
+    background-size: contain;
+    margin: 0; /* Remove margins to eliminate gaps */
+  }
 
-      /* Adjust dragon-title */
-      .dragon-title p {
-        font-size: 23px; /* Adjust font size for better readability */
-        line-height: 1.4em;
-        color: #959595;
-        text-align: center;
-      }
+  /* Adjust dragon-title text size (bigger on mobile) */
+  .dragon-title p {
+    font-size: 38px; /* Increased font size for phones */
+    line-height: 1.4em;
+    color: #959595;
+    text-align: center;
+  }
 
-      /* Adjust bottom-links to display side by side */
-      .bottom-links {
-        margin-top: 20px;
-        margin-bottom: 50px;
-        display: flex;
-        gap: 20px;
-        flex-direction: row; /* Change from column to row */
-        justify-content: center; /* Center the buttons horizontally */
-        align-items: center;
-        width: 100%; /* Ensure it takes full width */
-        padding: 0; /* Remove padding to eliminate gaps */
-      }
+  /* Adjust bottom-links to display side by side */
+  .bottom-links {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row; /* Change from column to row */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center;
+    width: 100%; /* Ensure it takes full width */
+    padding: 0; /* Remove padding to eliminate gaps */
+  }
 
-      /* Adjust button-container for better spacing */
-      .button-container {
-        flex-direction: column;
-      }
+  /* Increase GitBook and Extension icons for phones */
+  .button-container a {
+    width: 130px; /* Bigger icons for mobile */
+    height: 130px;
+  }
 
-      /* Adjust buttons size for mobile */
-      .button-container a {
-        width: 80px; /* Increased size for mobile */
-        height: 80px;
-      }
+  .button-container a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-      .button-container a img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+  .hover-text {
+    top: 110px; /* Adjusted position for larger icons */
+    font-size: 16px; /* Slightly bigger font size for clarity */
+  }
 
-      .hover-text {
-        top: 90px; /* Adjusted position for mobile to accommodate larger buttons */
-        font-size: 14px; /* Adjusted font size for better readability */
-      }
+  /* Make "Want to build?" and "contribute" bigger */
+  .want-to-build-text {
+    font-size: 80px; /* Increased font size for mobile */
+    font-weight: bold;
+    color: #000;
+  }
 
-      /* Adjust scroll-wrapper and scroll-text */
-      .middle-section {
-        max-height: none; /* Remove max-height to utilize full space */
-        overflow-y: auto;
-        width: 100%;
-        padding: 0; /* Remove padding to eliminate gaps */
-      }
+  .contribute-button {
+    width: 400px; 
+    height: 106px;
+    font-size: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    background-color: #e5ecf0;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 
-      .scroll-text {
-        font-size: 14px; /* Slightly smaller font */
-        padding: 20px; /* Add padding for better readability */
-      }
+  /* Adjust scroll-wrapper and scroll-text */
+  .middle-section {
+    max-height: none; /* Remove max-height to utilize full space */
+    overflow-y: auto;
+    width: 100%;
+    padding: 0; /* Remove padding to eliminate gaps */
+  }
 
-      /* Show "Read More" button immediately */
-      .read-more-button {
-        font-size: 16px;
-        text-align: center;
-        margin-top: 10px;
-        display: block;
-        opacity: 1;          
-        visibility: visible; 
-      }
+  .scroll-text {
+    font-size: 14px; /* Slightly smaller font to fit screen better */
+    padding: 20px; /* Add padding for better readability */
+  }
 
-      /* Removed arrowlanding code entirely */
+  /* Show "Read More" button immediately */
+  .read-more-button {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+    opacity: 1;          
+    visibility: visible; 
+  }
 
-      /* Adjust #new-section and .scrollable-extensions to fit without gaps */
-      #new-section {
-        height: 100vh;
-        background-color: #1a223f;
-        overflow-y: auto;
-        padding: 40px 20px; 
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        width: 100%; 
-        flex-direction: column;
-        background: #1a223f; 
-      }
+  /* Adjust #new-section and .scrollable-extensions to fit without gaps */
+  #new-section {
+    height: 100vh;
+    background-color: #1a223f;
+    overflow-y: auto;
+    padding: 40px 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%; 
+    flex-direction: column;
+  }
 
-      .scrollable-extensions {
-        background: #1a223f; 
-        margin-top: 200px; 
-        width: 100%; 
-        max-height: 100vh;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 10px; 
-        padding-right: 0; 
-        padding-top: 50px; 
-        padding-bottom: 40px; 
-        scrollbar-width: thin; 
-      }
+  .scrollable-extensions {
+    background: #1a223f; 
+    margin-top: 200px; 
+    width: 100%; 
+    max-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    padding-right: 0; 
+    padding-top: 50px; 
+    padding-bottom: 40px; 
+    scrollbar-width: thin; 
+  }
 
-      .scrollable-extensions::-webkit-scrollbar {
-        width: 8px;
-      }
+  .scrollable-extensions::-webkit-scrollbar {
+    width: 8px;
+  }
 
-      .scrollable-extensions::-webkit-scrollbar-track {
-        background: #282c4c; 
-        border-radius: 4px;
-      }
+  .scrollable-extensions::-webkit-scrollbar-track {
+    background: #282c4c; 
+    border-radius: 4px;
+  }
 
-      .scrollable-extensions::-webkit-scrollbar-thumb {
-        background: #282c4c; 
-        border-radius: 4px;
-      }
+  .scrollable-extensions::-webkit-scrollbar-thumb {
+    background: #282c4c; 
+    border-radius: 4px;
+  }
 
-      .scrollable-extensions::-webkit-scrollbar-thumb:hover {
-        background: #282c4c; 
-      }
+  .scrollable-extensions::-webkit-scrollbar-thumb:hover {
+    background: #282c4c; 
+  }
 
-      .extension-image-scroll {
-        width: 100%;
-        padding: 0; 
-        margin: 0; 
-        transition: transform 0.3s ease;
-      }
+  .extension-image-scroll {
+    width: 100%;
+    padding: 0; 
+    margin: 0; 
+    transition: transform 0.3s ease;
+  }
 
-      .extension-image-scroll img {
-        width: 100%;
-        height: auto;
-        border-radius: 0; 
-        box-shadow: none;
-        display: block;
-      }
+  .extension-image-scroll img {
+    width: 100%;
+    height: auto;
+    border-radius: 0; 
+    box-shadow: none;
+    display: block;
+  }
 
-      .extension-image-scroll:hover {
-        transform: scale(1.02);
-      }
-      
-    }
+  .extension-image-scroll:hover {
+    transform: scale(1.02);
+  }
+}
 
     /*--------------------------------
       TABLET DEVICES (max-width: 1400px, min-width: 1001px)
@@ -948,7 +961,6 @@
     .want-to-build-text {
       animation: bounceContribute 2s infinite;
     }
-
   </style>
 </head>
 
@@ -1028,19 +1040,19 @@
       <!-- Contribute button (with bounce animation) -->
       <div class="button-container" style="align-items: center; text-align: center; display: flex; flex-direction: column;">
         <!-- "Want to build?" text with bounce -->
-        <div class="want-to-build-text" style="margin: 4px 0; color: #000; font-size: 16px;">Want to build?</div>
+        <div class="want-to-build-text" style="margin: 4px 0; color: #000; font-size: 20px;">Want to build?</div>
 
         <!-- Direct link to contribute.html -->
         <a class="contribute-button" href="contribute.html" style="
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 150px;
-            height: 44px;
+            width: 180px;
+            height: 50px;
             border: none;
             border-radius: 8px;
             background-color: #e5ecf0;
-            font-size: 16px;
+            font-size: 20px;
             color: #000;
             text-decoration: none;
             cursor: pointer;
@@ -1121,8 +1133,6 @@
       </div>
     </div>
   </div>
-
-  <!-- (Removed the mobile "TAP" arrow entirely) -->
 
   <!-- Return Arrow (Initially Hidden) -->
   <a href="#main-container" class="return-arrow" aria-label="Return to Top">
