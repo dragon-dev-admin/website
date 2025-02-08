@@ -100,7 +100,18 @@
       background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
       pointer-events: none;
     }
-
+    .shadow-divider {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5px;  /* Thinner divider */
+      height: 100%;
+      background-color: #5b5b5b;  /* Lighter grey background color */
+      box-shadow: 2px 0 6px rgba(103, 103, 103, 0.1);  /* Subtle grey shadow */
+      z-index: 5; /* Ensures it stays between columns */
+    }
+    
+    
     @keyframes scroll-up {
       0% {
         transform: translateY(100%);
@@ -137,7 +148,6 @@
     .middle-column {
       position: relative;
       border-right: 3px solid rgba(0, 0, 0, 0.7);
-      box-shadow: inset -7px 0 10px -3px rgba(0, 0, 0, 0.8);
       overflow: hidden; /* to hide the animated info panel */
       display: flex;
       flex-direction: column;
@@ -441,18 +451,16 @@
   BOUNCE ANIMATION FOR "Want to build?" text (left-right animation)
 --------------------------------*/
 @keyframes bounceContributeLR {
-  0%, 20%, 50%, 80%, 100% {
+  0%, 100% {
     transform: translateX(0);
   }
-  40% {
-    transform: translateX(-10px);
-  }
-  60% {
+  50% {
     transform: translateX(10px);
   }
 }
+
 .want-to-build-text {
-  animation: bounceContributeLR 2s infinite;
+  animation: bounceContributeLR 1.6s ease-in-out infinite;
   white-space: nowrap;
 }
 
@@ -882,11 +890,10 @@
         <div class="scroll-wrapper">
           <div class="scroll-text">
             <p>
-              Heavy handed snipes, bundles, wash trades, and other deceptions on a token’s ownership are threatening web3 adoption. If you check Reddit (say like r/Solana) you’ll see all the recent stories about getting scammed or about the fear of buying a token because of rug pulls. Experienced traders can spot a token’s bundled supply or its wash trades with their naked eye, but new traders are blind. Let’s bring light to these techniques in a collective effort to pump the growth of the ecosystem.
-            </p>
+              Heavy handed snipes, bundles, volume trades, and other deceptions on a token’s ownership are threatening Web3 adoption. If you check Reddit (like r/Solana) you’ll see recent posts about getting scammed and about the fear of buying because of rug pulls. Experienced traders can spot a token’s bundled supply or its wash trades with their naked eye, but new traders are blind. Let’s bring light to these techniques in a collective effort to pump the growth of the ecosystem.            </p>
             <br><br>
             <p>
-              <strong>Dragon</strong> is a trading companion that reveals the true landscape of a token’s holders by converting JITO data into compelling visualizations. It gives new traders the confidence to get in the market and everyone else the insight to potential unbalanced power distributions in a project. At the end of the day every token will sunset on its holders, but that doesn’t mean we have to out-bot each other in a race to the bottom floor. Let’s build the trading ecosystem with better transparency for the long haul so that everyone holds their bags a little longer.
+              <strong>Dragon</strong> is a trading companion that reveals the true landscape of a token’s holders by converting on-chain data into compelling visualizations. It gives new traders the confidence to get in the market and everyone else the insight to the unbalanced power distributions in a project. At the end of the day, every token will find its natural floor, but that doesn’t mean we have to out-bot each other in a race to the bottom. Let’s build the trading ecosystem with better transparency for the long term, so that everyone holds their bags longer.
             </p>
             <br>
           </div>
@@ -925,10 +932,11 @@
           <div class="hover-text">Download the Extension!</div>
         </div>
       </div>
-
+  <!-- New Divider for Grey Space Shadow -->
+  <div class="shadow-divider"></div>
 
 <!-- Contribute button container -->
-<div class="button-container" style="display: flex; align-items: center; justify-content: flex-end; text-align: right; flex-direction: row; padding-left:115px;">
+<div class="button-container" style="display: flex; align-items: center; justify-content: flex-end; text-align: right; flex-direction: row; padding-left:140px;">
   <!-- Direct link to contribute.html (no bounce animation on this button) -->
   <a class="contribute-button" href="contribute.html" style="
     display: inline-flex;
@@ -949,7 +957,7 @@
   </a>
   <!-- "Want to build?" text placed next to the contribute button on the right -->
   <div class="want-to-build-text" style="margin-left: 10px; text-align: left; display: inline-block;">
-    <img src="./want_to_build.png" alt="Want to build?" style="width: 100px; height: auto;">
+    <img src="./want_to_build.png" alt="Want to build?" style="width: 130px; height: auto;">
   </div>
 </div>
 

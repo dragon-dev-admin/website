@@ -44,7 +44,7 @@
     */
     .container {
       display: grid;
-      grid-template-columns: 180px auto calc(100vh / 2.3);
+      grid-template-columns: 160px auto calc(100vh / 2.35);
       width: 100%;
       height: 100%;
     }
@@ -168,6 +168,7 @@
       text-decoration: none;
       margin-right: 50px;
       font-size: 18px;
+      margin-top:50px;
     }
     .bounty-row .bounty-details a:hover {
       text-decoration: underline;
@@ -236,11 +237,12 @@
     /* RIGHT COLUMN: extension sections */
     .right-column {
       background-color: #1A2240;
-      padding: 15px;
+      padding-left: 20px;
+      padding-right: 15px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 7px;
       align-items: center;
       border-left: 1px solid #ccc;
       scrollbar-width: none;         
@@ -412,17 +414,12 @@
       <!-- Intro Text -->
       <div class="intro-text">
         <p>
-          Dragon is a trading companion divided into data-modules that visualize the deceptions and power
-          concentrations on a Solana memecoin. Currently these modules produce analyses on bundles, snipes, clusters,
-          and top 10 holders. Soon Dragon will produce analyses on many other deception techniques, crowd-sourced by
-          the builders and traders in the trenches.
+          Dragon is divided into data-modules that visualize deceptions and power concentrations of any token project. The starting four modules produce analyses on bundles, snipes, clusters, and basic token information. Soon Dragon will produce analyses on many other deception and token-holder metrics, crowd-sourced by the builders and traders in the memecoin trenches.
         </p>
         <br />
         <p>
-          <strong>First Task:</strong> We build the data-pipelines to Dragon’s first four mods. The front-end for each
-          mod is already built for proof-of-concept, and gathers data by web-scraping various online tools. The
-          successful integration of a Solana node RPC pipeline into one of these mods will reward the developer
-          with the bounty specified.
+          <strong>First Task:</strong> We need to build data-pipelines to Dragon’s first four modules. The front-end for each mod is already built for proof-of-concept and gathers data by web-scraping various online tools. The successful integration of a Solana node RPC into one of these will reward the developer with the bounty specified.
+
         </p>
       </div>
 
@@ -436,11 +433,11 @@
         </div>
         <div class="bounty-details">
           <p><strong>Build:</strong> Token Info</p>
-          <p><strong>Bounty:</strong> 0.25% of $DRAGON supply</p>
+          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply          </p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
-            to RPC using our Helius node.
+            <strong>Details:</strong> Front end is built. Need an RPC pipeline via our Helius node. Data to get includes: Ticker, Thumbnail image, Token age, Market cap, # of holders, and more.
           </p>
+          <br>
           <p>
             <a href="#">See job</a>
             <a href="#">Go to repo</a>
@@ -454,12 +451,12 @@
           <img src="./images-contribute/image3.png" alt="Bundle Analysis" />
         </div>
         <div class="bounty-details">
-          <p><strong>Build:</strong> Bundle Analysis</p>
-          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply</p>
+          <p><strong>Build:</strong> Bundle Analysis          </p>
+          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply          </p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
-            to RPC using our Helius node.
+            <strong>Details:</strong> Front end is built. Need an RPC pipeline via our Helius node. Data to get includes: Total # of active bundles, Total % in active bundles, # of wallets in each bundle, and more.
           </p>
+          <br>
           <p>
             <a href="#">See job</a>
             <a href="#">Go to repo</a>
@@ -473,12 +470,13 @@
           <img src="./images-contribute/image4.png" alt="Sniper Analysis" />
         </div>
         <div class="bounty-details">
-          <p><strong>Build:</strong> Sniper Analysis</p>
-          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply</p>
+          <p><strong>Build:</strong> Sniper Analysis          </p>
+          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply          </p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
-            to RPC using our Helius node.
+            <strong>Details:</strong> Front end is built. Need an RPC pipeline via our Helius node. Data to get includes: Total # of snipers active, Total % sniped still active, Timestamp of each snipe from TGE, and more.
           </p>
+          <br>
+
           <p>
             <a href="#">See job</a>
             <a href="#">Go to repo</a>
@@ -492,12 +490,14 @@
           <img src="./images-contribute/image5.png" alt="Cluster Analysis" />
         </div>
         <div class="bounty-details">
-          <p><strong>Build:</strong> Cluster Analysis</p>
-          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply</p>
+          <p><strong>Build:</strong> Cluster Analysis          </p>
+          <p><strong>Bounty:</strong> 0.xx% of $DRAGON supply          </p>
           <p>
-            <strong>Details:</strong> Front end already built, uses Telegram and webscrapes. Need to build pipeline
-            to RPC using our Helius node.
+            <strong>Details:</strong> Front end is built. Need an RPC pipeline via our Helius node. Data to get includes: Total % in active clusters, # of wallets in each cluster, % active in each cluster, and more.
+
           </p>
+          <br>
+
           <p>
             <a href="#">See job</a>
             <a href="#">Go to repo</a>
