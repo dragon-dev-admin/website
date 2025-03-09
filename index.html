@@ -347,15 +347,16 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10);
     }
     .info-panel * {
-      font-weight: normal;
+      font-weight: bold;
     }
     .info-panel.show {
       right: 20px;
     }
     .info-panel strong {
-      display: block;
-      margin-bottom: 5px;
+      display: inline;
+      margin-bottom: 0;
     }
+    
 
     /* Hover image (to and fro) */
     .hover-image {
@@ -896,6 +897,7 @@
         margin-bottom: 20px;
       }
     }
+
   </style>
 </head>
 
@@ -1112,7 +1114,7 @@
         if (!section) return;
         const title = section.getAttribute('data-info');
         const description = section.getAttribute('data-description');
-        infoPanel.innerHTML = `<strong>${title}</strong><p>${description}</p>`;
+        infoPanel.innerHTML = `${title}<p>${description}</p>`;
         const sectionRect = section.getBoundingClientRect();
         const middleColRect = middleCol.getBoundingClientRect();
         const centerPosition =
@@ -1184,6 +1186,8 @@
         }
       }, 11000);
     };
+
+    
   </script>
 </body>
 </html>
