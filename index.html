@@ -104,14 +104,24 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 5px;  /* Thinner divider */
+      width: 1px;              /* The solid divider line */
       height: 100%;
-      background-color: #5b5b5b;  /* Lighter grey background color */
-      box-shadow: 2px 0 6px rgba(103, 103, 103, 0.1);  /* Subtle grey shadow */
-      z-index: 5; /* Ensures it stays between columns */
+      background-color: #00000000;
+      z-index: 5;
     }
     
-
+    /* Pseudo-element for the left-extending gradient
+       The gradient goes from white (blending with the background)
+       to a darker shadow (using rgba with 0.8 opacity) at the divider edge */
+    .shadow-divider::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -20px; /* Adjust to control how far the gradient extends */
+      width: 80px;
+      height: 100%;
+      background: linear-gradient(to right, white, rgba(91, 91, 91, 0.8));
+    }
 
     
     @keyframes scroll-up {
@@ -163,7 +173,6 @@
     --------------------------------*/
     .middle-column {
       position: relative;
-      border-right: 3px solid rgba(0, 0, 0, 0.7);
       overflow: hidden; /* to hide the animated info panel */
       display: flex;
       flex-direction: column;
