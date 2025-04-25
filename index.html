@@ -504,41 +504,91 @@
   align-items: center;
   justify-content: center; /* Centering the content */
 }
-  /* ───────── MOBILE ≤1000px ───────── */
-  @media(max-width:1000px){
-      /* Allow vertical scrolling, lock horizontal */
-      html,body{height:auto;min-height:100%;overflow-x:hidden;overflow-y:auto;}
 
-      /* Switch to single‑column flow */
-      .container{display:flex;flex-direction:column;min-height:100%;}
 
-      /* Hide desktop‑only elements */
-      .left-column,
-      .right-column,
-      .info-panel,
-      .shadow-divider,
-      #new-section{display:none!important;}
+    /* ===== MOBILE ≤1000px ===== */
+    @media (max-width:1000px){
+      /* Vertically center whole layout */
+      html,body{
+        display:flex;
+        align-items:center;        /* vertical centering */
+        justify-content:center;     /* horizontal centering */
+        min-height:100vh;
+        overflow-x:hidden;overflow-y:auto;
+      }
 
-      /* Middle column becomes main content */
-      .middle-column{width:100%;padding:24px 16px 40px;display:flex;flex-direction:column;align-items:center;gap:20px;}
+      .container{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        max-width:720px;            /* optional max-width for nicer look */
+        height:auto;
+      }
 
-      /* Hero image */
-      .image-container{width:100%;height:56vh;max-height:420px;background:url("main_image_small.gif") center/cover no-repeat;border-radius:12px;}
+      .left-column,.right-column,.info-panel,
+      .shadow-divider,#new-section{display:none!important;}
 
-      /* Headline */
+      .middle-column{
+        width:100%;
+        padding:24px 16px 40px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:20px;
+      }
+
+      .image-container{
+        width:100%;
+        height:56vh;
+        max-height:420px;
+        background:url("main_image_small.gif") center/cover no-repeat;
+        border-radius:12px;
+      }
+
       .dragon-title p{font-size:24px;font-weight:600;color:#4a4a4a;}
 
-      /* Action buttons */
-      .bottom-links{width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+      .bottom-links{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:20px;
+      }
+
       .button-container a{width:72px;height:72px;border-radius:50%;background:#fff;}
       .hover-text{top:88px;font-size:14px;}
 
-      /* Auto‑scroll text now below hero */
-      .middle-section{width:100%;max-height:220px;margin-top:12px;padding-top:12px;border-top:1px solid #efefef;}
+      .middle-section{
+        width:100%;
+        max-height:220px;
+        margin-top:12px;
+        padding-top:12px;
+        border-top:1px solid #efefef;
+      }
+
       .scroll-wrapper{max-height:inherit;}
       .scroll-text{font-size:16px;line-height:1.5;padding-right:8px;}
       .read-more-button{font-size:14px;margin-top:6px;opacity:1;visibility:visible;text-align:center;}
     }
+
+
+    /* ===== iPhone-14-Pro-Max (932 × 430) LANDSCAPE ===== */
+    @media (max-width:939px) and (max-height:439px){
+      .middle-column{padding:16px 12px 24px;gap:14px;}
+      .image-container{
+        height:48vh;               /* shorter banner */
+        max-height:330px;
+      }
+      .dragon-title p{font-size:20px;}
+      .button-container a{width:56px;height:56px;}
+      .hover-text{top:72px;font-size:12px;}
+
+      .scroll-text{font-size:14px;}
+      .middle-section{max-height:160px;}
+    }
+
+
+
         /*--------------------------------
       TABLET DEVICES (max-width: 1400px, min-width: 1001px)
     --------------------------------*/
