@@ -2,1262 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dragon | v0.3</title>
-  <link rel="icon" href="./icon-128.png" type="image/png" />
-
-  <!-- Optional: Font Awesome (used in other sections for icons) -->
-  <link
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-p1CmCnQfZNnjYfzIeF+PeOCHcQG0jWzIUGRc7MZJfI/9iXl6osAO6gMD6K6hoVJYV7+X1Dl1xwH/koTcNfY6wg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragon – Decentralizing token data</title>
 
   <style>
-    /* Global resets and basic styling */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --primary-gray: #6e6e6e;
+      --button-bg:   #666;
+      --button-text: #ffffff;
+      --button-hover:#4a4a4a;
+    }
+
+    /* ────── Basic reset ────── */
+    *,*::before,*::after{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    body{background:#fefefe;
+    padding-left: 60px;
+  padding-top: 10px;}
+
+    /* ────── Layout wrapper ────── */
+    .wrapper{
+      width:92%;
+      max-width:1200px;
+      margin:0 3%;
+      padding-top:2rem;
+      display:flex;
+      flex-direction:column;
+      gap:0;
+    }
+
+    /* ────── Headline & tagline ────── */
+    .headline h3{
+      font-size:4rem;                /* bigger “Dragon” */
+      font-weight:700;
+      text-align:left;
+    }
+    .headline p{
+      margin-top: -0.3%;
+      font-size:1.75rem;
+      line-height:1.35;
+      color:var(--primary-gray);
+      text-align:left;
+    }
+
+    /* ────── Logo ────── */
+    .logo{
+      width:200px;                    /* smaller logo */
+      height:auto;
+      margin:1rem 0 4rem;  
+      margin-top: -5px;  
+      margin-left: -25px;        /* extra space below */
+    }
+
+    /* ────── CTA buttons ────── */
+    .cta{
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+      max-width:300px;
+        width:fit-content;       /* or display:inline-block */
+
+    }
+    .cta a{
+      background:var(--button-bg);
+      color:var(--button-text);
+      text-decoration:none;
+      padding:0.9rem 0.92rem;
+      border-radius:0px;
+      text-align:left;
+      font-size:1rem;             /* larger link text */
+      transition:background .2s ease-in-out;
+      
+    }
+    .cta a:hover{background:var(--button-hover);}
+
+    /* ────── Social icons row ────── */
+    .social{
+      display:flex;
+      gap:1.25rem;
+      margin-top:2rem;
+    }
+    .social a{
+      width:35px;height:35px;
+      border-radius:50%;
+      overflow:hidden;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .social img{width:100%;height:100%;object-fit:cover;}
+
+    /* ────── Extra-small phones ────── */
+    @media(max-width:480px){
+      .headline h1{font-size:2.75rem;}
+      .headline p {font-size:1.1rem;}
+      .cta a      {font-size:1.8rem;padding:0.1rem;}
+      .social a   {width:64px;height:64px;}
+    }
+
+    /* ────── Huge 4-K & ultrawide ────── */
+    @media(min-width:2000px){
+      .wrapper   {max-width:1600px;gap:3rem;}
+      .headline h1{font-size:5rem;}
+      .headline p {font-size:2rem;}
+      .logo      {width:140px;margin:2.5rem 0;}
+      .cta       {max-width:400px;gap:2rem;}
+      .cta a     {font-size:1.8rem;padding:0.6rem 0.75rem;border-radius:6px;}
+      .social a  {width:80px;height:80px;}
     }
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      scroll-behavior: smooth; /* Enable smooth scrolling */
-    }
-    .container {
-      display: grid;
-      /* Left column stays 25%, middle column fills the remaining space, 
-         right column uses fixed width based on viewport height divided by 2.3 */
-      grid-template-columns: 25% auto calc(100vh / 2.3);
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    /*--------------------------------
-      LEFT COLUMN (Split into 3 parts)
-    --------------------------------*/
-    .left-column {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-    }
-    .top-section {
-      flex: 0 0 21%;
-      background-color: #fff; /* White background */
-    }
-    .middle-section {
-      flex: 0 0 65%;
-      display: flex;
-      flex-direction: column;
-      background-color: #fff; /* White background */
-      overflow: hidden; /* Container for the scrolling text */
-      padding: 20px; /* Added some padding for general spacing */
-      position: relative;
-    }
-    .bottom-section {
-      flex: 0 0 14%;
-      background-color: #fff; /* White background */
-    }
-
-    /* Auto-scrolling text inside the middle section */
-    .scroll-wrapper {
-      flex: 1; /* Take up available space */
-      overflow: hidden;
-      position: relative;
-    }
-    .scroll-text {
-      position: absolute;
-      width: 100%;
-      font-size: 18px;
-      line-height: 1.2em;
-      color: #333;
-      padding: 0px;
-      transition: animation-play-state 0.3s ease, opacity 1s ease;
-      opacity: 0; /* Initially hidden */
-    }
-    .scroll-text.start-scroll {
-      opacity: 1;
-      animation: scroll-up 80s linear infinite;
-    }
-    .scroll-text:hover {
-      animation-play-state: paused;
-    }
-
-    /* Gradient overlay for bottom 10% grey effect */
-    .scroll-wrapper::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 10%;
-      background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-      pointer-events: none;
-    }
-    .shadow-divider {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 1px;              /* The solid divider line */
-      height: 100%;
-      background-color: #00000000;
-      z-index: 5;
-    }
-    
-    /* Pseudo-element for the left-extending gradient
-       The gradient goes from white (blending with the background)
-       to a darker shadow (using rgba with 0.8 opacity) at the divider edge */
-    .shadow-divider::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -40px; /* Adjust to control how far the gradient extends */
-      width: 80px;
-      height: 100%;
-      background: linear-gradient(to right, white, rgba(0, 0, 0, 0.8));
-    }
-
-    
-    @keyframes scroll-up {
-      0% {
-        transform: translateY(100%);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
-    }
-
-    /* "Read More" - updated to be bold and change color on hover */
-    .read-more-button {
-      color: rgb(0, 0, 0);
-      text-decoration: none;
-      font-size: 18px;
-      margin-top: 10px;
-      display: block;
-      opacity: 0;          
-      visibility: hidden;  
-      transition: opacity 1s ease, visibility 1s ease, color 0.3s ease;
-      text-align: left;    
-      font-weight: bold;
-    }
-    .read-more-button.show {
-      opacity: 1;          
-      visibility: visible; 
-    }
-    .read-more-button:hover {
-      color: rgb(132, 132, 132);
-    }
-
-    .contribute-button{
-      align-items: center;
-      justify-content: center;
-      width: 180px;
-      height: 50px;
-      border: none;
-      border-radius: 8px;
-      background-color: #e5ecf0;
-      font-size: 20px;
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    /*--------------------------------
-      MIDDLE COLUMN
-    --------------------------------*/
-    .middle-column {
-      position: relative;
-      overflow: hidden; /* to hide the animated info panel */
-      display: flex;
-      flex-direction: column;
-      align-items: center;  /* center horizontally */
-      justify-content: center;
-      padding-right: 280px;
-    }
-
-    /* Container for the dragon image */
-    .image-container {
-
-      margin-top: 40px;
-      margin-bottom: 0px;
-
-      width: 700px;   
-      height: 350px;  
-      background: url("main_image_small.gif") center center no-repeat;
-      background-size: cover; /* Ensures the image covers the entire container */
-
-    }
-
-    /* The text below the image */
-    .dragon-title {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .dragon-title p {
-      font-size: 18px;
-      line-height: 1.4em;
-      color: #959595;
-    }
-
-    /* Scrollable Extensions Section */
-    .scrollable-extensions {
-      margin-top: 30px;
-      width: 90%;
-      max-height: 80vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding-right: 10px;
-      scrollbar-width: thin;
-    }
-    .scrollable-extensions::-webkit-scrollbar {
-      width: 8px;
-    }
-    .scrollable-extensions::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 4px;
-    }
-    .scrollable-extensions::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 4px;
-    }
-    .scrollable-extensions::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-    
-    .extension-image-scroll {
-      width: 100%;
-      transition: transform 0.3s ease;
-    }
-    .extension-image-scroll img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      display: block;
-    }
-    .extension-image-scroll:hover {
-      transform: scale(1.02);
-    }
-
-    /*--------------------------------
-      BOTTOM LINKS (GitBook, Chrome Extension, etc.)
-    --------------------------------*/
-    .bottom-links {
-      margin-top: 10px;
-      display: flex;
-      gap: 30px;
-      margin-bottom: 25px;
-    }
-    .button-container {
-      position: relative;
-      padding-top:10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .button-container a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: transparent;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-
-    }
-    .button-container a:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .button-container a img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .hover-text {
-      position: absolute;
-
-      top: 75px; /* Increase from 70px for more vertical space */
-
-      background-color: #fff;
-      color: #000;
-      font-size: 14px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
-      font-weight: normal;
-      transform: translateX(-50%);
-      left: 50%;
-    }
-    .button-container:hover .hover-text {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /*--------------------------------
-      PURPLE HIGHLIGHT FOR DOWNLOAD
-    --------------------------------*/
-    @keyframes pulsePurple {
-      0% {
-        box-shadow: 0 0 10px #d5d5d5;
-      }
-      50% {
-        box-shadow: 0 0 30px #bcbcbc;
-      }
-      100% {
-        box-shadow: 0 0 10px #d0d0d0;
-      }
-    }
-    .purple-highlight a {
-      background-color: #ffffff;
-      border: 2px solid #ffffff;
-    }
-    .purple-highlight a:hover {
-      background-color: #ffffff;
-      border-color: #ffffff;
-    }
-
-    /*--------------------------------
-      INFO PANEL (slides from the right)
-    --------------------------------*/
-    .info-panel {
-      position: absolute;
-      background-color: rgba(255, 255, 255, 0.9);
-      border: 2px solid #a1a1a1;
-      padding: 15px 20px;
-      border-radius: 8px;
-      width: 280px;
-      color: rgb(0, 0, 0);
-      font-size: 16px;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      white-space: normal;
-      right: -280px;
-      transition: right 0.5s ease;
-      z-index: 999;
-      top: 0;
-      transform: translateY(0);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.10);
-    }
-    .info-panel * {
-      font-weight: bold;
-    }
-    .info-panel.show {
-      right: 20px;
-    }
-    .info-panel strong {
-      display: inline;
-      margin-bottom: 0;
-    }
-    
-
-    /* Hover image (to and fro) */
-    .hover-image {
-      position: absolute;
-      right: 20px;
-      top: 70px;
-      z-index: 998;
-      transition: opacity 0.3s ease;
-      /* animation: float 2s infinite; */
-    }
-    .hover-image img {
-      width: 80px;
-      height: auto;
-    }
-    @keyframes float {
-      0%   { transform: translateX(0); }
-      50%  { transform: translateX(-30px); }
-      100% { transform: translateX(0); }
-    }
-
-    /*--------------------------------
-      RIGHT COLUMN
-    --------------------------------*/
-    .right-column {
-      background-color: #0e0e18;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      padding-left: 5px;
-      padding-right: 5px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      align-items: center;
-      border-left: 3px solid rgba(0, 0, 0, 0.7);
-      box-shadow: inset 7px 0 10px -3px rgba(0, 0, 0, 0.8);
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .right-column::-webkit-scrollbar {
-      width: 0;
-      background: transparent;
-    }
-    .extension-section {
-      width: 90%;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      border-radius: 24px;
-
-      cursor: pointer;
-    }
-    .extension-section:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-      z-index: 2000;
-    }
-    .extension-image {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 24px;
-      display: block;
-    }
-    .highlight-overlay {
-      display: none;
-    }
-
-    /*--------------------------------
-      RETURN ARROW STYLING
-    --------------------------------*/
-    .return-arrow {
-      position: fixed;
-      top: 0px;
-      left: 50%;
-      transform: translateX(-50%);
-      cursor: pointer;
-      z-index: 1000;
-      animation: bounce 2s infinite;
-      text-decoration: none;
-      outline: none;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 0px;
-    }
-    .return-arrow p {
-      font-size: 50px;
-      color: #000000;
-      margin: 0;
-    }
-    .return-arrow span {
-      font-size: 16px;
-      color: grey;
-      margin-top: 2px;
-      font-weight: bold;
-    }
-    .return-arrow:focus,
-    .return-arrow:active,
-    .return-arrow:focus-visible {
-      outline: none;
-      box-shadow: none;
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      40% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-      60% {
-        transform: translateX(-50%) translateY(-5px);
-      }
-    }
-/*--------------------------------
-  BOUNCE ANIMATION FOR "Want to build?" text (left-right animation)
---------------------------------*/
-@keyframes bounceContributeLR {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(10px);
-  }
-}
-
-.want-to-build-text {
-  animation: bounceContributeLR 1.6s ease-in-out infinite;
-  white-space: nowrap;
-}
-
-/* Adjusting flexbox alignment in the button container for right alignment */
-.button-container {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centering the content */
-}
-
-@media (max-aspect-ratio:127/100){
-        /* Vertically center whole layout */
-        html,body{
-        display:flex;
-        align-items:center;        /* vertical centering */
-        justify-content:center;     /* horizontal centering */
-        min-height:100vh;
-        overflow:hidden;            /* ← no scroll */
-      }
-
-      .container{
-        display:flex;
-        flex-direction:column;
-        width:100%;
-        max-width:720px;            /* optional max-width for nicer look */
-        height:auto;
-      }
-
-      .left-column,.right-column,.info-panel,
-      .shadow-divider,#new-section{display:none!important;}
-
-      .middle-column{
-        width:100%;
-        padding:24px 16px 40px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:20px;
-      }
-
-      .image-container{
-        width:100%;
-        height:56vh;
-        max-height:420px;
-        background:url("main_image_small.gif") center/cover no-repeat;
-        border-radius:12px;
-      }
-
-      .dragon-title p{font-size:24px;font-weight:600;color:#4a4a4a;}
-
-      .bottom-links{
-        width:100%;
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:20px;
-      }
-
-      .button-container a{width:72px;height:72px;border-radius:50%;background:#fff;}
-      .hover-text{top:88px;font-size:14px;}
-
-      .middle-section{
-        width:100%;
-        max-height:220px;
-        margin-top:12px;
-        padding-top:12px;
-        border-top:1px solid #efefef;
-      }
-
-      .scroll-wrapper{max-height:inherit;}
-      .scroll-text{font-size:16px;line-height:1.5;padding-right:8px;}
-      .read-more-button{font-size:14px;margin-top:6px;opacity:1;visibility:visible;text-align:center;}
-    }
-
-
-    /* ===== MOBILE ≤1000px ===== */
-    @media (max-width:1060px) and ( min-height:800px){
-      /* Vertically center whole layout */
-      html,body{
-        display:flex;
-        align-items:center;        /* vertical centering */
-        justify-content:center;     /* horizontal centering */
-        min-height:100vh;
-        overflow:hidden;            /* ← no scroll */
-      }
-
-      .container{
-        display:flex;
-        flex-direction:column;
-        width:100%;
-        max-width:720px;            /* optional max-width for nicer look */
-        height:auto;
-      }
-
-      .left-column,.right-column,.info-panel,
-      .shadow-divider,#new-section{display:none!important;}
-
-      .middle-column{
-        width:100%;
-        padding:24px 16px 40px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:20px;
-      }
-
-      .image-container{
-        width:100%;
-        height:56vh;
-        max-height:420px;
-        background:url("main_image_small.gif") center/cover no-repeat;
-        border-radius:12px;
-      }
-
-      .dragon-title p{font-size:24px;font-weight:600;color:#4a4a4a;}
-
-      .bottom-links{
-        width:100%;
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:20px;
-      }
-
-      .button-container a{width:72px;height:72px;border-radius:50%;background:#fff;}
-      .hover-text{top:88px;font-size:14px;}
-
-      .middle-section{
-        width:100%;
-        max-height:220px;
-        margin-top:12px;
-        padding-top:12px;
-        border-top:1px solid #efefef;
-      }
-
-      .scroll-wrapper{max-height:inherit;}
-      .scroll-text{font-size:16px;line-height:1.5;padding-right:8px;}
-      .read-more-button{font-size:14px;margin-top:6px;opacity:1;visibility:visible;text-align:center;}
-    }
-
-
-
-    
-/* ===== iPhone-14-Pro-Max landscape (≤999 w × ≤500 h) ===== */
-@media (max-width:999px) and (max-height:600px){
-
-/* center whole page */
-html,body{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:100vh;
-  overflow:hidden;            /* ← no scroll */
-}
-
-/* main column stack */
-.container{
-  display:flex;
-  flex-direction:column;
-  width:100%;
-  max-width:600px;          /* narrower */
-  height:auto;
-}
-
-/* hide desktop-only extras */
-.left-column,
-.right-column,
-.info-panel,
-.shadow-divider,
-#new-section{display:none !important;}
-
-/* middle column tweaks */
-.middle-column{
-  width:100%;
-  padding:12px 10px 20px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:2px;
-}
-
-/* hero image */
-.image-container{
-  width:70%;
-  height:40vh;             /* shorter */
-  max-height:240px;
-  background:url("main_image_small.gif") center/cover no-repeat;
-  border-radius:8px;
-}
-
-/* headline text */
-.dragon-title p{
-  font-size:16px;
-  font-weight:600;
-  color:#404040;
-  text-align:center;
-}
-
-/* icon row */
-.bottom-links{
-  width:100%;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
-}
-
-.button-container a{
-  width:44px;
-  height:44px;
-}
-.hover-text{
-  top:56px;
-  font-size:10px;
-}
-
-/* scrolling paragraph */
-.middle-section{
-  width:100%;
-  max-height:120px;
-  margin-top:8px;
-  padding-top:8px;
-  border-top:1px solid #e4e4e4;
-}
-.scroll-text{
-  font-size:12.5px;
-  line-height:1.4;
-}
-.read-more-button{
-  font-size:11px;
-  margin-top:4px;
-}
-}
-
-
-        /*--------------------------------
-      TABLET DEVICES (max-width: 1400px, min-width: 1001px)
-    --------------------------------*/
-    @media (max-width: 1600px) and (min-width: 939px) and (max-height: 1060px) {
-      .left-column {
-        display: none;
-      }
-      .container {
-        grid-template-columns: auto calc(100vh / 2.3);
-      }
-      .middle-column {
-        padding-right: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .right-column {
-        background-color: #0e0e18;
-        padding-top: 10px;
-        padding-bottom: 30px;
-        padding-left: 25px;
-        padding-right: 25px;
-        display: block;
-        overflow-y: auto;
-        flex-direction: column;
-        gap: 2px;
-        align-items: center;
-        border-left: 3px solid rgba(0, 0, 0, 0.7);
-        box-shadow: inset 7px 0 10px -3px rgba(0, 0, 0, 0.8);
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-      .image-container {
-        width: 600px;
-        height: 350px;
-        margin: 0 auto;
-        background: url("main_image_small.gif") center center no-repeat;
-        background-size: cover; /* Ensures the image covers the entire container */
-      }
-      .info-panel {
-        width: 250px;
-        right: -250px;
-      }
-      .hover-image img {
-        width: 120px;
-      }
-      .extension-image {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        border-radius: 12px;
-        display: block;
-        padding-top: 0%;
-        padding-bottom: 0%;
-      }
-      .extension-section {
-        width: 100%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        transition: transform 0.3s, box-shadow 0.3s;
-        cursor: pointer;
-      }
-      .extension-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .scrollable-extensions {
-        width: 100%;
-        max-height: 80vh;
-      }
-      .extension-image-scroll img {
-        width: 120px;
-      }
-    }
-
-
-    
-
-
-    /*--------------------------------
-      LARGE DESKTOP DEVICES (min-width: 2000px)
-    --------------------------------*/
-    @media (min-width: 2260px) {
-      .top-section {
-        flex: 0 0 21%;
-        background-color: #fff;
-      }
-      .middle-section {
-        flex: 0 0 55%;
-        display: flex;
-        flex-direction: column;
-        background-color: #fff;
-        overflow: hidden;
-        padding: 20px;
-        position: relative;
-      }
-      .bottom-section {
-        flex: 0 0 24%;
-        background-color: #fff;
-      }
-      .scroll-text {
-        bottom: 0px;
-      }
-      .right-column {
-        background-color: #0e0e18;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        align-items: center;
-        border-left: 3px solid rgba(0, 0, 0, 0.7);
-        box-shadow: inset 7px 0 10px -3px rgba(0, 0, 0, 0.8);
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-      .image-container {
-        width: 600px;
-        height: 350px;
-        background-size: cover; /* Ensures the image covers the entire container */
-
-      }
-      .middle-column {
-        padding-right: 320px;
-      }
-      .info-panel {
-        width: 300px;
-        right: -300px;
-      }
-      .hover-image img {
-        width: 180px;
-      }
-      .scrollable-extensions {
-        width: 80%;
-        max-height: 80vh;
-      }
-      .extension-image-scroll img {
-        width: 180px;
-      }
-    }
-
-    /*--------------------------------
-      NEW SECTION
-    --------------------------------*/
-    #new-section {
-      height: 100vh;
-      background-color: #ffffff;
-      overflow-y: auto;
-      padding: 0px 0px;
-      padding-top: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      flex-direction: column;
-    }
-    @media (max-width: 1000px) {
-      #new-section {
-        flex-direction: column;
-      }
-    }
-    .scrollable-extensions {
-      margin-top: 20px;
-      width: 100%;
-      max-height: 100vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding-top: 40px;
-      padding-bottom: 220px;
-      padding-right: 80px;
-      padding-left: 80px;
-      scrollbar-width: thin;
-    }
-    .scrollable-extensions::-webkit-scrollbar {
-      width: 8px;
-    }
-    .scrollable-extensions::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 4px;
-    }
-    .scrollable-extensions::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 4px;
-    }
-    .scrollable-extensions::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-    .extension-image-scroll {
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      transition: transform 0.3s ease;
-    }
-    .extension-image-scroll img {
-      width: 100%;
-      height: auto;
-      border-radius: 0;
-      box-shadow: none;
-      display: block;
-    }
-    .extension-image-scroll:hover {
-      transform: scale(1.02);
-    }
-    .hover-text {
-      top: 80px;
-      font-size: 16px;
-    }
-    .section-title {
-      font-size: 38px;
-      color: #ffffff;
-      text-align: center;
-      margin-bottom: 40px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    @media (max-width: 1000px) {
-      .section-title {
-        font-size: 28px;
-        margin-bottom: 20px;
-      }
-    }
-
   </style>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C5RWNSLV53"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C5RWNSLV53');
-</script>
-
 <body>
-  <!-- Main Container with ID for Return Arrow -->
-  <div class="container" id="main-container">
-    <!-- LEFT COLUMN: 3 sections -->
-    <div class="left-column">
-      <!-- Top 26% -->
-      <div class="top-section">
-        <!-- Could be used for a logo or just empty white space -->
-      </div>
-      <!-- Middle 60%: contains auto-scrolling text and "Read More" text -->
-      <div class="middle-section">
-        <div class="scroll-wrapper">
-          <div class="scroll-text">
-            <!-- <p>
-              Overused snipers, Jito bundles, volume bots, and other powerful maneuvers while trading are limiting blockchain’s total addressable market. Check Reddit or X and you’ll find so much recent activity about getting scammed or the fear of getting rug pulled. An experienced trader can spot volume trading with their naked eye but newcomers are blind to it. An increased transparency of trading bot activity in token projects will pump the growth for the entire market.
-              <p><br>
-              <strong>Dragon</strong> is a companion for trading memecoins that turns bot trading data into visual charts. It gives traders the confidence to buy more when they have the visibility into a token’s true power distribution. Every project will find its price floor but that doesn’t mean we have to race to the bottom. If powerful traders use bots to extract maximum value, everyone else should use bots to detect them.
-            </p> -->
-            <br>
-          </div>
-        </div>
-      </div>
-      <!-- Bottom 14% -->
-      <div class="bottom-section">
-        <!-- Could be used for any additional info or empty white space -->
-      </div>
+  <main class="wrapper">
+    <header class="headline">
+      <h3>Dragon</h3>
+      <p >Decentralizing token data for<br>retail analysis.</p>
+    </header>
+
+    <img src="/images-2/log1.gif" alt="Dragon logo" class="logo" />
+
+    <nav class="cta">
+      <a href="#overview">Read the project overview</a>
+      <a href="#download">Download the prototype</a>
+      <a href="https://github.com/yourrepo" target="_blank" rel="noopener noreferrer">Contribute on GitHub</a>
+      <a href="#demo">Watch a demo video</a>
+    </nav>
+
+    <div class="social">
+      <a href="https://t.me/yourtelegram" target="_blank" rel="noopener noreferrer">
+        <img src="/images-2/tele.png" alt="Telegram" />
+      </a>
+      <a href="mailto:info@example.com">
+        <img src="/images-2/email.webp" alt="Email" />
+      </a>
+      <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer">
+        <img src="/images-2/twitter.png" alt="Twitter/X" />
+      </a>
     </div>
-
-    <!-- MIDDLE COLUMN: Dragon image, title/text, links, hover image, info panel -->
-    <div class="middle-column">
-      <!-- Dragon image container -->
-      <div class="image-container"></div>
-      <!-- Text under the dragon image -->
-      <!-- <div class="dragon-title">
-        <p>
-          Data transparency for blockchain.
-        </p>
-      </div> -->
-      <!-- Bottom links to GitBook and Chrome Extension (with hover text) -->
-      <div class="bottom-links">
-        <!-- GitBook -->
-        <div class="button-container purple-highlight">
-          <a href="https://dragon-12.gitbook.io/dragon-alpha" target="_blank" aria-label="GitBook">
-            <img src="gitbook.png" alt="GitBook">
-          </a>
-          <div class="hover-text">Read about it!</div>
-        </div>
-        <!-- Chrome Extension [Highlighted in Purple] -->
-        <!-- <div class="button-container purple-highlight">
-          <a href="https://t.me/+OU0SLVfcpEZhZWQx" target="_blank" aria-label="Chrome Extension">
-            <img src="Telegram-Logo.png" alt="Chrome Extension">
-          </a>
-          <div class="hover-text">Telegram</div>
-        </div> -->
-        <div class="button-container purple-highlight">
-          <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank" aria-label="Chrome Extension">
-            <img src="extension3.png" alt="Chrome Extension">
-          </a>
-          <div class="hover-text">Download the extension!</div>
-        </div>
-        <div class="button-container purple-highlight">
-          <a href="https://github.com/alpha-dragon-org" target="_blank" aria-label="Chrome Extension">
-            <img src="github2.png" alt="Chrome Extension">
-          </a>
-          <div class="hover-text">Contribute!</div>
-        </div>
-      </div>
-            <div class="dragon-title">
-        <p>
-          Data transparency for blockchain.
-        </p>
-      </div>
-  <!-- New Divider for Grey Space Shadow -->
-  <div class="shadow-divider"></div>
-
-<!-- Contribute button container -->
-<div class="button-container" style="display: flex; align-items: center; justify-content: flex-end; text-align: right; flex-direction: row; padding-left:138px; padding-top:5% ">
-  <!-- Direct link to contribute.html (no bounce animation on this button) -->
-  <!-- <a class="contribute-button" href="contribute.html" style="
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 180px;
-    height: 50px;
-    border: none;
-    border-radius: 8px;
-    background-color: #e5ecf0;
-    font-size: 20px;
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  ">
-    contribute
-  </a> -->
-  <!-- "Want to build?" text placed next to the contribute button on the right -->
-  <!-- <div class="want-to-build-text" style="margin-left: 10px; text-align: left; display: inline-block;">
-    <img src="./want_to_build.png" alt="Want to build?" style="width: 130px; height: auto;">
-  </div> -->
-</div>
-
-      <!-- Hover image: placed inside the middle column, to the left of info panel -->
-      <!-- <div class="hover-image" id="hoverImage">
-        <img src="hover.png" alt="Hover Image">
-      </div> -->
-      <!-- Info panel (slides in/out on hover from right column items) -->
-      <div class="info-panel" id="infoPanel">
-        <!-- Content set via JavaScript -->
-      </div>
-    </div>
-
-    <!-- RIGHT COLUMN: extension sections with images -->
-    <div class="right-column">
-      <div class="extension-section" data-info="Paste in a token’s <strong>contract address</strong> if it ends in ‘pump’. This means it was created with pump.fun, a popular token launcher on Solana." data-description="">
-        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
-          <img src="images/image1.png" alt="Image 1" class="extension-image" />
-        </a>
-        <div class="highlight-overlay">
-          <i class="fas fa-info-circle"></i> Contact
-        </div>
-      </div>
-      <div class="extension-section" id="basicInfoSection" data-info="Some <strong>basic info</strong> about the token. Green checks for Mint, Freeze, and Locked are the most important. Here also are official links and platforms to research the token further." data-description="">
-        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
-          <img src="images/image2.png" alt="Image 2" class="extension-image" />
-        </a>
-        <div class="highlight-overlay">
-          <i class="fas fa-info-circle"></i> Basic Info
-        </div>
-      </div>
-      <div class="extension-section" data-info="A <strong>bundle</strong> is a specific program to Solana. It’s when one trader executes transactions on multiple wallets at the same time. Traders can bundle their buys to disguise the amount of tokens under one person’s control. " data-description="">
-        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
-          <img src="images/image3.png" alt="Image 3" class="extension-image" />
-        </a>
-        <div class="highlight-overlay">
-          <i class="fas fa-chart-line"></i> Bundle
-        </div>
-      </div>
-      <div class="extension-section" data-info="There are a ton of <strong>sniper</strong> bots for sale. Some snipers cost tens of thousands because they execute trades in fractions of a second. Sniping can be used legitimately, but too many active in one project is risky." data-description="">
-        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
-          <img src="images/image4.png" alt="Image 4" class="extension-image" />
-        </a>
-        <div class="highlight-overlay">
-          <i class="fas fa-bullseye"></i> Sniper
-        </div>
-      </div>
-      <div class="extension-section" data-info="A <strong>cluster</strong> is when wallets transfer tokens between themselves, not buying directly from an exchange. Like bundles, this can hide a person’s true percentage of the token.
-      <br>
-      <br>
-      The <strong>top 10</strong> holders is self-explanatory. Keep an eye on these because they are the most powerful traders in the project.
-      " data-description="">
-        <a href="https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe" target="_blank">
-          <img src="images/image5.png" alt="Image 5" class="extension-image" />
-        </a>
-        <div class="highlight-overlay">
-          <i class="fas fa-users"></i> Holders
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Return Arrow (Initially Hidden) -->
-  <a href="#main-container" class="return-arrow" aria-label="Return to Top">
-    <p style="color:rgb(224,224,224);">&#65087;</p>
-    <span style="font-size: 24px; color: rgb(241, 241, 241);">TAP</span>
-  </a>
-
-  <!-- New Section to Scroll To -->
-  <div id="new-section">
-    <!-- Scrollable Extensions Images -->
-    <div class="scrollable-extensions">
-      <div class="section-title">
-        <!-- You can add a title here if needed -->
-      </div>
-      <div class="extension-image-scroll">
-        <img src="images/image1.png" alt="Extension 1">
-      </div>
-      <div class="extension-image-scroll">
-        <img src="images/image2.png" alt="Extension 2">
-      </div>
-      <div class="extension-image-scroll">
-        <img src="images/image3.png" alt="Extension 3">
-      </div>
-      <div class="extension-image-scroll">
-        <img src="images/image4.png" alt="Extension 4">
-      </div>
-      <div class="extension-image-scroll">
-        <img src="images/image5.png" alt="Extension 5">
-      </div>
-    </div>
-  </div>
-
-  <!-- JavaScript to handle hover events, dynamic positioning, "Read More" text fade-in, and arrow behavior -->
-  <script>
-    window.onload = function() {
-      // Select elements
-      const extensionSections = document.querySelectorAll('.extension-section');
-      const infoPanel = document.getElementById('infoPanel');
-      const middleCol = document.querySelector('.middle-column');
-      const hoverImage = document.getElementById('hoverImage');
-      const readMoreButton = document.querySelector('.read-more-button');
-
-      // Return arrow
-      const returnArrow = document.querySelector('.return-arrow');
-
-      // Select the scroll-text element
-      const scrollText = document.querySelector('.scroll-text');
-
-      // Flag to detect if we've already hovered once
-      let hasHovered = false;
-
-      // Update the info panel content and position
-      function updateInfoPanel(section) {
-        if (!section) return;
-        const title = section.getAttribute('data-info');
-        const description = section.getAttribute('data-description');
-        infoPanel.innerHTML = `${title}<p>${description}</p>`;
-        const sectionRect = section.getBoundingClientRect();
-        const middleColRect = middleCol.getBoundingClientRect();
-        const centerPosition =
-          (sectionRect.top - middleColRect.top) +
-          (sectionRect.height / 2) -
-          (infoPanel.offsetHeight / 2);
-        const maxTop = middleCol.offsetHeight - infoPanel.offsetHeight;
-        const adjustedTop = Math.min(Math.max(centerPosition, 10), maxTop - 30);
-        infoPanel.style.top = `${adjustedTop}px`;
-      }
-
-      // Hover events for the extension sections
-      extensionSections.forEach(section => {
-        section.addEventListener('mouseenter', () => {
-          updateInfoPanel(section);
-          infoPanel.classList.add('show');
-          if (!hasHovered) {
-            hoverImage.style.opacity = '0';
-            hasHovered = true;
-          }
-        });
-        section.addEventListener('mouseleave', () => {
-          infoPanel.classList.remove('show');
-        });
-      });
-
-      // Initialize info panel with "Basic Information" section on page load
-      const basicInfoSection = document.getElementById('basicInfoSection');
-      if (basicInfoSection) {
-        setTimeout(() => {
-          updateInfoPanel(basicInfoSection);
-        }, 100);
-      }
-
-      // Re-position info panel on window resize (if panel is visible)
-      window.addEventListener('resize', () => {
-        if (infoPanel.classList.contains('show')) {
-          const activeTitle = infoPanel.querySelector('strong').innerText;
-          const activeSection = Array.from(extensionSections)
-            .find(sec => sec.getAttribute('data-info') === activeTitle);
-          if (activeSection) updateInfoPanel(activeSection);
-        } else if (basicInfoSection) {
-          updateInfoPanel(basicInfoSection);
-        }
-      });
-
-      // "Read More" text: show after 23 seconds
-      setTimeout(() => {
-        if (readMoreButton) {
-          readMoreButton.classList.add('show');
-        }
-      }, 23000);
-
-      // Smooth scroll for Return Arrow
-      returnArrow.addEventListener('click', function(event) {
-        event.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-        this.style.display = 'none';
-      });
-
-      // Start scroll-text animation after 11 seconds
-      setTimeout(() => {
-        if (scrollText) {
-          scrollText.classList.add('start-scroll');
-        }
-      }, 11000);
-    };
-
-    
-  </script>
+  </main>
 </body>
 </html>
