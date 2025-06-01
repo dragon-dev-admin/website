@@ -142,31 +142,61 @@
 }
 
     /* ────── Huge 4-K & ultrawide ────── */
-@media (min-width:1600px) {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  .wrapper   { max-width: 2160px; gap: 4.05rem;padding-top: 10rem; padding-bottom: 7rem; }
+@media (min-width: 1620px) {
 
-  .headline h3 { font-size: 10.8rem; }
-  .headline p  { font-size: 4.725rem; }
+/* Global rem baseline */
+html { font-size: 129%; }                        /* 132% × 0.98 */
 
-  .logo {
-    width: 540px;
-    margin: 3.375rem 0;
-    padding-bottom: 13.5%;
-    margin-top: -6.75px;
-    margin-left: -33.75px;
-  }
+/* Layout */
+.wrapper   { max-width: 1556px;                  /* 1588 × 0.98 */
+             padding-top: 2.593rem;              /* 2.646 × 0.98 */
+             padding-bottom: 2.593rem;
+             gap: 1.297rem; }                    /* 1.323 × 0.98 */
 
-  .cta {
-    max-width: 1080px;
-    gap: 2.7rem;
-    padding-bottom: 40.5px;
-  }
+/* Headline */
+.headline h3 { font-size: 5.186rem; }            /* 5.292 × 0.98 */
+.headline p  { font-size: 2.528rem; }            /* 2.58  × 0.98 */
 
-  .cta a { font-size: 3.105rem; padding: 2.16rem 1.2825rem; }
+/* Logo */
+.logo       { width: 323px; }                    /* 330  × 0.98 */
 
-  .social a { width: 108px; height: 108px; }
+/* Call-to-action block */
+.cta        { max-width: 412px;                  /* 420  × 0.98 */
+              gap: 0.648rem; }                   /* 0.661 × 0.98 */
+.cta a      { font-size: 1.296rem;               /* 1.323 × 0.98 */
+              padding: 1.167rem 1.193rem; }      /* 1.191/1.217 × 0.98 */
+
+/* Social icons */
+.social a   { width: 65px; height: 65px; }       /* 66   × 0.98 */
+}
+
+@media (min-height: 1200px) {
+
+/* Global rem baseline */
+html { font-size: 129%; }                        /* 132% × 0.98 */
+
+/* Layout */
+.wrapper   { max-width: 1556px;                  /* 1588 × 0.98 */
+             padding-top: 2.593rem;              /* 2.646 × 0.98 */
+             padding-bottom: 2.593rem;
+             gap: 1.297rem; }                    /* 1.323 × 0.98 */
+
+/* Headline */
+.headline h3 { font-size: 5.186rem; }            /* 5.292 × 0.98 */
+.headline p  { font-size: 2.528rem; }            /* 2.58  × 0.98 */
+
+/* Logo */
+.logo       { width: 323px; }                    /* 330  × 0.98 */
+
+/* Call-to-action block */
+.cta        { max-width: 412px;                  /* 420  × 0.98 */
+              gap: 0.648rem; }                   /* 0.661 × 0.98 */
+.cta a      { font-size: 1.296rem;               /* 1.323 × 0.98 */
+              padding: 1.167rem 1.193rem; }      /* 1.191/1.217 × 0.98 */
+
+/* Social icons */
+.social a   { width: 65px; height: 65px; }       /* 66   × 0.98 */
 }
   </style>
 </head>
