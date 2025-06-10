@@ -25,7 +25,14 @@
     body{background:#fefefe;
     padding-left: 60px;
   padding-top: 5px;}
-
+.brand-bold {
+  color: black;
+  font-weight: 700;
+}
+.brand-bold2 {
+  color: #d5d5d4;
+  font-weight: 700;
+}
     /* ────── Layout wrapper ────── */
     .wrapper{
       width:100%;
@@ -105,6 +112,19 @@
   html {                /* ⬅️ new */
     font-size: 98%;     /* 2 % smaller text on small phones */
   }
+      /* ────── Headline & tagline ────── */
+    .headline h3{
+      font-size:3.1rem;                /* bigger “Dragon” */
+      font-weight:700;
+      text-align:left;
+    }
+    .headline p{
+      margin-top: -0.3%;
+      font-size:1.95rem;
+      line-height:1.35;
+      color:var(--primary-gray);
+      text-align:left;
+    }
 
   
   body { background:#fefefe; padding-left:20px; }
@@ -214,8 +234,10 @@
 <body>
   <main class="wrapper">
     <header class="headline">
-      <h3>Dragon</h3>
-      <p >Decentralizing token data to <br>discover alpha.</p>
+    <h3>
+      <span class="brand-bold2">$Alpha</span> <span class="brand-bold">Dragon</span>
+    </h3>
+    <p >Decentralizing token data to <br>discover alpha.</p>
     </header>
 
     <img src="/images-2/log1.gif" alt="Dragon logo" class="logo" />
