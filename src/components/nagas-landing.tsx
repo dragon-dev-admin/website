@@ -672,7 +672,7 @@ export function NagasLanding() {
 
       <div className="relative z-10 flex min-h-screen min-h-dvh flex-col items-center justify-start px-4 pt-32 pb-6 sm:px-6 sm:pt-36 sm:pb-8 lg:justify-center lg:p-8">
         <div
-          className={`mb-6 flex max-w-full flex-col items-center text-center sm:mb-8 lg:mb-6 ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
+          className={`mb-16 flex max-w-full flex-col items-center text-center sm:mb-20 lg:mb-6 ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
         >
           <h1
             role="button"
