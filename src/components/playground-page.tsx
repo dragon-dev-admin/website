@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Download, Lock, LogOut, Mail, ThumbsDown, ThumbsUp, Upload, UserRound } from "lucide-react"
+import { BookOpen, Download, Lock, LogOut, Mail, ThumbsDown, ThumbsUp, Upload, UserRound } from "lucide-react"
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react"
 import { defaultPlaygroundModules, type PlaygroundModule } from "@/lib/playground-default-modules"
+import { WALKTHROUGH_CONTENT } from "@/lib/walkthrough-content"
 import { speakNagaMessage } from "@/lib/sounds"
 import {
   collection,
@@ -58,6 +59,13 @@ interface UserDoc {
 }
 
 type AuthDialogMode = "signin" | "signup" | "forgot" | null
+
+function maskEmail(email: string) {
+  if (!email || !email.includes("@")) return email
+  const [name, domain] = email.split("@")
+  if (name.length <= 2) return `***@${domain}`
+  return `${name.substring(0, 2)}***@${domain}`
+}
 
 function slugify(value: string) {
   return value
@@ -158,6 +166,7 @@ export function PlaygroundPage() {
   const [uploadMessage, setUploadMessage] = useState("")
   const [uploading, setUploading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
+  const [walkthroughOpen, setWalkthroughOpen] = useState(false)
   const [console1Bursts, setConsole1Bursts] = useState<MessageBurst[]>([])
   const [console2Bursts, setConsole2Bursts] = useState<MessageBurst[]>([])
   const [console3Bursts, setConsole3Bursts] = useState<MessageBurst[]>([])
@@ -688,7 +697,7 @@ export function PlaygroundPage() {
                       <TagGroup label="Inputs" tags={moduleItem.dataInputs} />
                       <TagGroup label="APIs" tags={moduleItem.dataApis} />
                       <p className="mt-3 text-xs text-slate-400">
-                        Published by {moduleItem.uploaderEmail || "community"}
+                        Published by {moduleItem.uploaderEmail ? maskEmail(moduleItem.uploaderEmail) : "community"}
                         {moduleItem.isDefault ? " - core module" : ""}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2">
@@ -805,19 +814,34 @@ export function PlaygroundPage() {
               <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
                 Publish
               </p>
-              <h2 className="mb-4 text-2xl sm:text-3xl font-black text-white">Upload Module Zip</h2>
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-2xl sm:text-3xl font-black text-white">Upload Module Zip</h2>
+                <button
+                  type="button"
+                  onClick={() => setWalkthroughOpen(true)}
+                  className="group relative flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1.5 text-xs font-black text-emerald-300 transition-all hover:border-emerald-300 hover:bg-emerald-400/20 hover:text-emerald-100 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)]"
+                  title="View Module Development Walkthrough"
+                >
+                  <BookOpen className="h-4 w-4 transition-transform group-hover:scale-110" />
+                  Walkthrough
+                </button>
+              </div>
               <form className="grid gap-2 sm:gap-3" onSubmit={handleUpload}>
-                <FormInput name="name" label="Module name" placeholder="Wallet Risk Radar" required />
-                <FormTextarea name="description" label="Brief description" placeholder="What it shows and why it matters." />
+                <FormInput name="name" label="Module name" placeholder="Wallet Risk Radar" required maxLength={50} />
+                <FormTextarea name="description" label="Brief description" placeholder="What it shows and why it matters." maxLength={200} />
                 <FormTextarea
                   name="setupInstructions"
                   label="Setup instructions"
                   placeholder="How to install, configure APIs, and test locally."
+                  maxLength={1000}
                 />
-                <FormInput name="dataInputs" label="Data inputs" placeholder="contractAddress, backendReport" />
-                <FormInput name="dataApis" label="Data APIs" placeholder="fetchData, custom-rpc" />
+                <FormInput name="dataInputs" label="Data inputs" placeholder="contractAddress, backendReport" maxLength={100} />
+                <FormInput name="dataApis" label="Data APIs" placeholder="fetchData, custom-rpc" maxLength={100} />
                 <label className="grid gap-1 text-sm font-bold text-slate-300">
-                  Thumbnail image
+                  <div className="flex items-center gap-2">
+                    Thumbnail image
+                    <span className="text-[0.65rem] font-medium tracking-wide text-slate-400">(Recommended: 16:9 ratio, max 2MB)</span>
+                  </div>
                   <input
                     name="thumbnail"
                     type="file"
@@ -944,6 +968,53 @@ export function PlaygroundPage() {
           </div>
         </div>
       )}
+
+      {walkthroughOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Module Development Walkthrough"
+          onClick={() => setWalkthroughOpen(false)}
+        >
+          <div
+            className="flex h-full max-h-[85vh] w-full max-w-4xl flex-col rounded-lg border border-emerald-400/30 bg-slate-950 shadow-2xl shadow-black/50"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex flex-shrink-0 items-center justify-between border-b border-emerald-400/20 px-6 py-4">
+              <h2 className="flex items-center gap-3 m-0 text-xl font-black text-white sm:text-2xl">
+                <BookOpen className="h-6 w-6 text-emerald-400" />
+                Module Development Walkthrough
+              </h2>
+              <button
+                type="button"
+                onClick={() => setWalkthroughOpen(false)}
+                className="rounded border border-slate-700 px-3 py-1.5 text-sm font-black text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
+              >
+                Close
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto px-6 py-6 text-sm leading-relaxed text-slate-300">
+              <div className="prose prose-invert prose-emerald max-w-none">
+                <pre className="whitespace-pre-wrap font-mono text-[0.8rem] text-emerald-50">
+                  {WALKTHROUGH_CONTENT}
+                </pre>
+              </div>
+            </div>
+            
+            <div className="flex-shrink-0 border-t border-emerald-400/20 bg-slate-900/50 px-6 py-4 text-center">
+              <button
+                type="button"
+                onClick={() => setWalkthroughOpen(false)}
+                className="rounded bg-emerald-400 px-6 py-2.5 font-black text-slate-950 transition-transform hover:scale-105"
+              >
+                Got it, let's build!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
@@ -970,11 +1041,13 @@ function FormInput({
   label,
   placeholder,
   required,
+  maxLength,
 }: {
   name: string
   label: string
   placeholder: string
   required?: boolean
+  maxLength?: number
 }) {
   return (
     <label className="grid gap-1 text-sm font-bold text-slate-300">
@@ -982,6 +1055,7 @@ function FormInput({
       <input
         name={name}
         required={required}
+        maxLength={maxLength}
         className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-1.5 sm:py-2 text-white outline-none focus:border-emerald-300"
         placeholder={placeholder}
       />
@@ -989,7 +1063,17 @@ function FormInput({
   )
 }
 
-function FormTextarea({ name, label, placeholder }: { name: string; label: string; placeholder: string }) {
+function FormTextarea({
+  name,
+  label,
+  placeholder,
+  maxLength,
+}: {
+  name: string
+  label: string
+  placeholder: string
+  maxLength?: number
+}) {
   return (
     <label className="grid gap-1 text-sm font-bold text-slate-300">
       {label}
@@ -997,6 +1081,7 @@ function FormTextarea({ name, label, placeholder }: { name: string; label: strin
         name={name}
         required
         rows={3}
+        maxLength={maxLength}
         className="resize-y rounded border border-emerald-400/25 bg-slate-950 px-3 py-1.5 sm:py-2 text-white outline-none focus:border-emerald-300"
         placeholder={placeholder}
       />
