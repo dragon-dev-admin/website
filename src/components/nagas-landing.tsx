@@ -986,7 +986,7 @@ export function NagasLanding() {
             aria-hidden
           />
           <div
-            className="naga-speech-overlay naga-stay-sharp pointer-events-none fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[8vh] sm:pt-[12vh]"
+            className="naga-speech-overlay naga-stay-sharp pointer-events-none fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[8vh] sm:pt-[10vh] lg:pt-[4vh]"
             aria-live="polite"
           >
             <div
