@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { BookOpen, Download, Lock, LogOut, Mail, ThumbsDown, ThumbsUp, Upload, UserRound } from "lucide-react"
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react"
+import JSZip from "jszip"
 import { defaultPlaygroundModules, type PlaygroundModule } from "@/lib/playground-default-modules"
 import { WalkthroughContent } from "@/lib/walkthrough-content"
 import { speakNagaMessage } from "@/lib/sounds"
@@ -525,6 +526,21 @@ export function PlaygroundPage() {
 
     try {
       setUploading(true)
+      setUploadMessage("Validating zip package...")
+
+      const zip = await JSZip.loadAsync(packageFile)
+      const filePaths = Object.keys(zip.files)
+      const fileBaseNames = filePaths.map(p => p.split('/').pop() || '')
+      
+      const requiredFiles = ['module.css', 'module.js', 'module.json', 'README.md', 'thumbnail.png']
+      const missingFiles = requiredFiles.filter(req => !fileBaseNames.includes(req))
+      
+      if (missingFiles.length > 0) {
+        setUploadMessage(`Validation failed. Missing mandatory files: ${missingFiles.join(', ')}`)
+        setUploading(false)
+        return
+      }
+
       setUploadMessage("Uploading module files...")
 
       const thumbRef = ref(firebase.storage, `module-thumbnails/${user.uid}/${moduleId}-${thumbnailFile.name}`)
