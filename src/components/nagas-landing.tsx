@@ -128,7 +128,7 @@ export function NagasLanding() {
   const ctaButtonClass = isDark
     ? "backdrop-blur-md border-2 border-emerald-400/55 bg-slate-950/80 text-emerald-50 shadow-lg shadow-emerald-500/15 hover:border-emerald-300/80 hover:bg-emerald-950/90 hover:shadow-emerald-400/25"
     : "backdrop-blur-sm border-2 border-emerald-500 bg-white/90 text-emerald-700 hover:bg-emerald-50"
-  const actionButtonClass = `relative z-10 min-h-10 w-full whitespace-normal px-3 py-2 text-center font-mono text-xs leading-snug transition-all duration-500 sm:min-h-11 sm:px-4 sm:py-2.5 sm:text-base lg:w-auto lg:px-6 lg:py-3 lg:text-base xl:text-lg ${ctaButtonClass}`
+  const actionButtonClass = `relative z-10 min-h-12 w-full whitespace-normal px-4 py-3 text-center font-mono text-sm leading-snug transition-all duration-500 sm:min-h-12 sm:px-4 sm:py-3 sm:text-base lg:w-auto lg:px-6 lg:py-3 lg:text-base xl:text-lg ${ctaButtonClass}`
 
   const horizonLightness = isDark ? "62%" : "50%"
   const decorOpacity = isDark ? "0.45" : "0.3"
@@ -684,7 +684,7 @@ export function NagasLanding() {
                 triggerBrandEffects(e)
               }
             }}
-            className={`mb-3 max-w-full cursor-pointer select-none break-words font-mono text-3xl font-bold leading-tight transition-colors duration-500 hover:opacity-90 sm:mb-4 sm:text-5xl md:text-6xl ${
+            className={`mb-4 max-w-full cursor-pointer select-none break-words font-mono text-4xl font-bold leading-tight transition-colors duration-500 hover:opacity-90 sm:mb-6 sm:text-5xl md:text-6xl ${
               megaGlitchActive ? "animate-mega-glitch-shake" : ""
             } ${isDark ? "text-emerald-50" : "text-gray-900"}`}
             style={{ color: `hsl(${colorCycle}, 55%, ${isDark ? "78%" : "20%"})` }}
@@ -718,7 +718,7 @@ export function NagasLanding() {
         >
           <div
             ref={nagaRef}
-            className={`relative mx-auto mb-6 flex w-full justify-center lg:absolute lg:left-1/2 lg:top-[46%] lg:mb-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform ${
+            className={`relative mx-auto mb-16 flex w-full justify-center lg:absolute lg:left-1/2 lg:top-[46%] lg:mb-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform ${
               playgroundTransition ? "z-[120]" : "z-20"
             } ${
               nagaSpeech ? "naga-spotlight naga-stay-sharp" : ""
@@ -752,7 +752,7 @@ export function NagasLanding() {
                 <img
                   src={NAGA_IMAGE}
                   alt="Data Naga"
-                  className={`pointer-events-none h-auto w-36 drop-shadow-2xl transition-all duration-500 sm:w-56 md:w-80 lg:w-96 ${
+                  className={`pointer-events-none h-auto w-48 drop-shadow-2xl transition-all duration-500 sm:w-64 md:w-80 lg:w-96 ${
                     nagaSpeech || tentacleReach ? "naga-glow-active naga-highlight-sharp" : ""
                   }`}
                 />
@@ -836,7 +836,7 @@ export function NagasLanding() {
             )
           })}
 
-          <div className={`relative grid w-full grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-4 lg:block lg:h-[30rem] ${nagaSpeech ? "naga-stay-sharp" : ""}`}>
+          <div className={`relative grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:block lg:h-[30rem] ${nagaSpeech ? "naga-stay-sharp" : ""}`}>
             <Button
               variant="outline"
               size="lg"
