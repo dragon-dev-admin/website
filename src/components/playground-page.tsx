@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { BookOpen, Download, Lock, LogOut, Mail, ThumbsDown, ThumbsUp, Upload, UserRound } from "lucide-react"
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react"
 import { defaultPlaygroundModules, type PlaygroundModule } from "@/lib/playground-default-modules"
-import { WALKTHROUGH_CONTENT } from "@/lib/walkthrough-content"
+import { WalkthroughContent } from "@/lib/walkthrough-content"
 import { speakNagaMessage } from "@/lib/sounds"
 import {
   collection,
@@ -997,9 +997,7 @@ export function PlaygroundPage() {
             
             <div className="flex-1 overflow-y-auto px-6 py-6 text-sm leading-relaxed text-slate-300">
               <div className="prose prose-invert prose-emerald max-w-none">
-                <pre className="whitespace-pre-wrap font-mono text-[0.8rem] text-emerald-50">
-                  {WALKTHROUGH_CONTENT}
-                </pre>
+                <WalkthroughContent />
               </div>
             </div>
             
