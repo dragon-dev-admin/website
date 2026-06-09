@@ -649,9 +649,10 @@ export function PlaygroundPage() {
           </div>
         </section>
 
-        <section className="relative z-20 grid gap-4 border-t border-emerald-400/20 bg-[#07111f] p-3 sm:p-4 lg:grid-cols-[minmax(0,1fr)_25rem]">
-          <section className="rounded-lg border border-emerald-400/25 bg-slate-950/70 p-4 sm:p-5 shadow-2xl shadow-black/30">
-            <div className="mb-5 flex items-end justify-between gap-4">
+        <section className="relative z-20 border-t border-emerald-400/20 bg-[#07111f]">
+          <div className="mx-auto grid w-full max-w-[90rem] gap-5 px-5 py-6 sm:gap-6 sm:px-6 lg:grid-cols-[minmax(0,1fr)_25rem] lg:p-8">
+            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/70 p-4 sm:p-5 shadow-2xl shadow-black/30 overflow-hidden">
+              <div className="mb-5 flex items-end justify-between gap-4">
               <div>
                 <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
                   Catalog
@@ -845,6 +846,7 @@ export function PlaygroundPage() {
               {uploadMessage && <p className="mt-4 text-sm text-emerald-200">{uploadMessage}</p>}
             </section>
           </aside>
+          </div>
         </section>
       </main>
 
