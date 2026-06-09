@@ -752,7 +752,7 @@ export function NagasLanding() {
                 <img
                   src={NAGA_IMAGE}
                   alt="Data Naga"
-                  className={`pointer-events-none h-auto w-48 drop-shadow-2xl transition-all duration-500 sm:w-64 md:w-80 lg:w-96 ${
+                  className={`pointer-events-none h-auto w-60 drop-shadow-2xl transition-all duration-500 sm:w-72 md:w-80 lg:w-96 ${
                     nagaSpeech || tentacleReach ? "naga-glow-active naga-highlight-sharp" : ""
                   }`}
                 />
