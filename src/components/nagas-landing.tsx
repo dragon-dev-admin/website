@@ -2,9 +2,10 @@
 
 import type React from "react"
 
+import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { Download, Github, Play, FileText, Moon, Sun } from "lucide-react"
+import { Download, Github, Play, FileText } from "lucide-react"
 import { SITE_LINKS } from "@/lib/site-links"
 import {
   estimateNagaSpeechMs,
@@ -43,6 +44,24 @@ const SOCIAL_LINKS = [
     external: true,
   },
 ] as const
+
+const HERO_SOCIAL_CLASSES = {
+  twitter: {
+    button:
+      "left-[36%] top-[16%] h-12 w-12 sm:h-14 sm:w-14 lg:left-[34%] lg:top-[8%]",
+    image: "h-6 w-6 sm:h-8 sm:w-8",
+  },
+  telegram: {
+    button:
+      "left-[60%] top-[39%] h-11 w-11 sm:h-12 sm:w-12 lg:left-[70%] lg:top-[36%]",
+    image: "h-6 w-6 sm:h-7 sm:w-7",
+  },
+  email: {
+    button:
+      "left-[37%] top-[62%] h-12 w-12 rounded-md sm:h-14 sm:w-14 lg:left-[32%] lg:top-[63%]",
+    image: "h-8 w-8 sm:h-10 sm:w-10",
+  },
+} as const
 
 /** Safe tips for Naga speech bubble — educational, non-specific. */
 const NAGA_SAFE_TIPS = [
@@ -90,28 +109,26 @@ interface MessageBurst {
 }
 
 const THEME_STORAGE_KEY = "naga-landing-theme-v2"
+const NAGA_IMAGE =
+  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/telegram-cloud-document-1-4961135720249951764.jpg-IOlkPvCq9ilZnXyQZf9udss7L7xPMv.png"
 
 export function NagasLanding() {
+  const router = useRouter()
   const console1Ref = useRef<HTMLDivElement>(null)
   const console2Ref = useRef<HTMLDivElement>(null)
   const console3Ref = useRef<HTMLDivElement>(null)
   const nagaRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window === "undefined") return true
-
-    return localStorage.getItem(THEME_STORAGE_KEY) !== "light"
-  })
+  const isDark = true
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark)
-    localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light")
-  }, [isDark])
+    document.documentElement.classList.add("dark")
+  }, [])
 
   const ctaButtonClass = isDark
     ? "backdrop-blur-md border-2 border-emerald-400/55 bg-slate-950/80 text-emerald-50 shadow-lg shadow-emerald-500/15 hover:border-emerald-300/80 hover:bg-emerald-950/90 hover:shadow-emerald-400/25"
     : "backdrop-blur-sm border-2 border-emerald-500 bg-white/90 text-emerald-700 hover:bg-emerald-50"
-  const actionButtonClass = `relative z-10 min-h-12 w-full whitespace-normal px-4 py-3 text-center font-mono text-sm leading-snug transition-all duration-500 sm:text-base lg:w-auto lg:px-8 lg:py-4 lg:text-lg ${ctaButtonClass}`
+  const actionButtonClass = `relative z-10 min-h-11 w-full whitespace-normal px-4 py-2.5 text-center font-mono text-sm leading-snug transition-all duration-500 sm:text-base lg:w-auto lg:px-6 lg:py-3 lg:text-base xl:text-lg ${ctaButtonClass}`
 
   const horizonLightness = isDark ? "62%" : "50%"
   const decorOpacity = isDark ? "0.45" : "0.3"
@@ -124,16 +141,17 @@ export function NagasLanding() {
   const [glitchText, setGlitchText] = useState<GlitchChar[]>([])
   const [colorCycle, setColorCycle] = useState(0)
   const [pageTransition, setPageTransition] = useState(false)
-  const [socialBubbles, setSocialBubbles] = useState<
-    { id: number; left: number; size: number; delay: number; duration: number; drift: number }[]
-  >([])
   const [logoSpinning, setLogoSpinning] = useState(false)
+  const [playgroundTransition, setPlaygroundTransition] = useState(false)
+  const [fadeToPlayground, setFadeToPlayground] = useState(false)
+  const [cameFromPlayground, setCameFromPlayground] = useState(false)
   const [megaGlitchActive, setMegaGlitchActive] = useState(false)
   const [nagaSpeech, setNagaSpeech] = useState<string | null>(null)
   const [nagaSpeechBubbleKey, setNagaSpeechBubbleKey] = useState(0)
   const [decorHueOffsets, setDecorHueOffsets] = useState({ one: 0, two: 120, three: 240 })
   const nagaClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const nagaSpeechTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const playgroundTransitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const nagaTipsPoolRef = useRef<string[]>([])
   const nagaSpeechGenerationRef = useRef(0)
   const megaGlitchTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -173,6 +191,16 @@ export function NagasLanding() {
       isGlitching: false,
     }))
     setGlitchText(chars)
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && sessionStorage.getItem("fromPlayground") === "true") {
+      setCameFromPlayground(true)
+      sessionStorage.removeItem("fromPlayground")
+      setTimeout(() => {
+        setCameFromPlayground(false)
+      }, 1500)
+    }
   }, [])
 
   useEffect(() => {
@@ -244,29 +272,8 @@ export function NagasLanding() {
       if (nagaClickTimerRef.current) clearTimeout(nagaClickTimerRef.current)
       if (nagaSpeechTimerRef.current) clearTimeout(nagaSpeechTimerRef.current)
       if (megaGlitchTimerRef.current) clearInterval(megaGlitchTimerRef.current)
+      if (playgroundTransitionTimerRef.current) clearTimeout(playgroundTransitionTimerRef.current)
     }
-  }, [])
-
-  useEffect(() => {
-    const spawn = () => {
-      setSocialBubbles((prev) => {
-        const next = [
-          ...prev,
-          {
-            id: Date.now() + Math.random(),
-            left: 8 + Math.random() * 84,
-            size: 12 + Math.random() * 28,
-            delay: Math.random() * 2,
-            duration: 3.5 + Math.random() * 3,
-            drift: (Math.random() - 0.5) * 40,
-          },
-        ]
-        return next.slice(-24)
-      })
-    }
-    spawn()
-    const interval = setInterval(spawn, 450)
-    return () => clearInterval(interval)
   }, [])
 
   const handleClick = useCallback((e: React.MouseEvent) => {
@@ -337,8 +344,27 @@ export function NagasLanding() {
 
   const triggerBrandEffects = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation()
+    if (playgroundTransition) return
+
     triggerLogoSpin()
-    triggerMegaGlitchEffect()
+    try {
+      triggerMegaGlitchEffect()
+    } catch (error) {
+      console.warn("[Alpha Dragon] Playground transition sound unavailable.", error)
+    }
+    setPlaygroundTransition(true)
+
+    window.setTimeout(() => {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+    }, 520)
+
+    window.setTimeout(() => {
+      setFadeToPlayground(true)
+    }, 1800)
+
+    playgroundTransitionTimerRef.current = window.setTimeout(() => {
+      router.push("/playground")
+    }, 2250)
   }
 
   const hideNagaSpeechBubble = useCallback(() => {
@@ -508,6 +534,10 @@ export function NagasLanding() {
       {pageTransition && (
         <div className="fixed inset-0 z-50 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 backdrop-blur-sm animate-pulse" />
       )}
+      
+      {fadeToPlayground && (
+        <div className="fixed inset-0 z-[200] bg-[#06101d] transition-opacity duration-500 animate-fade-in pointer-events-none" />
+      )}
 
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1600 800" preserveAspectRatio="none" style={{ zIndex: 0 }}>
         <defs>
@@ -535,16 +565,7 @@ export function NagasLanding() {
         />
       ))}
 
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => setIsDark(!isDark)}
-        className={`naga-theme-toggle absolute right-4 top-4 z-30 rounded-full px-3 py-2 transition-all duration-300 sm:right-6 sm:top-6 ${
-          nagaSpeech ? "naga-stay-sharp" : ""
-        } ${isDark ? "" : "text-emerald-600 hover:bg-emerald-50"}`}
-      >
-        {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-      </Button>
+
 
       <div
         className={`absolute inset-0 hidden xl:grid xl:grid-cols-3 xl:gap-4 xl:p-4 xl:text-sm ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
@@ -651,26 +672,8 @@ export function NagasLanding() {
 
       <div className="relative z-10 flex min-h-screen min-h-dvh flex-col items-center justify-start px-4 py-6 sm:px-6 sm:py-8 lg:justify-center lg:p-8">
         <div
-          className={`mb-8 flex max-w-full flex-col items-center text-center sm:mb-12 lg:mb-16 ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
+          className={`mb-6 flex max-w-full flex-col items-center text-center sm:mb-8 lg:mb-6 ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
         >
-          <button
-            type="button"
-            aria-label="Trigger logo spin and title glitch"
-            onClick={triggerBrandEffects}
-            className={`mb-4 flex h-24 w-24 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 shadow-lg transition-transform hover:scale-105 active:scale-95 sm:mb-6 sm:h-28 sm:w-28 md:h-32 md:w-32 ${
-              logoSpinning ? "animate-logo-spin-once" : ""
-            } ${
-              isDark
-                ? "border-emerald-400/60 bg-slate-950/90 shadow-[0_0_32px_rgba(16,185,129,0.25)] hover:border-emerald-300/80"
-                : "border-emerald-400/70 bg-white/95 hover:border-emerald-500"
-            }`}
-          >
-            <img
-              src="/images/logo.png"
-              alt="$Alpha Dragon"
-              className="pointer-events-none h-full w-full object-cover object-center"
-            />
-          </button>
           <h1
             role="button"
             tabIndex={0}
@@ -708,17 +711,31 @@ export function NagasLanding() {
           </p>
         </div>
 
-        <div className={`relative mx-auto w-full max-w-sm sm:max-w-2xl lg:max-w-6xl ${nagaSpeech ? "naga-stay-sharp z-[95]" : ""}`}>
+        <div
+          className={`relative mx-auto w-full max-w-sm sm:max-w-2xl lg:max-w-[1600px] xl:max-w-[1760px] ${
+            nagaSpeech ? "naga-stay-sharp z-[95]" : ""
+          }`}
+        >
           <div
             ref={nagaRef}
-            className={`relative z-20 mx-auto mb-6 flex w-full justify-center lg:absolute lg:left-1/2 lg:top-[46%] lg:mb-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform ${
+            className={`relative mx-auto mb-6 flex w-full justify-center lg:absolute lg:left-1/2 lg:top-[46%] lg:mb-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform ${
+              playgroundTransition ? "z-[120]" : "z-20"
+            } ${
               nagaSpeech ? "naga-spotlight naga-stay-sharp" : ""
             }`}
           >
             <div
-              className="relative animate-float transition-transform duration-100 ease-out"
+              className={`relative ${
+                playgroundTransition
+                  ? "animate-center-naga-descend"
+                  : cameFromPlayground
+                  ? "animate-center-naga-ascend"
+                  : "animate-float transition-transform duration-100 ease-out"
+              }`}
               style={{
-                transform: `${getNagaTransform()} ${getTentacleReachTransform()}`,
+                transform: playgroundTransition
+                  ? undefined
+                  : `${getNagaTransform()} ${getTentacleReachTransform()}`,
                 transformStyle: "preserve-3d",
               }}
             >
@@ -733,9 +750,9 @@ export function NagasLanding() {
                 style={{ ["--naga-glow-hue" as string]: colorCycle }}
               >
                 <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/telegram-cloud-document-1-4961135720249951764.jpg-IOlkPvCq9ilZnXyQZf9udss7L7xPMv.png"
+                  src={NAGA_IMAGE}
                   alt="Data Naga"
-                  className={`pointer-events-none h-auto w-48 drop-shadow-2xl transition-all duration-500 sm:w-60 md:w-72 lg:w-80 ${
+                  className={`pointer-events-none h-auto w-56 drop-shadow-2xl transition-all duration-500 sm:w-72 md:w-80 lg:w-96 ${
                     nagaSpeech || tentacleReach ? "naga-glow-active naga-highlight-sharp" : ""
                   }`}
                 />
@@ -763,11 +780,67 @@ export function NagasLanding() {
             </div>
           </div>
 
-          <div className={`relative grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:block lg:h-96 ${nagaSpeech ? "naga-stay-sharp" : ""}`}>
+          <button
+            type="button"
+            aria-label="Trigger logo spin and title glitch"
+            onClick={triggerBrandEffects}
+            className="absolute left-[64%] top-[72%] z-30 hidden h-[100px] w-[100px] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center overflow-visible rounded-full bg-transparent p-0 transition-transform hover:scale-105 active:scale-95 lg:flex"
+          >
+            <span
+              className={`pointer-events-none flex h-full w-full items-center justify-center drop-shadow-[0_0_18px_rgba(52,211,153,0.4)] ${
+                logoSpinning ? "animate-logo-spin-once" : "animate-dragon-angry-shake"
+              }`}
+            >
+              <img
+                src="/images/logo.png"
+                alt="$Alpha Dragon"
+                className="h-full w-full object-contain object-center"
+              />
+            </span>
+          </button>
+
+          {SOCIAL_LINKS.map((link, index) => {
+            const placement = HERO_SOCIAL_CLASSES[link.id]
+
+            return (
+              <button
+                key={link.id}
+                type="button"
+                aria-label={link.label}
+                className={`group absolute z-30 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center border-2 shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl sm:flex ${placement.button} ${link.ringClass} ${link.bgClass}`}
+                style={{ animationDelay: `${index * 0.25}s` }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  const action = () => {
+                    if (link.external) {
+                      window.open(link.href, "_blank", "noopener,noreferrer")
+                    } else {
+                      window.location.href = link.href
+                    }
+                  }
+                  handleButtonClick(link.id, action)
+                }}
+              >
+                <span
+                  className={`pointer-events-none absolute inset-0 rounded-[inherit] border-2 animate-social-pulse-ring ${link.ringClass}`}
+                  style={{ animationDelay: `${index * 0.35}s` }}
+                />
+                <img
+                  src={link.imageSrc}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className={`relative z-10 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-110 ${placement.image}`}
+                />
+              </button>
+            )
+          })}
+
+          <div className={`relative grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:block lg:h-[30rem] ${nagaSpeech ? "naga-stay-sharp" : ""}`}>
             <Button
               variant="outline"
               size="lg"
-              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:left-16 lg:top-0 ${
+              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:left-[4%] lg:top-[4%] ${
                 expandedButton === "read" ? "animate-expand-down" : ""
               }`}
               style={{
@@ -787,7 +860,7 @@ export function NagasLanding() {
             <Button
               variant="outline"
               size="lg"
-              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:left-8 lg:top-32 ${
+              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:left-[1%] lg:top-[67%] ${
                 expandedButton === "download" ? "animate-expand-down" : ""
               }`}
               style={{
@@ -807,7 +880,7 @@ export function NagasLanding() {
             <Button
               variant="outline"
               size="lg"
-              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:right-16 lg:top-0 ${
+              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:right-[4%] lg:top-[12%] ${
                 expandedButton === "github" ? "animate-expand-down" : ""
               }`}
               style={{
@@ -827,7 +900,7 @@ export function NagasLanding() {
             <Button
               variant="outline"
               size="lg"
-              className={`${actionButtonClass} animate-float-gentle sm:col-span-2 sm:mx-auto sm:w-auto lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:transform ${
+              className={`${actionButtonClass} animate-float-gentle lg:absolute lg:right-[9%] lg:top-[58%] ${
                 expandedButton === "watch" ? "animate-expand-down" : ""
               }`}
               style={{
@@ -846,90 +919,6 @@ export function NagasLanding() {
           </div>
         </div>
 
-        <div
-          className={`relative z-40 mx-auto mt-10 w-full max-w-4xl sm:mt-14 sm:px-4 lg:mt-20 ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
-        >
-          <div
-            className={`relative min-h-[180px] overflow-hidden rounded-lg border-2 px-4 py-6 shadow-2xl backdrop-blur-md sm:min-h-[220px] sm:px-8 sm:py-10 ${
-              isDark
-                ? "border-emerald-500/35 bg-gradient-to-b from-slate-900/95 via-slate-950/98 to-emerald-950/40 shadow-emerald-900/30"
-                : "border-emerald-400/60 bg-white/95"
-            }`}
-          >
-            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-              {socialBubbles.map((bubble) => (
-                <span
-                  key={bubble.id}
-                  className="absolute bottom-4 rounded-full animate-social-ambient-float opacity-50"
-                  style={{
-                    left: `${bubble.left}%`,
-                    width: bubble.size,
-                    height: bubble.size,
-                    background: `hsl(${(colorCycle + bubble.left) % 360}, 70%, 58%)`,
-                    animationDelay: `${bubble.delay}s`,
-                    ["--drift" as string]: `${bubble.drift}px`,
-                    ["--duration" as string]: `${bubble.duration}s`,
-                  }}
-                />
-              ))}
-            </div>
-
-            <p
-              className={`relative z-10 mb-6 text-center font-mono text-xs font-bold uppercase tracking-[0.14em] sm:mb-8 sm:text-base sm:tracking-[0.2em] ${
-                isDark ? "text-emerald-200" : "text-emerald-800"
-              }`}
-            >
-              Connect with Dragon
-            </p>
-
-            <div className="relative z-10 grid grid-cols-3 items-start justify-items-center gap-3 sm:flex sm:flex-wrap sm:items-end sm:justify-center sm:gap-10 md:gap-14">
-              {SOCIAL_LINKS.map((link, index) => (
-                <div
-                  key={link.id}
-                  className="animate-social-float flex min-w-0 flex-col items-center gap-2 sm:gap-3"
-                  style={{ animationDelay: `${index * 0.25}s` }}
-                >
-                  <button
-                    type="button"
-                    aria-label={link.label}
-                    className={`group relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-[3px] shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl sm:h-20 sm:w-20 md:h-24 md:w-24 ${link.ringClass} ${link.bgClass}`}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      const action = () => {
-                        if (link.external) {
-                          window.open(link.href, "_blank", "noopener,noreferrer")
-                        } else {
-                          window.location.href = link.href
-                        }
-                      }
-                      handleButtonClick(link.id, action)
-                    }}
-                  >
-                    <span
-                      className={`pointer-events-none absolute inset-0 rounded-full border-2 animate-social-pulse-ring ${link.ringClass}`}
-                      style={{ animationDelay: `${index * 0.35}s` }}
-                    />
-                    <img
-                      src={link.imageSrc}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className="relative z-10 h-7 w-7 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
-                    />
-                  </button>
-                  <span
-                    className={`relative z-10 max-w-[5.75rem] text-center font-mono text-[0.7rem] font-bold leading-tight tracking-normal sm:text-sm ${
-                      isDark ? "text-emerald-100" : "text-emerald-900"
-                    }`}
-                  >
-                    {link.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
         <button
           type="button"
           aria-label="Decorative 1 — click to shift color and play tone"
@@ -945,7 +934,7 @@ export function NagasLanding() {
           type="button"
           aria-label="Decorative 2 — click to shift color and play tone"
           onClick={(e) => handleDecorClick(e, "two", 554)}
-          className={`absolute left-[10%] top-[48%] hidden cursor-pointer font-mono text-6xl font-bold transition-all duration-300 animate-pulse hover:scale-110 hover:opacity-70 sm:left-[12%] sm:top-[46%] md:block lg:left-[4%] lg:top-[55%] xl:left-[12%] xl:top-[52%] ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
+          className={`absolute left-[10%] top-[54%] hidden cursor-pointer font-mono text-6xl font-bold transition-all duration-300 animate-pulse hover:scale-110 hover:opacity-70 sm:left-[12%] sm:top-[53%] md:block lg:left-[4%] lg:top-[60%] xl:left-[12%] xl:top-[56%] ${nagaSpeech ? "naga-blur-when-speech" : ""}`}
           style={{
             color: `hsl(${(colorCycle + decorHueOffsets.two) % 360}, 70%, ${isDark ? "65%" : "40%"})`,
             opacity: decorOpacity,
@@ -981,6 +970,12 @@ export function NagasLanding() {
           style={{ backgroundColor: `hsl(${(colorCycle + 180) % 360}, 60%, 50%)` }}
         />
       </div>
+
+      {playgroundTransition && (
+        <div className="pointer-events-none fixed inset-0 z-[8] overflow-hidden bg-slate-950/20 backdrop-blur-[2px]">
+          <div className="animate-playground-portal-wash absolute inset-x-0 bottom-0 h-[48vh] bg-gradient-to-t from-emerald-950/75 via-slate-950/45 to-transparent" />
+        </div>
+      )}
 
       {nagaSpeech && (
         <>
