@@ -718,10 +718,10 @@ export function NagasLanding() {
         >
           <div
             ref={nagaRef}
-            className={`relative mx-auto mb-16 flex w-full justify-center lg:absolute lg:left-1/2 lg:top-[46%] lg:mb-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform ${
+            className={`relative mx-auto mb-16 flex w-full justify-center transition-all duration-500 ease-out lg:absolute lg:left-1/2 lg:top-[46%] lg:mb-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform ${
               playgroundTransition ? "z-[120]" : "z-20"
             } ${
-              nagaSpeech ? "naga-spotlight naga-stay-sharp" : ""
+              nagaSpeech ? "naga-spotlight naga-stay-sharp mt-[22vh] sm:mt-[24vh] lg:mt-0" : ""
             }`}
           >
             <div
@@ -986,7 +986,7 @@ export function NagasLanding() {
             aria-hidden
           />
           <div
-            className="naga-speech-overlay naga-stay-sharp pointer-events-none fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[8vh] sm:pt-[10vh] lg:pt-[4vh]"
+            className="naga-speech-overlay naga-stay-sharp pointer-events-none fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[8vh] sm:pt-[10vh] lg:pt-[6vh]"
             aria-live="polite"
           >
             <div
