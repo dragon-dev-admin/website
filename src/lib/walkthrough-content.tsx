@@ -41,9 +41,15 @@ export const WalkthroughContent = () => {
               <code>5_wallet_risk</code>
             </pre>
           </li>
-          <li>Update <code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">module.json</code>.</li>
-          <li>Update <code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">module.js</code>.</li>
-          <li>Add a thumbnail image named <code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">thumbnail.png</code>.</li>
+          <li>Ensure your module folder contains all 5 <strong>mandatory</strong> files:
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-emerald-300">
+              <li><code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">module.json</code></li>
+              <li><code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">module.js</code></li>
+              <li><code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">module.css</code></li>
+              <li><code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">README.md</code></li>
+              <li><code className="bg-slate-800 px-1 py-0.5 rounded text-emerald-200">thumbnail.png</code></li>
+            </ul>
+          </li>
           <li>Run:
             <pre className="mt-2 bg-slate-900 p-3 rounded-md overflow-x-auto border border-emerald-400/20 text-emerald-400">
               <code>npm run modules:sync</code>
