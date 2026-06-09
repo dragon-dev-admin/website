@@ -649,8 +649,8 @@ export function PlaygroundPage() {
           </div>
         </section>
 
-        <section className="relative z-20 grid gap-4 border-t border-emerald-400/20 bg-[#07111f] p-4 lg:grid-cols-[minmax(0,1fr)_25rem]">
-          <section className="rounded-lg border border-emerald-400/25 bg-slate-950/70 p-5 shadow-2xl shadow-black/30">
+        <section className="relative z-20 grid gap-4 border-t border-emerald-400/20 bg-[#07111f] p-3 sm:p-4 lg:grid-cols-[minmax(0,1fr)_25rem]">
+          <section className="rounded-lg border border-emerald-400/25 bg-slate-950/70 p-4 sm:p-5 shadow-2xl shadow-black/30">
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
                 <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
@@ -669,14 +669,14 @@ export function PlaygroundPage() {
                 return (
                   <article
                     key={moduleItem.id}
-                    className="grid gap-4 rounded-lg border border-emerald-400/20 bg-slate-900/80 p-4 sm:grid-cols-[7rem_minmax(0,1fr)]"
+                    className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 rounded-lg border border-emerald-400/20 bg-slate-900/80 p-3 sm:p-4"
                   >
                     <img
                       src={moduleItem.thumbnailUrl || "/images/logo.png"}
                       alt={`${moduleItem.name} thumbnail`}
-                      className="h-28 w-28 rounded-lg border border-emerald-400/35 bg-slate-950 object-cover"
+                      className="h-16 w-16 sm:h-28 sm:w-28 flex-shrink-0 rounded-lg border border-emerald-400/35 bg-slate-950 object-cover"
                     />
-                    <div className="min-w-0">
+                    <div className="min-w-0 w-full">
                       <div className="mb-2 flex items-start justify-between gap-3">
                         <h3 className="m-0 text-xl font-black text-white">{moduleItem.name}</h3>
                         <span className="rounded-full border border-emerald-400/20 bg-slate-950/80 px-2 py-1 font-mono text-xs font-black text-slate-300">
@@ -728,8 +728,8 @@ export function PlaygroundPage() {
             </div>
           </section>
 
-          <aside className="grid gap-4 lg:sticky lg:top-4">
-            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-5 shadow-2xl shadow-black/30">
+          <aside className="grid gap-3 sm:gap-4 lg:sticky lg:top-4">
+            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-4 sm:p-5 shadow-2xl shadow-black/30">
               <div className="mb-4 flex items-center gap-4">
                 <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-emerald-400/40 bg-slate-900">
                   {user?.photoURL ? (
@@ -757,7 +757,7 @@ export function PlaygroundPage() {
                     setAuthDialog("signin")
                     setAuthMessage("")
                   }}
-                  className="rounded bg-emerald-400 px-4 py-3 text-sm font-black text-slate-950"
+                  className="rounded bg-emerald-400 px-4 py-2 sm:py-3 text-sm font-black text-slate-950"
                 >
                   Sign in
                 </button>
@@ -768,7 +768,7 @@ export function PlaygroundPage() {
                     setAuthDialog("signup")
                     setAuthMessage("")
                   }}
-                  className="rounded border border-emerald-400/45 px-4 py-3 text-sm font-black text-emerald-100 hover:bg-emerald-400/10"
+                  className="rounded border border-emerald-400/45 px-4 py-2 sm:py-3 text-sm font-black text-emerald-100 hover:bg-emerald-400/10"
                 >
                   Sign up
                 </button>
@@ -778,7 +778,7 @@ export function PlaygroundPage() {
                     setAuthDialog("forgot")
                     setAuthMessage("")
                   }}
-                  className="rounded border border-slate-600 px-4 py-3 text-sm font-black text-white hover:bg-slate-800"
+                  className="rounded border border-slate-600 px-4 py-2 sm:py-3 text-sm font-black text-white hover:bg-slate-800"
                 >
                   Forgot password
                 </button>
@@ -800,12 +800,12 @@ export function PlaygroundPage() {
               {authMessage && <p className="mt-4 text-sm text-emerald-200">{authMessage}</p>}
             </section>
 
-            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-5 shadow-2xl shadow-black/30">
+            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-4 sm:p-5 shadow-2xl shadow-black/30">
               <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
                 Publish
               </p>
-              <h2 className="mb-4 text-3xl font-black text-white">Upload Module Zip</h2>
-              <form className="grid gap-3" onSubmit={handleUpload}>
+              <h2 className="mb-4 text-2xl sm:text-3xl font-black text-white">Upload Module Zip</h2>
+              <form className="grid gap-2 sm:gap-3" onSubmit={handleUpload}>
                 <FormInput name="name" label="Module name" placeholder="Wallet Risk Radar" required />
                 <FormTextarea name="description" label="Brief description" placeholder="What it shows and why it matters." />
                 <FormTextarea
@@ -836,7 +836,7 @@ export function PlaygroundPage() {
                 <button
                   type="submit"
                   disabled={uploadLocked}
-                  className="inline-flex items-center justify-center gap-2 rounded bg-emerald-400 px-4 py-3 font-black text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+                  className="inline-flex items-center justify-center gap-2 rounded bg-emerald-400 px-4 py-2 sm:py-3 font-black text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
                 >
                   {uploadLocked ? <Lock className="h-4 w-4" /> : <Upload className="h-4 w-4" />}
                   {uploading ? "Uploading..." : "Upload to Playground"}
@@ -980,7 +980,7 @@ function FormInput({
       <input
         name={name}
         required={required}
-        className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white outline-none focus:border-emerald-300"
+        className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-1.5 sm:py-2 text-white outline-none focus:border-emerald-300"
         placeholder={placeholder}
       />
     </label>
@@ -995,7 +995,7 @@ function FormTextarea({ name, label, placeholder }: { name: string; label: strin
         name={name}
         required
         rows={3}
-        className="resize-y rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white outline-none focus:border-emerald-300"
+        className="resize-y rounded border border-emerald-400/25 bg-slate-950 px-3 py-1.5 sm:py-2 text-white outline-none focus:border-emerald-300"
         placeholder={placeholder}
       />
     </label>
