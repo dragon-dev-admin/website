@@ -1,84 +1,68 @@
-export const WALKTHROUGH_CONTENT = `# Alpha Dragon Module Development
+export const WALKTHROUGH_CONTENT = `# Alpha Dragon Module Walkthrough
 
-Alpha Dragon modules live in \`ext-dragon/modules/\` as numbered folders. The numeric prefix controls render order in the sidepanel.
+This guide is for builders who want to use existing modules or publish their own.
 
-\`\`\`text
-modules/
-  1_token_info/
-    module.json
-    module.js
-    module.css
-    README.md
-    thumbnail.png
-  2_sniper_analysis/
-  registry.js
-\`\`\`
+## Use a Playground Module Locally
 
-\`modules/registry.js\` is generated. Do not edit it by hand.
-
-## Folder Naming
-
-Use this format:
+1. Download the extension from GitHub.
+2. Download a module zip from \`https://alpha-dragon.ai/playground\`.
+3. Unzip the package.
+4. Move the unzipped module folder into:
 
 \`\`\`text
-{sequence}_{module_name}
+ext-dragon/modules/
 \`\`\`
 
-Examples:
-
-\`\`\`text
-1_token_info
-2_sniper_analysis
-5_wallet_risk
-\`\`\`
-
-After adding, removing, or renaming a module folder, run:
+5. From \`ext-dragon\`, run:
 
 \`\`\`bash
 npm run modules:sync
 \`\`\`
 
-The sync script scans \`modules/[0-9]_*\`, sorts by folder prefix, and regenerates \`modules/registry.js\`.
+6. Open Chrome and go to \`chrome://extensions\`.
+7. Enable Developer Mode.
+8. Click \`Load unpacked\` and select the \`ext-dragon\` folder, or click reload if it is already loaded.
+9. Open the sidepanel and submit a contract address.
 
-Duplicates are allowed so a contributor can copy a module and experiment without breaking the registry. If two modules use the same \`module.json\` id, the sync script gives later copies a safe runtime id such as \`bundle_analysis__5_bundle_analysis\`.
+The module order follows the numeric folder prefix, such as \`1_token_info\`, \`2_sniper_analysis\`, and \`5_wallet_risk\`.
 
-For a real contribution, the copied module should still be renamed before publishing. Update the folder number, \`module.json\` id, \`module.json\` sequence, display name, and DOM ids inside \`module.js\`. If the copied module keeps DOM ids such as \`bundleDistChart\`, it can render but it will share IDs with the original module and will not behave as an independent feature.
+## Create a New Module
 
-## Metadata
+1. Copy one of the built-in module folders.
+2. Rename it with the next sequence number:
 
-Each module needs a \`module.json\`.
-
-\`\`\`json
-{
-  "id": "wallet_risk",
-  "sequence": 5,
-  "name": "Wallet Risk",
-  "description": "Scores risky wallet behavior from token holder data.",
-  "dataInputs": ["contractAddress", "backendReport"],
-  "dataApis": ["fetchData", "custom-rpc"],
-  "thumbnail": "thumbnail.png",
-  "css": "module.css",
-  "entry": "module.js"
-}
+\`\`\`text
+5_wallet_risk
 \`\`\`
 
-Keep \`id\` stable once published. It is used by the loader, docs, and Playground packages.
+3. Update \`module.json\`.
+4. Update \`module.js\`.
+5. Add a thumbnail image named \`thumbnail.png\`.
+6. Run:
 
-## Contributor Checklist
+\`\`\`bash
+npm run modules:sync
+\`\`\`
 
-Before opening a pull request or uploading a module package:
+7. Reload the extension and test with a contract address.
 
-- Folder uses the intended order number, such as 5_wallet_risk
-- module.json sequence matches the folder number
-- module.json id is unique for a new feature
-- module.js metadata uses the same id/name
-- HTML ids/classes inside module.js are unique to the module
-- npm run modules:sync completes
-- Chrome extension is reloaded from chrome://extensions
+Copied folders are allowed for quick experiments. The sync script will auto-alias duplicate module ids so the extension still loads.
 
-## JavaScript API
+Before publishing a real new module, rename the copied module properly:
 
-Each \`module.js\` exports metadata and lifecycle methods:
+\`\`\`text
+Change the folder number/name
+Change module.json id
+Change module.json sequence
+Change module.js metadata id/name
+Change HTML ids inside module.js
+Run npm run modules:sync
+Reload the unpacked extension
+\`\`\`
+
+If a copied module keeps the original DOM ids, it may render but it will not behave as an independent module.
+
+Minimum \`module.js\`:
 
 \`\`\`js
 export const metadata = {
@@ -86,100 +70,68 @@ export const metadata = {
   sequence: 5,
   name: 'Wallet Risk',
   description: 'Scores risky wallet behavior from token holder data.',
-  dataInputs: ['contractAddress', 'backendReport'],
-  dataApis: ['fetchData', 'custom-rpc'],
+  dataInputs: ['contractAddress'],
+  dataApis: ['fetchData'],
 };
 
-export async function mount({ root, context }) {
-  root.innerHTML = '<section class="wallet-risk">Waiting for a contract.</section>';
+export async function mount({ root }) {
+  root.innerHTML = '<section class="wallet-risk">Wallet Risk</section>';
 }
 
-export async function reset({ context }) {
-  // Clear visual state before the next contract loads.
-}
-
-export async function load({ contractAddress, context }) {
-  // Read the new contract address and refresh this module.
-}
-
-export async function destroy() {
-  // Tear down listeners, timers, observers, or charts if needed.
-}
+export async function reset() {}
+export async function load({ contractAddress }) {}
+export async function destroy() {}
 \`\`\`
 
-## Lifecycle
+## Zip and Share a Module
 
-**mount({ root, context })**
-Renders the module UI inside the provided root element.
+From inside \`ext-dragon/modules\`, zip the module folder:
 
-**reset({ context })**
-Clears stale state before a new contract loads.
-
-**load({ contractAddress, context })**
-Runs when a contract address is submitted. One module failure is isolated by the loader and does not stop other modules.
-
-**destroy()**
-Reserved for cleanup when future UI surfaces unload modules dynamically.
-
-## Context
-
-\`context\` is created by \`core/module-context.js\`. It currently provides:
-
-\`\`\`js
-context.getContractAddress();
-context.getUid();
-context.emit(eventName, payload);
-context.on(eventName, handler);
+\`\`\`bash
+zip -r wallet_risk.zip 5_wallet_risk
 \`\`\`
 
-Use events for cross-module coordination instead of reaching into another module's DOM.
-
-## Styling
-
-Each module can ship a \`module.css\`. Keep styles scoped to module classes or stable IDs inside that module.
-
-Recommended:
-
-\`\`\`css
-.wallet-risk {
-  border: 1px solid var(--panel-border);
-}
-\`\`\`
-
-Avoid global selectors such as \`button\`, \`section\`, or \`canvas\` unless the shared shell owns them.
-
-## Chart Helpers
-
-Shared helpers live in \`core/chart-helpers.js\`. Prefer shared helpers for chart teardown and repeated chart safety patterns.
-
-If a module creates its own Chart.js instance, store the instance and destroy it during \`reset()\` or \`destroy()\`.
-
-## Local Testing
-
-1. Add or edit a module folder.
-2. Run: \`npm run modules:sync\`
-3. Reload the unpacked extension from \`chrome://extensions\`.
-4. Open the sidepanel and submit a contract address.
-5. Confirm the module appears in the expected order.
-6. Temporarily move a module folder out of \`modules/\`, run the sync command, and confirm it disappears.
-7. Move it back, run the sync command again, and confirm it returns.
-
-## Safety Rules
-
-The extension must never execute remote code from the Playground. The Playground only distributes zip packages. Developers download a zip, review it locally, unzip it into \`ext-dragon/modules/\`, run \`npm run modules:sync\`, and reload the unpacked extension.
-
-Do not add external runtime scripts to a module. If a dependency is needed, vendor it into the extension or discuss it before publishing.
-
-## Built-In Modules
-
-The current built-ins are:
+Go to \`https://alpha-dragon.ai/playground\`, sign in, and upload:
 
 \`\`\`text
-1_token_info
-2_sniper_analysis
-3_holder_analysis
-4_bundle_analysis
+Module name
+Thumbnail image
+Brief description
+Setup instructions
+Data inputs
+Data API names
+Module zip
 \`\`\`
 
-These modules preserve the existing sidepanel behavior while giving contributors a clear place to work.
+Uploaded modules publish immediately as active Playground packages.
+
+## Non-Developer Flow
+
+1. Download the Chrome extension from GitHub.
+2. Download a module zip from the custom Playground.
+3. Ask a developer or technical teammate to unzip it into \`ext-dragon/modules/\`.
+4. Ask them to run \`npm run modules:sync\`.
+5. Reload the unpacked extension in Chrome.
+6. Test the module with a contract address.
+7. If you have a module idea, sign in to the Playground and upload a draft package with setup notes.
+
+## Playground Accounts
+
+Anyone can browse and vote. The Playground uses Firebase anonymous auth for public votes so one browser identity cannot vote repeatedly on the same module.
+
+Uploading requires email/password auth or Google sign-in.
+
+Root admins are created in Firebase Auth first. Then add this Firestore document:
+
+\`\`\`text
+admins/{uid}
+  role: "root"
+  createdAt: serverTimestamp()
+\`\`\`
+
+Root admins can disable, enable, mark deleted, restore, blacklist, and unblacklist uploaders from \`/playground/admin.html\`.
+
+## Important Security Rule
+
+The extension does not load or run Playground code remotely. Every module is downloaded, reviewed, copied into the local extension, synced into the generated registry, and loaded from the local unpacked extension.
 `;
