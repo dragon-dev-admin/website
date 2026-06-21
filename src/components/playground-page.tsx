@@ -537,10 +537,10 @@ export function PlaygroundPage() {
       const zip = await JSZip.loadAsync(packageFile)
       const filePaths = Object.keys(zip.files)
       const fileBaseNames = filePaths.map(p => p.split('/').pop() || '')
-      
+
       const requiredFiles = ['module.css', 'module.js', 'module.json', 'README.md', 'thumbnail.png']
       const missingFiles = requiredFiles.filter(req => !fileBaseNames.includes(req))
-      
+
       if (missingFiles.length > 0) {
         setUploadMessage(`Validation failed. Missing mandatory files: ${missingFiles.join(', ')}`)
         setUploading(false)
@@ -685,225 +685,225 @@ export function PlaygroundPage() {
           <div className="mx-auto grid w-full max-w-[90rem] gap-5 px-5 py-6 sm:gap-6 sm:px-6 lg:grid-cols-[minmax(0,1fr)_25rem] lg:p-8">
             <section className="rounded-lg border border-emerald-400/25 bg-slate-950/70 p-4 sm:p-5 shadow-2xl shadow-black/30 overflow-hidden">
               <div className="mb-5 flex items-end justify-between gap-4">
-              <div>
-                <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
-                  Catalog
-                </p>
-                <h2 className="m-0 text-3xl font-black text-white">Available Modules</h2>
-              </div>
-              <span className="font-mono text-sm font-bold text-slate-300">
-                {sortedModules.length} module{sortedModules.length === 1 ? "" : "s"}
-              </span>
-            </div>
-
-            <div className="grid gap-4 xl:grid-cols-2">
-              {sortedModules.map((moduleItem) => {
-                const voteValue = votes.get(moduleItem.id) || 0
-                return (
-                  <article
-                    key={moduleItem.id}
-                    className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 rounded-lg border border-emerald-400/20 bg-slate-900/80 p-3 sm:p-4"
-                  >
-                    <img
-                      src={moduleItem.thumbnailUrl || "/images/logo.png"}
-                      alt={`${moduleItem.name} thumbnail`}
-                      className="h-16 w-16 sm:h-28 sm:w-28 flex-shrink-0 rounded-lg border border-emerald-400/35 bg-slate-950 object-cover"
-                    />
-                    <div className="min-w-0 w-full">
-                      <div className="mb-2 flex items-start justify-between gap-3">
-                        <h3 className="m-0 text-xl font-black text-white">{moduleItem.name}</h3>
-                        <span className="rounded-full border border-emerald-400/20 bg-slate-950/80 px-2 py-1 font-mono text-xs font-black text-slate-300">
-                          #{moduleItem.sequence || "-"}
-                        </span>
-                      </div>
-                      <p className="mb-4 text-sm leading-6 text-slate-300">{moduleItem.description}</p>
-                      <TagGroup label="Inputs" tags={moduleItem.dataInputs} />
-                      <TagGroup label="APIs" tags={moduleItem.dataApis} />
-                      <p className="mt-3 text-xs text-slate-400">
-                        Published by {moduleItem.uploaderEmail ? maskEmail(moduleItem.uploaderEmail) : "community"}
-                        {moduleItem.isDefault ? " - core module" : ""}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        <a
-                          href={moduleItem.packageUrl || "#"}
-                          className="inline-flex items-center gap-2 rounded bg-emerald-400 px-3 py-2 text-sm font-black text-slate-950 no-underline hover:bg-emerald-300"
-                        >
-                          <Download className="h-4 w-4" />
-                          Download zip
-                        </a>
-                        <button
-                          type="button"
-                          onClick={() => void handleVote(moduleItem.id, 1)}
-                          className={`inline-flex items-center gap-2 rounded border px-3 py-2 text-sm font-black ${voteValue === 1
-                            ? "border-emerald-300 bg-emerald-400/20 text-emerald-100"
-                            : "border-slate-600 bg-slate-800 text-white"
-                            }`}
-                        >
-                          <ThumbsUp className="h-4 w-4" />
-                          Upvote {moduleItem.upvotes || 0}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => void handleVote(moduleItem.id, -1)}
-                          className={`inline-flex items-center gap-2 rounded border px-3 py-2 text-sm font-black ${voteValue === -1
-                            ? "border-pink-300 bg-pink-500/20 text-pink-100"
-                            : "border-slate-600 bg-slate-800 text-white"
-                            }`}
-                        >
-                          <ThumbsDown className="h-4 w-4" />
-                          Downvote {moduleItem.downvotes || 0}
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                )
-              })}
-            </div>
-          </section>
-
-          <aside className="grid gap-3 sm:gap-4 lg:sticky lg:top-4">
-            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-4 sm:p-5 shadow-2xl shadow-black/30">
-              <div className="mb-4 flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-emerald-400/40 bg-slate-900">
-                  {user?.photoURL ? (
-                    <img src={user.photoURL} alt="" className="h-full w-full object-cover" />
-                  ) : (
-                    <UserRound className="h-8 w-8 text-emerald-300" />
-                  )}
-                </div>
                 <div>
-                  <p className="mb-1 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
-                    Account
+                  <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
+                    Playground
                   </p>
-                  <h2 className="m-0 text-2xl font-black text-white">
-                    {realUser ? "Signed In" : "Upload Access"}
-                  </h2>
+                  <h2 className="m-0 text-3xl font-black text-white">Available Modules</h2>
                 </div>
+                <span className="font-mono text-sm font-bold text-slate-300">
+                  {sortedModules.length} module{sortedModules.length === 1 ? "" : "s"}
+                </span>
               </div>
-              <p className="mb-4 text-sm leading-6 text-slate-300">{authSummary}</p>
 
-              <div className="grid gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signin")
-                    setAuthDialog("signin")
-                    setAuthMessage("")
-                  }}
-                  className="rounded bg-emerald-400 px-4 py-2 sm:py-3 text-sm font-black text-slate-950"
-                >
-                  Sign in
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signup")
-                    setAuthDialog("signup")
-                    setAuthMessage("")
-                  }}
-                  className="rounded border border-emerald-400/45 px-4 py-2 sm:py-3 text-sm font-black text-emerald-100 hover:bg-emerald-400/10"
-                >
-                  Sign up
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthDialog("forgot")
-                    setAuthMessage("")
-                  }}
-                  className="rounded border border-slate-600 px-4 py-2 sm:py-3 text-sm font-black text-white hover:bg-slate-800"
-                >
-                  Forgot password
-                </button>
-                {realUser && (
+              <div className="grid gap-4 xl:grid-cols-2">
+                {sortedModules.map((moduleItem) => {
+                  const voteValue = votes.get(moduleItem.id) || 0
+                  return (
+                    <article
+                      key={moduleItem.id}
+                      className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 rounded-lg border border-emerald-400/20 bg-slate-900/80 p-3 sm:p-4"
+                    >
+                      <img
+                        src={moduleItem.thumbnailUrl || "/images/logo.png"}
+                        alt={`${moduleItem.name} thumbnail`}
+                        className="h-16 w-16 sm:h-28 sm:w-28 flex-shrink-0 rounded-lg border border-emerald-400/35 bg-slate-950 object-cover"
+                      />
+                      <div className="min-w-0 w-full">
+                        <div className="mb-2 flex items-start justify-between gap-3">
+                          <h3 className="m-0 text-xl font-black text-white">{moduleItem.name}</h3>
+                          <span className="rounded-full border border-emerald-400/20 bg-slate-950/80 px-2 py-1 font-mono text-xs font-black text-slate-300">
+                            #{moduleItem.sequence || "-"}
+                          </span>
+                        </div>
+                        <p className="mb-4 text-sm leading-6 text-slate-300">{moduleItem.description}</p>
+                        <TagGroup label="Inputs" tags={moduleItem.dataInputs} />
+                        <TagGroup label="APIs" tags={moduleItem.dataApis} />
+                        <p className="mt-3 text-xs text-slate-400">
+                          Published by {moduleItem.uploaderEmail ? maskEmail(moduleItem.uploaderEmail) : "community"}
+                          {moduleItem.isDefault ? " - core module" : ""}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          <a
+                            href={moduleItem.packageUrl || "#"}
+                            className="inline-flex items-center gap-2 rounded bg-emerald-400 px-3 py-2 text-sm font-black text-slate-950 no-underline hover:bg-emerald-300"
+                          >
+                            <Download className="h-4 w-4" />
+                            Download zip
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => void handleVote(moduleItem.id, 1)}
+                            className={`inline-flex items-center gap-2 rounded border px-3 py-2 text-sm font-black ${voteValue === 1
+                              ? "border-emerald-300 bg-emerald-400/20 text-emerald-100"
+                              : "border-slate-600 bg-slate-800 text-white"
+                              }`}
+                          >
+                            <ThumbsUp className="h-4 w-4" />
+                            Upvote {moduleItem.upvotes || 0}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => void handleVote(moduleItem.id, -1)}
+                            className={`inline-flex items-center gap-2 rounded border px-3 py-2 text-sm font-black ${voteValue === -1
+                              ? "border-pink-300 bg-pink-500/20 text-pink-100"
+                              : "border-slate-600 bg-slate-800 text-white"
+                              }`}
+                          >
+                            <ThumbsDown className="h-4 w-4" />
+                            Downvote {moduleItem.downvotes || 0}
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  )
+                })}
+              </div>
+            </section>
+
+            <aside className="grid gap-3 sm:gap-4 lg:sticky lg:top-4">
+              <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-4 sm:p-5 shadow-2xl shadow-black/30">
+                <div className="mb-4 flex items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-emerald-400/40 bg-slate-900">
+                    {user?.photoURL ? (
+                      <img src={user.photoURL} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <UserRound className="h-8 w-8 text-emerald-300" />
+                    )}
+                  </div>
+                  <div>
+                    <p className="mb-1 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
+                      Account
+                    </p>
+                    <h2 className="m-0 text-2xl font-black text-white">
+                      {realUser ? "Signed In" : "Upload Access"}
+                    </h2>
+                  </div>
+                </div>
+                <p className="mb-4 text-sm leading-6 text-slate-300">{authSummary}</p>
+
+                <div className="grid gap-2">
                   <button
                     type="button"
                     onClick={() => {
-                      const firebase = firebaseRef.current
-                      if (firebase) void signOut(firebase.auth)
+                      setAuthMode("signin")
+                      setAuthDialog("signin")
+                      setAuthMessage("")
                     }}
-                    className="inline-flex items-center justify-center gap-2 rounded border border-slate-600 px-4 py-3 text-sm font-black text-white hover:bg-slate-800"
+                    className="rounded bg-emerald-400 px-4 py-2 sm:py-3 text-sm font-black text-slate-950"
                   >
-                    <LogOut className="h-4 w-4" />
-                    Sign out
+                    Sign in
                   </button>
-                )}
-              </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode("signup")
+                      setAuthDialog("signup")
+                      setAuthMessage("")
+                    }}
+                    className="rounded border border-emerald-400/45 px-4 py-2 sm:py-3 text-sm font-black text-emerald-100 hover:bg-emerald-400/10"
+                  >
+                    Sign up
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthDialog("forgot")
+                      setAuthMessage("")
+                    }}
+                    className="rounded border border-slate-600 px-4 py-2 sm:py-3 text-sm font-black text-white hover:bg-slate-800"
+                  >
+                    Forgot password
+                  </button>
+                  {realUser && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const firebase = firebaseRef.current
+                        if (firebase) void signOut(firebase.auth)
+                      }}
+                      className="inline-flex items-center justify-center gap-2 rounded border border-slate-600 px-4 py-3 text-sm font-black text-white hover:bg-slate-800"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign out
+                    </button>
+                  )}
+                </div>
 
-              {authMessage && <p className="mt-4 text-sm text-emerald-200">{authMessage}</p>}
-            </section>
+                {authMessage && <p className="mt-4 text-sm text-emerald-200">{authMessage}</p>}
+              </section>
 
-            <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-4 sm:p-5 shadow-2xl shadow-black/30">
-              <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
-                Publish
-              </p>
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-2xl sm:text-3xl font-black text-white">Upload Module Zip</h2>
-                <button
-                  type="button"
-                  onClick={() => setWalkthroughOpen(true)}
-                  className="group relative flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1.5 text-xs font-black text-emerald-300 transition-all hover:border-emerald-300 hover:bg-emerald-400/20 hover:text-emerald-100 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)]"
-                  title="View Module Development Walkthrough"
-                >
-                  <BookOpen className="h-4 w-4 transition-transform group-hover:scale-110" />
-                  Walkthrough
-                </button>
-              </div>
-              <form className="grid gap-2 sm:gap-3" onSubmit={handleUpload}>
-                <FormInput name="name" label="Module name" placeholder="Wallet Risk Radar" required maxLength={50} />
-                <FormTextarea name="description" label="Brief description" placeholder="What it shows and why it matters." maxLength={200} />
-                <FormTextarea
-                  name="setupInstructions"
-                  label="Setup instructions"
-                  placeholder="How to install, configure APIs, and test locally."
-                  maxLength={1000}
-                />
-                <FormInput name="dataInputs" label="Data inputs" placeholder="contractAddress, backendReport" maxLength={100} />
-                <FormInput name="dataApis" label="Data APIs" placeholder="fetchData, custom-rpc" maxLength={100} />
-                <label className="grid gap-1 text-sm font-bold text-slate-300">
-                  <div className="flex items-center gap-2">
-                    Thumbnail image
-                    <span className="text-[0.65rem] font-medium tracking-wide text-slate-400">(Recommended: 16:9 ratio, max 2MB)</span>
-                  </div>
-                  <input
-                    name="thumbnail"
-                    type="file"
-                    accept="image/png,image/jpeg,image/webp"
-                    className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white"
+              <section className="rounded-lg border border-emerald-400/25 bg-slate-950/80 p-4 sm:p-5 shadow-2xl shadow-black/30">
+                <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
+                  Publish
+                </p>
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 className="text-2xl sm:text-3xl font-black text-white">Upload Module Zip</h2>
+                  <button
+                    type="button"
+                    onClick={() => setWalkthroughOpen(true)}
+                    className="group relative flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1.5 text-xs font-black text-emerald-300 transition-all hover:border-emerald-300 hover:bg-emerald-400/20 hover:text-emerald-100 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)]"
+                    title="View Module Development Walkthrough"
+                  >
+                    <BookOpen className="h-4 w-4 transition-transform group-hover:scale-110" />
+                    Walkthrough
+                  </button>
+                </div>
+                <form className="grid gap-2 sm:gap-3" onSubmit={handleUpload}>
+                  <FormInput name="name" label="Module name" placeholder="Wallet Risk Radar" required maxLength={50} />
+                  <FormTextarea name="description" label="Brief description" placeholder="What it shows and why it matters." maxLength={200} />
+                  <FormTextarea
+                    name="setupInstructions"
+                    label="Setup instructions"
+                    placeholder="How to install, configure APIs, and test locally."
+                    maxLength={1000}
                   />
-                </label>
-                <label className="grid gap-1 text-sm font-bold text-slate-300">
-                  Module zip package
-                  <input
-                    name="package"
-                    type="file"
-                    accept=".zip,application/zip,application/x-zip-compressed"
-                    className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white"
-                  />
-                </label>
-                <label className="flex items-start gap-3 rounded border border-emerald-400/20 bg-slate-900/70 p-3 text-xs leading-5 text-slate-300">
-                  <input
-                    name="rightsConfirmed"
-                    type="checkbox"
-                    required
-                    className="mt-1 h-4 w-4 rounded border-emerald-400/40 bg-slate-950 accent-emerald-400"
-                  />
-                  <span>
-                    I confirm I have rights to share this module package and have disclosed any third-party libraries, APIs, backend services, data collection, permissions, or reuse terms that affect installation or use.
-                  </span>
-                </label>
-                <button
-                  type="submit"
-                  disabled={uploadLocked}
-                  className="inline-flex items-center justify-center gap-2 rounded bg-emerald-400 px-4 py-2 sm:py-3 font-black text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
-                >
-                  {uploadLocked ? <Lock className="h-4 w-4" /> : <Upload className="h-4 w-4" />}
-                  {uploading ? "Uploading..." : "Upload to Playground"}
-                </button>
-              </form>
-              {uploadMessage && <p className="mt-4 text-sm text-emerald-200">{uploadMessage}</p>}
-            </section>
-          </aside>
+                  <FormInput name="dataInputs" label="Data inputs" placeholder="contractAddress, backendReport" maxLength={100} />
+                  <FormInput name="dataApis" label="Data APIs" placeholder="fetchData, custom-rpc" maxLength={100} />
+                  <label className="grid gap-1 text-sm font-bold text-slate-300">
+                    <div className="flex items-center gap-2">
+                      Thumbnail image
+                      <span className="text-[0.65rem] font-medium tracking-wide text-slate-400">(Recommended: 16:9 ratio, max 2MB)</span>
+                    </div>
+                    <input
+                      name="thumbnail"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white"
+                    />
+                  </label>
+                  <label className="grid gap-1 text-sm font-bold text-slate-300">
+                    Module zip package
+                    <input
+                      name="package"
+                      type="file"
+                      accept=".zip,application/zip,application/x-zip-compressed"
+                      className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white"
+                    />
+                  </label>
+                  <label className="flex items-start gap-3 rounded border border-emerald-400/20 bg-slate-900/70 p-3 text-xs leading-5 text-slate-300">
+                    <input
+                      name="rightsConfirmed"
+                      type="checkbox"
+                      required
+                      className="mt-1 h-4 w-4 rounded border-emerald-400/40 bg-slate-950 accent-emerald-400"
+                    />
+                    <span>
+                      I confirm I have rights to share this module package and have disclosed any third-party libraries, APIs, backend services, data collection, permissions, or reuse terms that affect installation or use.
+                    </span>
+                  </label>
+                  <button
+                    type="submit"
+                    disabled={uploadLocked}
+                    className="inline-flex items-center justify-center gap-2 rounded bg-emerald-400 px-4 py-2 sm:py-3 font-black text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+                  >
+                    {uploadLocked ? <Lock className="h-4 w-4" /> : <Upload className="h-4 w-4" />}
+                    {uploading ? "Uploading..." : "Upload to Playground"}
+                  </button>
+                </form>
+                {uploadMessage && <p className="mt-4 text-sm text-emerald-200">{uploadMessage}</p>}
+              </section>
+            </aside>
           </div>
         </section>
       </main>
@@ -1028,13 +1028,13 @@ export function PlaygroundPage() {
                 Close
               </button>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto px-6 py-6 text-sm leading-relaxed text-slate-300">
               <div className="prose prose-invert prose-emerald max-w-none">
                 <WalkthroughContent />
               </div>
             </div>
-            
+
             <div className="flex-shrink-0 border-t border-emerald-400/20 bg-slate-900/50 px-6 py-4 text-center">
               <button
                 type="button"

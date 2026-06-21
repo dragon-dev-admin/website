@@ -32,7 +32,7 @@ const SOCIAL_LINKS = [
     imageSrc: "/images/email.svg",
     ringClass: "border-slate-400/80 shadow-slate-500/40",
     bgClass: "bg-slate-600",
-    external: false,
+    external: true,
   },
   {
     id: "twitter",
