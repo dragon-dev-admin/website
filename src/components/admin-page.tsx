@@ -266,7 +266,7 @@ export function AdminPage() {
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Modules List */}
             <section>
-              <h2 className="text-2xl font-black mb-6 text-emerald-50">Catalog Modules</h2>
+              <h2 className="text-2xl font-black mb-6 text-emerald-50">Playground Modules</h2>
               <div className="flex flex-col gap-4">
                 {modules.filter(m => m.status !== 'deleted').length === 0 && (
                   <p className="text-slate-500 italic">No visible modules.</p>
