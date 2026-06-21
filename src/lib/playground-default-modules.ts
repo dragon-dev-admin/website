@@ -48,7 +48,7 @@ export const defaultPlaygroundModules: PlaygroundModule[] = [
       "Unzip 2_sniper_analysis into ext-dragon/modules, run npm run modules:sync, and reload the unpacked extension.",
     dataInputs: ["contractAddress", "backendReport"],
     dataApis: ["fetchData"],
-    thumbnailUrl: "/playground/thumbnails/2_sniper_analysis.png",
+    thumbnailUrl: "/playground/thumbnails/1_token_info.png",
     packageUrl: "/playground/default-packages/2_sniper_analysis.zip",
     uploaderEmail: "Alpha Dragon core",
     status: "active",
