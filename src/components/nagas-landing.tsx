@@ -980,21 +980,15 @@ export function NagasLanding() {
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.18em] text-emerald-400">
-              Transparency
+              Project Official
             </p>
             <h2 className="mb-4 text-2xl font-black sm:text-3xl">Onchain addresses will be published after launch.</h2>
-            <p className={`text-sm leading-6 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-              The project will publish the token contract, Clanker pool, creator-fee Safe, vault-recipient Safe, vault schedule, and relevant admin addresses in one public Start Here page. Until then, Safe and vault mechanics are intended launch design, not completed onchain verification.
-            </p>
           </div>
           <div className="grid gap-3">
             {[
-              ["Token contract", "TBD"],
-              ["Clanker pool", "TBD"],
-              ["Creator-fee Safe", "TBD"],
-              ["Vault-recipient Safe", "TBD"],
-              ["Vault schedule", "TBD"],
-              ["Admin addresses", "TBD"],
+              ["Project token on Base", "TBD"],
+              ["Safe for token vault", "TBD"],
+              ["Safe for project fees", "TBD"],
             ].map(([label, value]) => (
               <div
                 key={label}
@@ -1008,9 +1002,6 @@ export function NagasLanding() {
                 <code className="font-mono font-black text-emerald-400">{value}</code>
               </div>
             ))}
-            <p className={`pt-2 text-xs leading-5 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-              During founder stewardship, new Safe stewards may be proposed by the community and added by a Safe transaction after public, time-bounded support from wallets representing at least 5% of circulating, non-vault $Alpha supply, provided support is not dominated by a single wallet.
-            </p>
           </div>
         </div>
       </section>
