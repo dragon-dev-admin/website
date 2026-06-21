@@ -338,7 +338,7 @@ export function PlaygroundPage() {
     // Play the voice when playground page is mounted
     try {
       setIsSpeaking(true)
-      speakNagaMessage("The developer modules are boring, lets create our own Dragon")
+      speakNagaMessage("The prototype modules are just the beginning. Time to create your own Dragon.")
       setTimeout(() => setIsSpeaking(false), 4500)
     } catch (error) {
       console.warn("[Alpha Dragon] Could not play playground voice", error)
