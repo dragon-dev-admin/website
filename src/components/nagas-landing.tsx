@@ -971,6 +971,51 @@ export function NagasLanding() {
         />
       </div>
 
+      <section
+        className={`relative z-10 border-t px-4 py-10 sm:px-6 lg:px-8 ${
+          isDark
+            ? "border-emerald-400/20 bg-slate-950/80 text-emerald-50"
+            : "border-emerald-900/10 bg-emerald-50/70 text-slate-950"
+        }`}
+      >
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.15fr]">
+          <div>
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.18em] text-emerald-400">
+              Transparency
+            </p>
+            <h2 className="mb-4 text-2xl font-black sm:text-3xl">Onchain addresses will be published after launch.</h2>
+            <p className={`text-sm leading-6 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+              The project will publish the token contract, Clanker pool, creator-fee Safe, vault-recipient Safe, vault schedule, and relevant admin addresses in one public Start Here page. Until then, Safe and vault mechanics are intended launch design, not completed onchain verification.
+            </p>
+          </div>
+          <div className="grid gap-3">
+            {[
+              ["Token contract", "TBD"],
+              ["Clanker pool", "TBD"],
+              ["Creator-fee Safe", "TBD"],
+              ["Vault-recipient Safe", "TBD"],
+              ["Vault schedule", "TBD"],
+              ["Admin addresses", "TBD"],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className={`flex items-center justify-between gap-4 rounded border px-4 py-3 text-sm ${
+                  isDark
+                    ? "border-emerald-400/20 bg-slate-900/80"
+                    : "border-emerald-900/10 bg-white/80"
+                }`}
+              >
+                <span className={isDark ? "text-slate-300" : "text-slate-700"}>{label}</span>
+                <code className="font-mono font-black text-emerald-400">{value}</code>
+              </div>
+            ))}
+            <p className={`pt-2 text-xs leading-5 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              During founder stewardship, new Safe stewards may be proposed by the community and added by a Safe transaction after public, time-bounded support from wallets representing at least 5% of circulating, non-vault $Alpha supply, provided support is not dominated by a single wallet.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {playgroundTransition && (
         <div className="pointer-events-none fixed inset-0 z-[8] overflow-hidden bg-slate-950/20 backdrop-blur-[2px]">
           <div className="animate-playground-portal-wash absolute inset-x-0 bottom-0 h-[48vh] bg-gradient-to-t from-emerald-950/75 via-slate-950/45 to-transparent" />

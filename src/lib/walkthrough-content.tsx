@@ -108,9 +108,10 @@ Brief description
 Setup instructions
 Data inputs
 Data API names
-Module zip`}</code>
+Module zip
+Rights-to-share confirmation`}</code>
         </pre>
-        <p className="mt-4 text-emerald-300">Uploaded modules publish immediately as active Playground packages.</p>
+        <p className="mt-4 text-emerald-300">Before uploading, confirm you have rights to share the package and that setup notes disclose third-party services, APIs, data collection, permissions, or reuse terms.</p>
       </div>
 
       <div className="w-full h-px bg-emerald-400/20" />

@@ -515,9 +515,15 @@ export function PlaygroundPage() {
     const dataApis = parseTags(form.get("dataApis"))
     const thumbnailFile = form.get("thumbnail") as File | null
     const packageFile = form.get("package") as File | null
+    const rightsConfirmed = form.get("rightsConfirmed") === "on"
 
     if (!name || !description || !setupInstructions || !thumbnailFile?.size || !packageFile?.size) {
       setUploadMessage("Complete the module fields, thumbnail, and zip package.")
+      return
+    }
+
+    if (!rightsConfirmed) {
+      setUploadMessage("Confirm that you have rights to share this module and disclosed required services or data terms.")
       return
     }
 
@@ -563,6 +569,7 @@ export function PlaygroundPage() {
         packageUrl,
         uploaderUid: user.uid,
         uploaderEmail: user.email || "",
+        moduleAuthorRightsConfirmed: true,
         status: "active",
         upvotes: 0,
         downvotes: 0,
@@ -873,6 +880,17 @@ export function PlaygroundPage() {
                     accept=".zip,application/zip,application/x-zip-compressed"
                     className="rounded border border-emerald-400/25 bg-slate-950 px-3 py-2 text-white"
                   />
+                </label>
+                <label className="flex items-start gap-3 rounded border border-emerald-400/20 bg-slate-900/70 p-3 text-xs leading-5 text-slate-300">
+                  <input
+                    name="rightsConfirmed"
+                    type="checkbox"
+                    required
+                    className="mt-1 h-4 w-4 rounded border-emerald-400/40 bg-slate-950 accent-emerald-400"
+                  />
+                  <span>
+                    I confirm I have rights to share this module package and have disclosed any third-party libraries, APIs, backend services, data collection, permissions, or reuse terms that affect installation or use.
+                  </span>
                 </label>
                 <button
                   type="submit"

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$Alpha Dragon Playground</title>
+  <link rel="icon" href="../icon-128.png" type="image/png" />
+  <link rel="stylesheet" href="./playground.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Alpha Dragon home">
+      <img src="../icon-128.png" alt="" />
+      <span>$Alpha Dragon</span>
+    </a>
+    <nav class="topnav" aria-label="Playground navigation">
+      <a href="../contribute.html">Contribute</a>
+      <a href="./admin.html">Admin</a>
+      <a href="https://github.com/alpha-dragon-org" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero-panel">
+      <div>
+        <p class="eyebrow">Module Playground</p>
+        <h1>Download, test, and share Alpha Dragon modules.</h1>
+        <p class="hero-copy">
+          Browse community module packages, vote on useful ideas, and publish your own zip package.
+        </p>
+      </div>
+      <div class="status-card" id="firebaseStatus" role="status">
+        Checking Firebase configuration...
+      </div>
+    </section>
+
+    <section class="layout-grid">
+      <div class="catalog-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Catalog</p>
+            <h2>Available Modules</h2>
+          </div>
+          <div class="catalog-count" id="moduleCount">0 modules</div>
+        </div>
+        <div id="moduleGrid" class="module-grid" aria-live="polite"></div>
+      </div>
+
+      <aside class="side-stack">
+        <section class="auth-panel">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Account</p>
+              <h2>Upload Access</h2>
+            </div>
+          </div>
+          <p class="muted" id="authSummary">Anonymous users can browse and vote. Sign in to upload.</p>
+
+          <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+            <button class="tab-button is-active" data-auth-mode="signin" type="button">Sign in</button>
+            <button class="tab-button" data-auth-mode="signup" type="button">Sign up</button>
+          </div>
+
+          <form id="authForm" class="form-stack">
+            <label>
+              Email
+              <input id="authEmail" type="email" autocomplete="email" placeholder="builder@example.com" />
+            </label>
+            <label>
+              Password
+              <input id="authPassword" type="password" autocomplete="current-password" placeholder="Minimum 6 characters" />
+            </label>
+            <div class="button-row">
+              <button id="authSubmit" class="primary-button" type="submit">Sign in</button>
+              <button id="forgotPasswordButton" class="ghost-button" type="button">Forgot password</button>
+            </div>
+          </form>
+
+          <div class="button-row">
+            <button id="googleButton" class="secondary-button" type="button">Sign in with Google</button>
+            <button id="signOutButton" class="ghost-button" type="button" hidden>Sign out</button>
+          </div>
+          <p class="form-message" id="authMessage"></p>
+        </section>
+
+        <section class="upload-panel">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Publish</p>
+              <h2>Upload Module Zip</h2>
+            </div>
+          </div>
+          <form id="uploadForm" class="form-stack">
+            <label>
+              Module name
+              <input id="moduleName" type="text" placeholder="Wallet Risk Radar" required />
+            </label>
+            <label>
+              Brief description
+              <textarea id="moduleDescription" rows="3" placeholder="What it shows and why it matters." required></textarea>
+            </label>
+            <label>
+              Setup instructions
+              <textarea id="setupInstructions" rows="4" placeholder="How to install, configure APIs, and test locally." required></textarea>
+            </label>
+            <label>
+              Data inputs
+              <input id="dataInputs" type="text" placeholder="contractAddress, backendReport" />
+            </label>
+            <label>
+              Data APIs
+              <input id="dataApis" type="text" placeholder="fetchData, custom-rpc" />
+            </label>
+            <label>
+              Thumbnail image
+              <input id="thumbnailFile" type="file" accept="image/png,image/jpeg,image/webp" required />
+            </label>
+            <label>
+              Module zip package
+              <input id="packageFile" type="file" accept=".zip,application/zip,application/x-zip-compressed" required />
+            </label>
+            <label>
+              <input id="rightsConfirmed" type="checkbox" required />
+              I confirm I have rights to share this module package and have disclosed any third-party libraries, APIs, backend services, data collection, permissions, or reuse terms that affect installation or use.
+            </label>
+            <button class="primary-button full-width" id="uploadButton" type="submit" disabled>Upload to Playground</button>
+          </form>
+          <p class="form-message" id="uploadMessage"></p>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <template id="moduleCardTemplate">
+    <article class="module-card">
+      <div class="module-thumb-wrap">
+        <img class="module-thumb" alt="" />
+      </div>
+      <div class="module-body">
+        <div class="module-title-row">
+          <h3></h3>
+          <span class="sequence-pill"></span>
+        </div>
+        <p class="module-description"></p>
+        <div class="tag-group inputs"></div>
+        <div class="tag-group apis"></div>
+        <div class="module-meta"></div>
+        <div class="module-actions">
+          <a class="download-link" target="_blank" rel="noopener noreferrer">Download zip</a>
+          <button class="vote-button" data-vote="1" type="button">Upvote <span></span></button>
+          <button class="vote-button" data-vote="-1" type="button">Downvote <span></span></button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="./playground.js"></script>
+</body>
+</html>
