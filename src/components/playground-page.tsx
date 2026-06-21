@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { BookOpen, Download, Lock, LogOut, Mail, ThumbsDown, ThumbsUp, Upload, UserRound } from "lucide-react"
+import { BookOpen, Download, Github, Lock, LogOut, Mail, ThumbsDown, ThumbsUp, Upload, UserRound } from "lucide-react"
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react"
 import JSZip from "jszip"
 import { defaultPlaygroundModules, type PlaygroundModule } from "@/lib/playground-default-modules"
@@ -664,7 +664,7 @@ export function PlaygroundPage() {
             <div className="flex w-full flex-1 items-center justify-center md:pr-12 lg:pr-24">
               <div className="z-20 max-w-[42rem]">
                 <h1 className="mb-6 font-sans text-4xl font-black leading-[1.15] tracking-tight text-white md:text-5xl lg:text-5xl">
-                  Download, test, and share <br /> Alpha Dragon modules.
+                  Download, test, and share <br /> new Dragon modules.
                 </h1>
                 <p className="mb-8 max-w-md text-base leading-relaxed text-slate-300 md:text-lg">
                   Browse community module packages, vote on useful ideas, and publish your own zip package.
@@ -689,7 +689,7 @@ export function PlaygroundPage() {
                   <p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
                     Playground
                   </p>
-                  <h2 className="m-0 text-3xl font-black text-white">Available Modules</h2>
+                  <h2 className="m-0 text-3xl font-black text-white">Community Modules</h2>
                 </div>
                 <span className="font-mono text-sm font-bold text-slate-300">
                   {sortedModules.length} module{sortedModules.length === 1 ? "" : "s"}
@@ -839,18 +839,30 @@ export function PlaygroundPage() {
                 </p>
                 <div className="mb-4 flex items-center justify-between">
                   <h2 className="text-2xl sm:text-3xl font-black text-white">Upload Module Zip</h2>
-                  <button
-                    type="button"
-                    onClick={() => setWalkthroughOpen(true)}
-                    className="group relative flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1.5 text-xs font-black text-emerald-300 transition-all hover:border-emerald-300 hover:bg-emerald-400/20 hover:text-emerald-100 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)]"
-                    title="View Module Development Walkthrough"
-                  >
-                    <BookOpen className="h-4 w-4 transition-transform group-hover:scale-110" />
-                    Walkthrough
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="https://github.com/alpha-dragon-org/chrome-extension"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1.5 text-xs font-black text-emerald-300 transition-all hover:border-emerald-300 hover:bg-emerald-400/20 hover:text-emerald-100 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)]"
+                      title="View GitHub Repository"
+                    >
+                      <Github className="h-4 w-4 transition-transform group-hover:scale-110" />
+                      GitHub
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setWalkthroughOpen(true)}
+                      className="group relative flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1.5 text-xs font-black text-emerald-300 transition-all hover:border-emerald-300 hover:bg-emerald-400/20 hover:text-emerald-100 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)]"
+                      title="View Module Development Walkthrough"
+                    >
+                      <BookOpen className="h-4 w-4 transition-transform group-hover:scale-110" />
+                      Walkthrough
+                    </button>
+                  </div>
                 </div>
                 <form className="grid gap-2 sm:gap-3" onSubmit={handleUpload}>
-                  <FormInput name="name" label="Module name" placeholder="Wallet Risk Radar" required maxLength={50} />
+                  <FormInput name="name" label="Module name" placeholder="Ex. Ticker NiceScore" required maxLength={50} />
                   <FormTextarea name="description" label="Brief description" placeholder="What it shows and why it matters." maxLength={200} />
                   <FormTextarea
                     name="setupInstructions"
@@ -858,7 +870,7 @@ export function PlaygroundPage() {
                     placeholder="How to install, configure APIs, and test locally."
                     maxLength={1000}
                   />
-                  <FormInput name="dataInputs" label="Data inputs" placeholder="contractAddress, backendReport" maxLength={100} />
+                  <FormInput name="dataInputs" label="Data inputs" placeholder="Ex. contractAddress, backendReport" maxLength={100} />
                   <FormInput name="dataApis" label="Data APIs" placeholder="fetchData, custom-rpc" maxLength={100} />
                   <label className="grid gap-1 text-sm font-bold text-slate-300">
                     <div className="flex items-center gap-2">
