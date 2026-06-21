@@ -85,7 +85,7 @@ export const defaultPlaygroundModules: PlaygroundModule[] = [
       "Unzip 4_bundle_analysis into ext-dragon/modules, run npm run modules:sync, and reload the unpacked extension.",
     dataInputs: ["contractAddress", "backendReport"],
     dataApis: ["fetchData"],
-    thumbnailUrl: "/playground/thumbnails/4_bundle_analysis.png",
+    thumbnailUrl: "/playground/thumbnails/1_token_info.png",
     packageUrl: "/playground/default-packages/4_bundle_analysis.zip",
     uploaderEmail: "Alpha Dragon core",
     status: "active",
