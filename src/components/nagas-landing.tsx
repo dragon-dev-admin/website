@@ -65,18 +65,17 @@ const HERO_SOCIAL_CLASSES = {
 
 /** Safe tips for Naga speech bubble — educational, non-specific. */
 const NAGA_SAFE_TIPS = [
-  "Transparency beats hype. Verify mint, freeze, and liquidity before you trust a chart.",
-  "Holder clusters can reveal coordination — look beyond the headline market cap.",
+  "Legitimacy beats hype. Verify the mint ability, freeze authority, and liquidity security before you trust a project.",
+  "Holder clusters can reveal deceptive coordination. Look beyond the surface wallet addresses.",
   "Top-10 concentration matters. Heavy bags in few wallets can mean fragile exits.",
-  "Early sniper and bundle patterns tell a story — numbers age, habits do not.",
-  "DYOR: use multiple sources. No single dashboard is the full picture.",
-  "Locked liquidity is a signal, not a guarantee. Read the details every time.",
-  "Community tools help you see structure — they do not replace your judgment.",
-  "Alpha is often in distribution: who holds, who funded, who sold.",
-  "Fast moves are exciting; slow research is what keeps you in the game.",
+  "Early snipers and bundlers tell a story because numbers age, habits do not.",
+  "DYOR: use multiple sources. No single token analysis is the full picture.",
+  "Locked liquidity is a signal, not a guarantee.",
+  "Community tools help you see structure. They do not replace your judgment.",
+  "Alpha is often in data: who holds, who funded, who sold.",
+  "Fast moves are exciting; fast research is what keeps you in the game.",
   "If data looks too clean, dig one layer deeper.",
-  "Dragon surfaces bundles, snipes, and clusters so you can decide with context.",
-  "Treat every token as guilty until on-chain data proves otherwise.",
+  "Treat every token as guilty until data proves otherwise.",
 ] as const
 
 function shuffleStrings<T>(items: readonly T[]): T[] {
@@ -707,7 +706,7 @@ export function NagasLanding() {
               isDark ? "text-emerald-200/75" : "text-gray-600"
             }`}
           >
-            Decentralizing token data to discover alpha.
+            Patterns in token data to compose alpha.
           </p>
         </div>
 
