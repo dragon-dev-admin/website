@@ -221,12 +221,16 @@ export function PlaygroundPage() {
 
   const mergeModules = useCallback((remoteModules: PlaygroundModule[]) => {
     const byId = new Map(defaultPlaygroundModules.map((moduleItem) => [moduleItem.id, { ...moduleItem }]))
+    const defaultThumbnails = new Map(defaultPlaygroundModules.map((m) => [m.id, m.thumbnailUrl]))
     for (const moduleItem of remoteModules) {
       const fallbackId = moduleItem.id || moduleItem.slug
+      const localDefault = defaultThumbnails.get(fallbackId)
       byId.set(fallbackId, {
         ...byId.get(fallbackId),
         ...moduleItem,
         id: fallbackId,
+        // For built-in modules, always use the local thumbnailUrl (Firestore may have stale values)
+        ...(localDefault ? { thumbnailUrl: localDefault } : {}),
       })
     }
     setModules(
