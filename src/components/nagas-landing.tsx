@@ -982,7 +982,7 @@ export function NagasLanding() {
             <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.18em] text-emerald-400">
               Project Official
             </p>
-            <h2 className="mb-4 text-2xl font-black sm:text-3xl">Onchain addresses will be published after launch.</h2>
+            <h2 className="mb-4 text-2xl font-black sm:text-3xl">Onchain addresses are live on Base.</h2>
           </div>
           <div className="grid gap-3">
             {[
