@@ -986,10 +986,10 @@ export function NagasLanding() {
           </div>
           <div className="grid gap-3">
             {[
-              ["Project token on Base", "0x0233d2c84143933DDFbd4A977960b0ba8EF0DB07"],
-              ["Safe for token vault", "0x4e50968Be657436C428107b03C0F9F324f02e689"],
-              ["Safe for project fees", "0xE4f20aAeA534690ce3Cb78B9a4Baa2a2811DA0ba"],
-            ].map(([label, value]) => (
+              ["Project token on Base", "0x0233d2c84143933DDFbd4A977960b0ba8EF0DB07", "https://www.clanker.world/clanker/0x0233d2c84143933DDFbd4A977960b0ba8EF0DB07"],
+              ["Safe for token vault", "0x4e50968Be657436C428107b03C0F9F324f02e689", "https://basescan.org/address/0x4e50968Be657436C428107b03C0F9F324f02e689"],
+              ["Safe for project fees", "0xE4f20aAeA534690ce3Cb78B9a4Baa2a2811DA0ba", "https://basescan.org/address/0xE4f20aAeA534690ce3Cb78B9a4Baa2a2811DA0ba"],
+            ].map(([label, value, href]) => (
               <div
                 key={label}
                 className={`flex items-center justify-between gap-4 rounded border px-4 py-3 text-sm ${
@@ -999,7 +999,14 @@ export function NagasLanding() {
                 }`}
               >
                 <span className={isDark ? "text-slate-300" : "text-slate-700"}>{label}</span>
-                <code className="font-mono font-black text-emerald-400">{value}</code>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono font-black text-emerald-400 hover:text-emerald-300 hover:underline transition-colors truncate max-w-[60%] text-right"
+                >
+                  {value}
+                </a>
               </div>
             ))}
           </div>
