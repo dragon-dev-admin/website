@@ -986,9 +986,9 @@ export function NagasLanding() {
           </div>
           <div className="grid gap-3">
             {[
-              ["Project token on Base", "TBD"],
-              ["Safe for token vault", "TBD"],
-              ["Safe for project fees", "TBD"],
+              ["Project token on Base", "0x0233d2c84143933DDFbd4A977960b0ba8EF0DB07"],
+              ["Safe for token vault", "0x4e50968Be657436C428107b03C0F9F324f02e689"],
+              ["Safe for project fees", "0xE4f20aAeA534690ce3Cb78B9a4Baa2a2811DA0ba"],
             ].map(([label, value]) => (
               <div
                 key={label}
