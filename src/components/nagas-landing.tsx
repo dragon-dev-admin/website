@@ -893,7 +893,7 @@ export function NagasLanding() {
               }
             >
               <Github className="mr-2 h-5 w-5" />
-              Link to Github
+              Contribute to GitHub
             </Button>
 
             <Button
