@@ -3,7 +3,7 @@ export const SITE_LINKS = {
   whitepaper: "/alphadragon.pdf",
   chromeExtension:
     "https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe",
-  githubOrg: "https://github.com/alpha-dragon-org",
+  githubOrg: "https://github.com/alpha-dragon-org/project-transfer",
   launchVideo: "https://vimeo.com/1062123553?fl=ip&fe=ec",
   telegram: "https://t.me/alphadragontg",
   email: "mailto:baddragonmygoodness@gmail.com",

@@ -30,13 +30,18 @@ html {
       <body className="min-h-screen antialiased flex flex-col bg-[#06101d]" suppressHydrationWarning>
         {/* Project Transfer Announcement Banner */}
         <div className="w-full bg-emerald-950/80 backdrop-blur-md border-b border-emerald-500/30 text-emerald-100 px-4 py-3 text-center text-xs sm:text-sm font-mono flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 relative z-[9999]">
-          <span className="inline-flex items-center gap-1.5 text-emerald-400 font-bold tracking-wide">
+          <a
+            href="/%24Alpha%20Dragon%20Project%20RFP.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-emerald-400 font-bold tracking-wide hover:text-emerald-300 transition-colors hover:underline"
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             Project Transfer RFP is Active
-          </span>
+          </a>
           <span className="hidden md:inline text-emerald-500/30">|</span>
           <span className="text-emerald-200/90">The prototype stage is complete. Join the transfer proposal:</span>
           <a
