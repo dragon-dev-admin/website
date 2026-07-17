@@ -1,6 +1,6 @@
 /** Links aligned with Extension-main 8/website/website/index.html */
 export const SITE_LINKS = {
-  whitepaper: "/alphadragon.pdf",
+  whitepaper: "/%24Alpha_Dragon_Whitepaper.pdf",
   chromeExtension:
     "https://chromewebstore.google.com/detail/dragon/ncbgllgbplhnbekllhogabdefjidbkoe",
   githubOrg: "https://github.com/alpha-dragon-org",
